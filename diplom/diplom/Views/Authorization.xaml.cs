@@ -1,0 +1,53 @@
+﻿using diplom.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Essentials;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace diplom.Views
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class Authorization : ContentPage
+    {
+        public Authorization()
+        {
+            InitializeComponent();
+        }
+
+        //protected override void OnAppearing()
+        //{
+        //    base.OnAppearing();
+        //}
+
+        private async void LoginButton_Clicked(object sender, EventArgs e)
+        {
+            var users = await App.Diplomdatabase.GetUsersAsync();
+            bool login = false;
+            User thisuser = null;
+            foreach (var user in users)
+            {
+                if (user.Login == EntryLogin.Text && user.Password == EntryPassword.Text)
+                {
+                    login = true;
+                    thisuser = user;
+                }
+            }
+
+            if (login)
+            {
+                // Сохраняем информацию о пользователе в SecureStorage
+                SecureStorage.RemoveAll();
+                await SecureStorage.SetAsync("Key", thisuser.Id.ToString());
+
+                Application.Current.MainPage = new AppShell();
+                await DisplayAlert("Успешная авторизация", "Добро пожаловать, " + thisuser.Name.ToString() + "!", "Приветствую!");
+            }
+            else
+                await DisplayAlert("Неуспешная авторизация", "Нет такого пользователя!", "OK");
+        }
+    }
+}
