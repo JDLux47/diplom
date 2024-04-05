@@ -3,11 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="diplom.Views.Authorization">
     <ContentPage.Content>
-        <StackLayout Padding="20">
-            <Entry x:Name="EntryLogin" Placeholder="Введите логин"/>
-            <Entry x:Name="EntryPassword" Placeholder="Введите пароль" IsPassword="True"/>
-            <Button Text="Войти" Clicked="LoginButton_Clicked" />
+        
+        <StackLayout>
+            <StackLayout Padding="20" VerticalOptions="FillAndExpand">
+            
+                <Entry x:Name="EntryLogin" Placeholder="Введите логин"/>
+                <Entry x:Name="EntryPassword" Placeholder="Введите пароль" IsPassword="True"/>
+            
+                <Button Text="Войти" Clicked="LoginButton_Clicked" />
+            </StackLayout>
+            
+            <StackLayout Padding="20" HorizontalOptions="Center">
+                <Label>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="RegisterLabel_Tapped"/>
+                    </Label.GestureRecognizers>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Ещё нет аккаунта? "/>
+                            <Span Text="Зарегистрироваться" TextDecorations="Underline" FontAttributes="Bold"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
         </StackLayout>
+        
     </ContentPage.Content>
     
 </ContentPage>

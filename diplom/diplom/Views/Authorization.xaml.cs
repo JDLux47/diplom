@@ -18,24 +18,24 @@ namespace diplom.Views
             InitializeComponent();
         }
 
-        //protected override void OnAppearing()
-        //{
-        //    base.OnAppearing();
-        //}
+        private void RegisterLabel_Tapped(object sender, EventArgs e)
+        {
+            Application.Current.MainPage = new Registration();
+        }
 
         private async void LoginButton_Clicked(object sender, EventArgs e)
         {
             var users = await App.Diplomdatabase.GetUsersAsync();
-            bool login = false;
-            User thisuser = null;
-            foreach (var user in users)
-            {
-                if (user.Login == EntryLogin.Text && user.Password == EntryPassword.Text)
-                {
-                    login = true;
-                    thisuser = user;
-                }
-            }
+            bool login = true;
+            User thisuser = users.FirstOrDefault();
+            //foreach (var user in users)
+            //{
+            //    if (user.Login == EntryLogin.Text && user.Password == EntryPassword.Text)
+            //    {
+            //        login = true;
+            //        thisuser = user;
+            //    }
+            //}
 
             if (login)
             {
