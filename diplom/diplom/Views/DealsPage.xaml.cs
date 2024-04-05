@@ -20,10 +20,9 @@ namespace diplom.Views
         protected override async void OnAppearing()
         {
             var deals = await App.Diplomdatabase.GetDealsAsync(); // Получаем все дела
-            int loggedInUser = Convert.ToInt32(await SecureStorage.GetAsync("Key"));
 
             // Фильтруем транзакции, чтобы остались только те, где Id равен 1
-            var filteredDeals = deals.Where(deal => deal.UserId == loggedInUser).ToList();
+            var filteredDeals = deals.Where(deal => deal.UserId == App.LoggedInUser.Id).ToList();
 
             dealsView.ItemsSource = filteredDeals;
 

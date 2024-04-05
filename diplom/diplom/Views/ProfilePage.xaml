@@ -2,11 +2,43 @@
 <ContentPage Visual ="Material" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="diplom.Views.ProfilePage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+
+    <StackLayout Padding="20" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        
+        <Image Source="logo_user.png"  Aspect="AspectFill"/>
+
+        <CollectionView x:Name="userView" Margin="20" SelectionMode="Single">
+            
+            <CollectionView.ItemTemplate>
+                
+                <DataTemplate>
+                    
+                    <StackLayout Margin="20">
+                        
+                        <Label Text="Информация о пользователе" FontSize="Large" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="10">
+                            <Label Text="Имя: " FontSize="Medium"/>
+                            <Label Text="{Binding Name}" FontSize="Medium"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="10">
+                            <Label Text="Логин: "   FontSize="Medium"/>
+                            <Label Text="{Binding Login}" FontSize="Medium"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="10">
+                            <Label Text="Баланс: "  FontSize="Medium"/>
+                            <Label Text="{Binding Balance}" FontSize="Medium"/>
+                        </StackLayout>
+                        
+                    </StackLayout>
+                    
+                </DataTemplate>
+                
+            </CollectionView.ItemTemplate>
+            
+        </CollectionView>
+    </StackLayout>
+    
 </ContentPage>

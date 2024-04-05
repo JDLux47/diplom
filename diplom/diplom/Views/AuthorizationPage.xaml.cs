@@ -27,7 +27,7 @@ namespace diplom.Views
         {
             var users = await App.Diplomdatabase.GetUsersAsync();
             bool login = true;
-            User thisuser = users.FirstOrDefault();
+            App.LoggedInUser = users.FirstOrDefault();
             //foreach (var user in users)
             //{
             //    if (user.Login == EntryLogin.Text && user.Password == EntryPassword.Text)
@@ -40,11 +40,8 @@ namespace diplom.Views
             if (login)
             {
                 // Сохраняем информацию о пользователе в SecureStorage
-                SecureStorage.RemoveAll();
-                await SecureStorage.SetAsync("Key", thisuser.Id.ToString());
-
                 Application.Current.MainPage = new AppShell();
-                await DisplayAlert("Успешная авторизация", "Добро пожаловать, " + thisuser.Name.ToString() + "!", "Приветствую!");
+                await DisplayAlert("Успешная авторизация", "Добро пожаловать, " + App.LoggedInUser.Name.ToString() + "!", "Приветствую!");
             }
             else
                 await DisplayAlert("Неуспешная авторизация", "Нет такого пользователя!", "OK");
