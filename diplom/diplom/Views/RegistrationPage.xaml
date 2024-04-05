@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage Visual="Material" xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="diplom.Views.RegistrationPage">
+
+    <StackLayout Padding="20">
+        <Entry x:Name="entryName" Placeholder="Введите имя"/>
+        <Entry x:Name="entryLogin" Placeholder="Введите логин"/>
+        <Entry x:Name="entryPassword" Placeholder="Введите пароль" IsPassword="True" />
+        <Entry x:Name="entryBalance" Placeholder="Введите начальный баланс" Keyboard="Numeric" />
+
+        <Button Text="Зарегистироваться" Clicked="Register_Clicked" />
+    </StackLayout>
+    
+</ContentPage>

@@ -1,5 +1,6 @@
 ﻿using diplom.Data;
 using diplom.Models;
+using diplom.Views;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,7 +20,7 @@ namespace diplom
                 if (diplomdatabase == null)
                 {
                     string destination = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Diplomdatabase.db3");
-                    File.Delete(destination);
+                    //File.Delete(destination);
                     diplomdatabase = new DB(destination);
                 }
                 return diplomdatabase;
@@ -38,16 +39,14 @@ namespace diplom
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new AuthorizationPage());
         }
 
         protected override async void OnStart()
         {
-            await ContextData.SeedAsync(Diplomdatabase);
-            DataBaseCopy();
+            //await ContextData.SeedAsync(Diplomdatabase);
+            //DataBaseCopy();
             List<User> users = await Diplomdatabase.GetUsersAsync();
-            List<Transaction> transactions = users[0].Transactions;
-            List<Deal> deals = users[0].Deals;
         }
 
         protected override void OnSleep()
