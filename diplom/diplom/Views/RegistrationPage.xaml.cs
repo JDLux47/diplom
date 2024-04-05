@@ -11,9 +11,9 @@ using Xamarin.Forms.Xaml;
 namespace diplom.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Registration : ContentPage
+    public partial class RegistrationPage : ContentPage
     {
-        public Registration()
+        public RegistrationPage()
         {
             InitializeComponent();
         }
@@ -35,12 +35,15 @@ namespace diplom.Views
                     Balance = Convert.ToDecimal(entryBalance.Text)
                 };
 
-                await App.Diplomdatabase.SaveUserAsync(newUser); // Вставка нового пользователя в базу данных
-                await DisplayAlert("Успех!", "Мы зарегистрировали Вас в системе!", "OK");
+                bool isSuccess = Convert.ToBoolean(await App.Diplomdatabase.SaveUserAsync(newUser)); // Вставка нового пользователя в базу данных
+                if (isSuccess)
+                    await DisplayAlert("Успех!", "Мы зарегистрировали Вас в системе!", "OK");
+                else
+                    await DisplayAlert("Ошибка!", "К сожалению, мы не смогли Вас зарегистрировать :(", "OK");
             }
             else
             {
-                await DisplayAlert("Ошибка!", "Пожалуйста, заполните поля Имя, Логин и Пароль!", "OK");
+                await DisplayAlert("Ошибка!", "Пожалуйста, заполните поля 'Имя', 'Логин' и 'Пароль'!", "OK");
             }
         }
     }

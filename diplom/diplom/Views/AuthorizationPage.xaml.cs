@@ -11,16 +11,16 @@ using Xamarin.Forms.Xaml;
 namespace diplom.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Authorization : ContentPage
+    public partial class AuthorizationPage : ContentPage
     {
-        public Authorization()
+        public AuthorizationPage()
         {
             InitializeComponent();
         }
 
-        private void RegisterLabel_Tapped(object sender, EventArgs e)
+        private async void RegisterLabel_Tapped(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new Registration();
+            await Navigation.PushAsync(new RegistrationPage());
         }
 
         private async void LoginButton_Clicked(object sender, EventArgs e)

@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace diplom.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Profile : ContentPage
+    public partial class GraphicPage : ContentPage
     {
-        public Profile()
+        public GraphicPage()
         {
             InitializeComponent();
         }

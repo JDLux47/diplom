@@ -39,7 +39,7 @@ namespace diplom
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new Authorization());
+            MainPage = new NavigationPage(new AuthorizationPage());
         }
 
         protected override async void OnStart()

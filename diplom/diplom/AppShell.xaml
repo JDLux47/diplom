@@ -5,19 +5,19 @@
         xmlns:views="clr-namespace:diplom.Views">
 
     <TabBar>
-        <ShellContent Title="Профиль" ContentTemplate="{DataTemplate views:Profile}">
+        <ShellContent Title="Профиль" ContentTemplate="{DataTemplate views:ProfilePage}">
 
         </ShellContent>
 
-        <ShellContent Title="Дела" ContentTemplate="{DataTemplate views:Deals}">
+        <ShellContent Title="Дела" ContentTemplate="{DataTemplate views:DealsPage}">
             
         </ShellContent>
 
-        <ShellContent Title="Бюджет" ContentTemplate="{DataTemplate views:Budget}">
+        <ShellContent Title="Бюджет" ContentTemplate="{DataTemplate views:BudgetPage}">
 
         </ShellContent>
 
-        <ShellContent Title="Графики" ContentTemplate="{DataTemplate views:Graphic}">
+        <ShellContent Title="Графики" ContentTemplate="{DataTemplate views:GraphicPage}">
 
         </ShellContent>
 

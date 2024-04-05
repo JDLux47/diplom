@@ -1,5 +1,4 @@
-﻿using diplom.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,27 +10,27 @@ using Xamarin.Forms.Xaml;
 namespace diplom.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Budget : ContentPage
+    public partial class DealsPage : ContentPage
     {
-        public Budget()
+        public DealsPage()
         {
             InitializeComponent();
         }
 
         protected override async void OnAppearing()
         {
-            var transactions = await App.Diplomdatabase.GetTransactionsAsync(); // Получаем все транзакции
+            var deals = await App.Diplomdatabase.GetDealsAsync(); // Получаем все дела
             int loggedInUser = Convert.ToInt32(await SecureStorage.GetAsync("Key"));
 
             // Фильтруем транзакции, чтобы остались только те, где Id равен 1
-            var filteredTransactions = transactions.Where(transaction => transaction.UserId == loggedInUser).ToList();
+            var filteredDeals = deals.Where(deal => deal.UserId == loggedInUser).ToList();
 
-            transactionsView.ItemsSource = filteredTransactions;
+            dealsView.ItemsSource = filteredDeals;
 
             base.OnAppearing();
         }
 
-        private async void OnSelectionChanged (object sender, SelectionChangedEventArgs e)
+        private async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
