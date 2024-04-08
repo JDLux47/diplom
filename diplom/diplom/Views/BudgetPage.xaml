@@ -4,9 +4,13 @@
              x:Class="diplom.Views.BudgetPage">
     
     <ContentPage.Resources>
-        <local:TypeConverter  x:Key="TypeConverter" />
+        <local:TypeConverter x:Key="TypeConverter" />
         <local:CategoryConverter x:Key="CategoryConverter"/>
     </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="AddButton_Clicked" IconImageSource="add.png" />
+    </ContentPage.ToolbarItems>
 
     <CollectionView x:Name="transactionsView" Margin="20" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
 
@@ -17,14 +21,28 @@
         <CollectionView.ItemTemplate>
             <DataTemplate>
                 <Frame CornerRadius="10" Padding="10" Margin="5" HasShadow="True">
+                    <Frame.Triggers>
+                        <DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="-1">
+                            <Setter Property="BackgroundColor" Value="Crimson" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="1">
+                            <Setter Property="BackgroundColor" Value="Green" />
+                        </DataTrigger>
+                    </Frame.Triggers>
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="{Binding Type, Converter={StaticResource TypeConverter}}" FontSize="Small" />
-                        <Label Text="{Binding Sum}" FontSize="Small" />
-                        <Label Text="{Binding Date}" FontSize="Small" />
                         <Label Text="{Binding CategoryId, Converter={StaticResource CategoryConverter}}" FontSize="Small" />
-                        <!--<Label Text="{Binding UserId}" FontSize="Small" />-->
+                        <Label Text="{Binding Sum}" FontSize="Small" />
+                        <Label Text="{Binding Date, StringFormat='{0:dd.MM.yyyy}'}" FontSize="Small" />
+                        <ImageButton Source="trash.png" 
+                                     BackgroundColor="Transparent" 
+                                     Clicked="DeleteButton_Clicked" 
+                                     CommandParameter="{Binding .}"
+                                     WidthRequest="30" HeightRequest="30" 
+                                     Aspect="AspectFit" 
+                                     HorizontalOptions="EndAndExpand" 
+                                     CornerRadius="30"/>
                     </StackLayout>
-                </Frame>
+                </Frame>    
             </DataTemplate>
         </CollectionView.ItemTemplate> 
         

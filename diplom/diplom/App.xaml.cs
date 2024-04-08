@@ -28,6 +28,25 @@ namespace diplom
             }
         }
 
+        private static User loggedInUser;
+
+        public static User LoggedInUser
+        {
+            get
+            {
+                if (loggedInUser != null)
+                    return loggedInUser;
+                else
+                    return null;
+            }
+
+            set 
+            { 
+                loggedInUser = value; 
+            }
+
+        }
+
         public static void DataBaseCopy()
         {
             string desktopPath = Path.Combine("storage", "self", "primary", "Android", "data", "com.companyname.diplom", "Diplomdatabase.db3"); //путь в доступную папку 
@@ -46,7 +65,6 @@ namespace diplom
         {
             //await ContextData.SeedAsync(Diplomdatabase);
             //DataBaseCopy();
-            List<User> users = await Diplomdatabase.GetUsersAsync();
         }
 
         protected override void OnSleep()

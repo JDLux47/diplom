@@ -6,6 +6,8 @@
     <ContentPage.Resources>
         <local:StatusConverter  x:Key="StatusConverter" />
         <local:ImportanceConverter x:Key="ImportanceConverter"/>
+        <local:ImportanceColorConverter x:Key="ImportanceColorConverter"/>
+        <local:StatusColorConverter  x:Key="StatusColorConverter" />
     </ContentPage.Resources>
 
     <CollectionView x:Name="dealsView" Margin="20" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
@@ -19,13 +21,13 @@
                 <Frame CornerRadius="10" Padding="10" Margin="5" HasShadow="True">
                     <StackLayout Orientation="Horizontal">
                         <Label Text="{Binding Name}" FontSize="Small"/>
-                        <Label Text="{Binding Note}" FontSize="Small"/>
-                        <Label Text="{Binding DateOfCreation}" FontSize="Small"/>
-                        <Label Text="{Binding Deadline}" FontSize="Small" />
-                        <Label Text="{Binding OtherDealId}" FontSize="Small" />
-                        <Label Text="{Binding StatusId, Converter={StaticResource StatusConverter}}" FontSize="Small" />
-                        <Label Text="{Binding ImportanceId, Converter={StaticResource ImportanceConverter}}" FontSize="Small"/>
-                        <CheckBox IsChecked="{Binding Notification}" IsEnabled="False"/>
+                        <!--<Label Text="{Binding Note}" FontSize="Small"/>-->
+                        <!--<Label Text="{Binding DateOfCreation}" FontSize="Small"/>-->
+                        <!--<Label Text="{Binding Deadline}" FontSize="Small" />-->
+                        <!--<Label Text="{Binding OtherDealId}" FontSize="Small" />-->
+                        <Label Text="{Binding StatusId, Converter={StaticResource StatusConverter}}" TextColor="{Binding StatusId, Converter={StaticResource StatusColorConverter}}" FontSize="Small" />
+                        <Label Text="{Binding ImportanceId, Converter={StaticResource ImportanceConverter}}" TextColor="{Binding ImportanceId, Converter={StaticResource ImportanceColorConverter}}" FontSize="Small"/>
+                        <!--<CheckBox IsChecked="{Binding Notification}" IsEnabled="False"/>-->
                     </StackLayout>
                 </Frame>
             </DataTemplate>
