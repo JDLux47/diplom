@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage Visual="Material" xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="diplom.Views.AddTransactionPage">
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Picker x:Name="pickerType" Title="Выберите тип">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Доход</x:String>
+                        <x:String>Расход</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <Picker x:Name="pickerCategory" Title="Выберите категорию" SelectedItem="{Binding SelectedCategory}" ItemDisplayBinding="{Binding Name}"/>
+            <Entry Placeholder="Сумма" x:Name="entrySum" />
+            <Button Text="Добавить" Clicked="Add_Clicked" />
+        </StackLayout>
+    </ContentPage.Content>
+    
+</ContentPage>
