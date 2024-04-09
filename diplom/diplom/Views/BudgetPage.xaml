@@ -9,7 +9,7 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="AddButton_Clicked" IconImageSource="add.png" />
+        <ToolbarItem Order="Secondary" Text="Добавить" Clicked="AddButton_Clicked"/>
     </ContentPage.ToolbarItems>
 
     <CollectionView x:Name="transactionsView" Margin="20" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
