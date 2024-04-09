@@ -38,34 +38,11 @@ namespace diplom.Views
         {
             if (e.CurrentSelection.FirstOrDefault() is Transaction selectedItem)
             {
-                // Создание новой страницы для отображения подробной информации
-                ContentPage detailPage = new ContentPage();
-
-                // Создание макета для отображения данных объекта на новой странице
-                StackLayout detailLayout = new StackLayout
+                TransactionInformationPage transactionInformationPage = new TransactionInformationPage
                 {
-                    Padding = new Thickness(20)
+                    BindingContext = selectedItem // Передача данных транзакции в качестве контекста привязки
                 };
-
-                // Добавление элементов с подробной информацией о выбранном объекте
-                Label titleLabel = new Label { Text = $"Информация о транзакции: ", FontSize = 20 };
-                Label typeLabel = new Label { Text = $"Тип: {((TypeConverter)Resources["TypeConverter"]).Convert(selectedItem.Type, null, null, null)}", FontSize = 16 };
-                Label sumLabel = new Label { Text = $"Сумма: {selectedItem.Sum}", FontSize = 16 };
-                Label dateLabel = new Label { Text = $"Дата: {selectedItem.Date:D}", FontSize = 16 };
-                Label categoryLabel = new Label { Text = $"Категория: { ((CategoryConverter)Resources["CategoryConverter"]).Convert(selectedItem.CategoryId, null, null, null)}", FontSize = 16 };
-
-                // Добавление элементов в макет
-                detailLayout.Children.Add(titleLabel);
-                detailLayout.Children.Add(typeLabel);
-                detailLayout.Children.Add(sumLabel);
-                detailLayout.Children.Add(dateLabel);
-                detailLayout.Children.Add(categoryLabel);
-
-                // Устанавливаем Content для новой страницы
-                detailPage.Content = detailLayout;
-
-                // Навигация к новой странице
-                await Navigation.PushAsync(detailPage);
+                await Navigation.PushAsync(transactionInformationPage);
             }
         }
 
