@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:diplom.Interface"
+             x:Class="diplom.Views.ListOfCategoriesPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Secondary" Text="Добавить" Clicked="AddButton_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <CollectionView x:Name="categoriesView" Margin="20" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
+
+        <CollectionView.ItemsLayout>
+            <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="5" VerticalItemSpacing="10" />
+        </CollectionView.ItemsLayout>
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Frame CornerRadius="10" Padding="10" Margin="5" HasShadow="True" BackgroundColor="Orange">
+                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <Label Grid.Column="0" Text="{Binding Name}" VerticalOptions="Center" HorizontalOptions="Start" />
+                        
+                        <ImageButton Grid.Column="1"
+                                     BackgroundColor="Transparent" 
+                                     Clicked="DeleteButton_Clicked" 
+                                     CommandParameter="{Binding .}"
+                                     WidthRequest="30" HeightRequest="30" 
+                                     Aspect="AspectFit" 
+                                     HorizontalOptions="EndAndExpand" 
+                                     CornerRadius="30" 
+                                     Source="trash.png"/>
+                    </Grid>
+                </Frame>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+
+    </CollectionView>
+</ContentPage>

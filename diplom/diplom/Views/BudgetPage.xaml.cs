@@ -22,6 +22,8 @@ namespace diplom.Views
             InitializeComponent();
         }
 
+        public bool SortByDate = false, SortBySum = false;
+
         protected override async void OnAppearing()
         {
             var transactions = await App.Diplomdatabase.GetTransactionsAsync(); // Получаем все транзакции
@@ -57,6 +59,75 @@ namespace diplom.Views
             await App.Diplomdatabase.DeleteTransactionAsync(transactionToDelete);
 
             OnAppearing();
+        }
+
+        private async void DateHeader_Tapped(object sender, EventArgs e)
+        {
+            if (SortByDate)
+            {
+                var transactions = await App.Diplomdatabase.GetTransactionsAsync(); // Получаем все транзакции
+
+                // Фильтруем транзакции, чтобы остались только те, где Id равен 1
+                var filteredTransactions = transactions.Where(transaction => transaction.UserId == App.LoggedInUser.Id).OrderBy(transaction => transaction.Date).ToList();
+                
+                transactionsView.ItemsSource = filteredTransactions;
+
+                SortByDate = false;
+            }
+            else
+            {
+                var transactions = await App.Diplomdatabase.GetTransactionsAsync(); // Получаем все транзакции
+
+                // Фильтруем транзакции, чтобы остались только те, где Id равен 1
+                var filteredTransactions = transactions.Where(transaction => transaction.UserId == App.LoggedInUser.Id).OrderByDescending(transaction => transaction.Date).ToList();
+
+                transactionsView.ItemsSource = filteredTransactions;
+
+                SortByDate = true;
+
+            }
+        }
+
+        private async void CategoryHeader_Tapped(object sender, EventArgs e)
+        {
+            var transactions = await App.Diplomdatabase.GetTransactionsAsync(); // Получаем все транзакции
+
+            // Фильтруем транзакции, чтобы остались только те, где Id равен 1
+            var filteredTransactions = transactions.Where(transaction => transaction.UserId == App.LoggedInUser.Id).OrderBy(transaction => transaction.CategoryId).ToList();
+
+            transactionsView.ItemsSource = filteredTransactions;
+        }
+
+        private async void SumHeader_Tapped(object sender, EventArgs e)
+        {
+            if (SortBySum)
+            {
+                var transactions = await App.Diplomdatabase.GetTransactionsAsync(); // Получаем все транзакции
+
+                // Фильтруем транзакции, чтобы остались только те, где Id равен 1
+                var filteredTransactions = transactions.Where(transaction => transaction.UserId == App.LoggedInUser.Id).OrderBy(transaction => transaction.Sum).ToList();
+
+                transactionsView.ItemsSource = filteredTransactions;
+
+                SortBySum = false;
+            }
+            else
+            {
+                var transactions = await App.Diplomdatabase.GetTransactionsAsync(); // Получаем все транзакции
+
+                // Фильтруем транзакции, чтобы остались только те, где Id равен 1
+                var filteredTransactions = transactions.Where(transaction => transaction.UserId == App.LoggedInUser.Id).OrderByDescending(transaction => transaction.Sum).ToList();
+
+                transactionsView.ItemsSource = filteredTransactions;
+
+                SortBySum = true;
+
+            }
+        }
+
+        private async void CategoriesButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ListOfCategoriesPage());
         }
     }
 }
