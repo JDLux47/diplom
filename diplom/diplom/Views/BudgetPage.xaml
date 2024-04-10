@@ -10,6 +10,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Secondary" Text="Добавить" Clicked="AddButton_Clicked"/>
+        <ToolbarItem Order="Secondary" Text="Категории" Clicked="CategoriesButton_Clicked"/>
     </ContentPage.ToolbarItems>
 
     <CollectionView x:Name="transactionsView" Margin="20" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
@@ -17,7 +18,34 @@
         <CollectionView.ItemsLayout>
             <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
         </CollectionView.ItemsLayout>
-        
+
+        <CollectionView.Header>
+            <Grid BackgroundColor="LightGray" Padding="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Text="Категория" FontAttributes="Bold" HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="CategoryHeader_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Grid.Column="1" Text="Сумма" FontAttributes="Bold" HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="SumHeader_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Grid.Column="2" Text="Дата" FontAttributes="Bold" HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="DateHeader_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Grid.Column="3" Text="        " FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+            </Grid>
+        </CollectionView.Header>
+
         <CollectionView.ItemTemplate>
             <DataTemplate>
                 <Frame CornerRadius="10" Padding="10" Margin="5" HasShadow="True">
@@ -29,11 +57,17 @@
                             <Setter Property="BackgroundColor" Value="Green" />
                         </DataTrigger>
                     </Frame.Triggers>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="{Binding CategoryId, Converter={StaticResource CategoryConverter}}" FontSize="Small" />
-                        <Label Text="{Binding Sum}" FontSize="Small" />
-                        <Label Text="{Binding Date, StringFormat='{0:dd.MM.yyyy}'}" FontSize="Small" />
-                        <ImageButton Source="trash.png" 
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Text="{Binding CategoryId, Converter={StaticResource CategoryConverter}}" FontSize="Small" HorizontalTextAlignment="Center"/>
+                            <Label Grid.Column="1" Text="{Binding Sum}" FontSize="Small" HorizontalTextAlignment="Center"/>
+                        <Label Grid.Column="2" Text="{Binding Date, StringFormat='{0:dd.MM.yyyy}'}" FontSize="Small" HorizontalTextAlignment="Center"/>
+                            <ImageButton Grid.Column="3" Source="trash.png" 
                                      BackgroundColor="Transparent" 
                                      Clicked="DeleteButton_Clicked" 
                                      CommandParameter="{Binding .}"
@@ -41,7 +75,7 @@
                                      Aspect="AspectFit" 
                                      HorizontalOptions="EndAndExpand" 
                                      CornerRadius="30"/>
-                    </StackLayout>
+                    </Grid>
                 </Frame>    
             </DataTemplate>
         </CollectionView.ItemTemplate> 

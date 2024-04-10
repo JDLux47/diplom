@@ -40,8 +40,10 @@ namespace diplom.Data
                 var categories = new Category[]
                 {
                     new Category { Name = "Транспорт"},
-                    new Category { Name = "Продукты" },
-                    new Category { Name = "Интернет" }
+                    new Category { Name = "Продукты"},
+                    new Category { Name = "Интернет"},
+                    new Category { Name = "Зарплата"},
+                    new Category { Name = "Пенсия"}
                 };
                 foreach (Category p in categories)
                 {
@@ -52,9 +54,9 @@ namespace diplom.Data
                 {
                     new Transaction { Sum = 150, Type = 1, Date = new DateTime(2024, 03, 14), CategoryId = 1, UserId = 1},
                     new Transaction { Sum = 1200, Type = 1, Date = new DateTime(2024, 02, 11), CategoryId = 2, UserId = 1},
-                    new Transaction { Sum = 350, Type = -1, Date = new DateTime(2024, 03, 24), CategoryId = 3, UserId = 1},
-                    new Transaction { Sum = 190, Type = 1, Date = new DateTime(2024, 01, 20), CategoryId = 1, UserId = 2},
-                    new Transaction { Sum = 700, Type = -1, Date = new DateTime(2024, 02, 07), CategoryId = 2, UserId = 2 }
+                    new Transaction { Sum = 350, Type = -1, Date = new DateTime(2024, 03, 24), CategoryId = 4, UserId = 1},
+                    new Transaction { Sum = 190, Type = 1, Date = new DateTime(2024, 01, 20), CategoryId = 3, UserId = 2},
+                    new Transaction { Sum = 700, Type = -1, Date = new DateTime(2024, 02, 07), CategoryId = 5, UserId = 2 }
                 };
                 foreach (Transaction p in transactions)
                 {
