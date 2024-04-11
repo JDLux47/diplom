@@ -28,10 +28,7 @@ namespace diplom.Views
         {
             var transactions = await App.Diplomdatabase.GetTransactionsAsync(); // Получаем все транзакции
 
-            // Фильтруем транзакции, чтобы остались только те, где Id равен 1
-            var filteredTransactions = transactions.Where(transaction => transaction.UserId == App.LoggedInUser.Id).ToList();
-
-            transactionsView.ItemsSource = filteredTransactions;
+            transactionsView.ItemsSource = transactions;
 
             base.OnAppearing();
         }
@@ -63,66 +60,52 @@ namespace diplom.Views
 
         private async void DateHeader_Tapped(object sender, EventArgs e)
         {
+            var transactions = await App.Diplomdatabase.GetTransactionsAsync(); // Получаем все транзакции
+
             if (SortByDate)
             {
-                var transactions = await App.Diplomdatabase.GetTransactionsAsync(); // Получаем все транзакции
-
-                // Фильтруем транзакции, чтобы остались только те, где Id равен 1
-                var filteredTransactions = transactions.Where(transaction => transaction.UserId == App.LoggedInUser.Id).OrderBy(transaction => transaction.Date).ToList();
-                
-                transactionsView.ItemsSource = filteredTransactions;
+                transactions = transactions.OrderBy(transaction => transaction.Date).ToList();
 
                 SortByDate = false;
             }
             else
             {
-                var transactions = await App.Diplomdatabase.GetTransactionsAsync(); // Получаем все транзакции
-
-                // Фильтруем транзакции, чтобы остались только те, где Id равен 1
-                var filteredTransactions = transactions.Where(transaction => transaction.UserId == App.LoggedInUser.Id).OrderByDescending(transaction => transaction.Date).ToList();
-
-                transactionsView.ItemsSource = filteredTransactions;
+                transactions = transactions.OrderByDescending(transaction => transaction.Date).ToList();
 
                 SortByDate = true;
 
             }
+
+            transactionsView.ItemsSource = transactions;
         }
 
         private async void CategoryHeader_Tapped(object sender, EventArgs e)
         {
             var transactions = await App.Diplomdatabase.GetTransactionsAsync(); // Получаем все транзакции
 
-            // Фильтруем транзакции, чтобы остались только те, где Id равен 1
-            var filteredTransactions = transactions.Where(transaction => transaction.UserId == App.LoggedInUser.Id).OrderBy(transaction => transaction.CategoryId).ToList();
+            transactions = transactions.OrderBy(transaction => transaction.CategoryId).ToList();
 
-            transactionsView.ItemsSource = filteredTransactions;
+            transactionsView.ItemsSource = transactions;
         }
 
         private async void SumHeader_Tapped(object sender, EventArgs e)
         {
+            var transactions = await App.Diplomdatabase.GetTransactionsAsync(); // Получаем все транзакции
+
             if (SortBySum)
             {
-                var transactions = await App.Diplomdatabase.GetTransactionsAsync(); // Получаем все транзакции
-
-                // Фильтруем транзакции, чтобы остались только те, где Id равен 1
-                var filteredTransactions = transactions.Where(transaction => transaction.UserId == App.LoggedInUser.Id).OrderBy(transaction => transaction.Sum).ToList();
-
-                transactionsView.ItemsSource = filteredTransactions;
+                transactions = transactions.OrderBy(transaction => transaction.Sum).ToList();
 
                 SortBySum = false;
             }
             else
             {
-                var transactions = await App.Diplomdatabase.GetTransactionsAsync(); // Получаем все транзакции
-
-                // Фильтруем транзакции, чтобы остались только те, где Id равен 1
-                var filteredTransactions = transactions.Where(transaction => transaction.UserId == App.LoggedInUser.Id).OrderByDescending(transaction => transaction.Sum).ToList();
-
-                transactionsView.ItemsSource = filteredTransactions;
+                transactions = transactions.OrderByDescending(transaction => transaction.Sum).ToList();
 
                 SortBySum = true;
-
             }
+
+            transactionsView.ItemsSource = transactions;
         }
 
         private async void CategoriesButton_Clicked(object sender, EventArgs e)

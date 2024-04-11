@@ -39,7 +39,7 @@ namespace diplom.Data
 
                 var categories = new Category[]
                 {
-                    new Category { Name = "Транспорт"},
+                    new Category { Name = "Без категории"},
                     new Category { Name = "Продукты"},
                     new Category { Name = "Интернет"},
                     new Category { Name = "Зарплата"},

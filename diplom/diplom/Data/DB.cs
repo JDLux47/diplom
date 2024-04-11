@@ -52,7 +52,7 @@ namespace diplom.Data
         #region Transaction
         public Task<List<Transaction>> GetTransactionsAsync() //получение всех
         {
-            return db.Table<Transaction>().ToListAsync();
+            return db.Table<Transaction>().Where(i => i.UserId == App.LoggedInUser.Id).ToListAsync();
         }
 
         public Task<Transaction> GetTransactionAsync(int id) //получение одного 
@@ -77,7 +77,7 @@ namespace diplom.Data
         #region Deal
         public Task<List<Deal>> GetDealsAsync() //получение всех
         {
-            return db.Table<Deal>().ToListAsync();
+            return db.Table<Deal>().Where(i => i.UserId == App.LoggedInUser.Id).ToListAsync();
         }
 
         public Task<Deal> GetDealAsync(int id) //получение одного 
@@ -152,7 +152,7 @@ namespace diplom.Data
         #region Category
         public Task<List<Category>> GetCategoriesAsync() //получение всех
         {
-            return db.Table<Category>().ToListAsync();
+            return db.Table<Category>().Where(i => i.UserId == App.LoggedInUser.Id || i.UserId == 0).ToListAsync();
         }
 
         public Task<Category> GetCategoryAsync(int id) //получение одного 
