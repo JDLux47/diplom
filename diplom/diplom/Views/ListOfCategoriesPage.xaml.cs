@@ -23,7 +23,7 @@ namespace diplom.Views
         {
             var categories = await App.Diplomdatabase.GetCategoriesAsync();
 
-            var filteredCategories = categories.Where(category => category.UserId == App.LoggedInUser.Id || category.UserId == 0 ).ToList();
+            var filteredCategories = categories.Where(category => (category.UserId == App.LoggedInUser.Id || category.UserId == 0) && category.Id != 1).ToList();
 
             categoriesView.ItemsSource = filteredCategories;
 
@@ -102,9 +102,34 @@ namespace diplom.Views
         private async void DeleteButton_Clicked(object sender, EventArgs e)
 		{
             var categoryToDelete = (Category)((ImageButton)sender).CommandParameter;
-            await App.Diplomdatabase.DeleteCategoryAsync(categoryToDelete);
 
-            OnAppearing();
+            var transactions = await App.Diplomdatabase.GetTransactionsAsync();
+
+            bool result = true;
+
+            foreach (var trans in transactions)
+            {
+                if (trans.CategoryId == categoryToDelete.Id)
+                {
+                    result = await DisplayAlert("Нарушение связей", $"Существуют транзакции с данной категорией. Удалить категорию?", "Да", "Отмена");
+                    if (result)
+                        await DisplayAlert("Оповещение", $"Категории у связанных транзакций будут изменены на 'Без категории'", "ОК");
+                    break;
+                }
+            }
+            if (result)
+            {
+                foreach (var trans in transactions)
+                {
+                    if (trans.CategoryId == categoryToDelete.Id)
+                    {
+                        trans.CategoryId = 1;
+                        await App.Diplomdatabase.SaveTransactionAsync(trans);
+                    }
+                }
+                await App.Diplomdatabase.DeleteCategoryAsync(categoryToDelete);
+                OnAppearing();
+            }
         }
 
     }

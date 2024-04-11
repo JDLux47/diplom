@@ -1,12 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage Visual ="Material" xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage Visual="Material" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="diplom.Views.GraphicPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             x:Class="diplom.Views.GraphicPage"
+             Title="Статистика">
+
+    <ScrollView>
+        <StackLayout Orientation="Vertical" Padding="10">
+            <Label Text="Расходы" HorizontalOptions="Center" Margin="10" FontSize="Large" FontAttributes="Bold"/>
+            <microcharts:ChartView
+                x:Name="DiagramRas"
+                Margin="10,0,10,10"
+                Chart="{Binding DonutChartRas}"
+                HeightRequest="300"
+                VerticalOptions="Start"
+                HorizontalOptions="Fill"/>
+            <Label Text="Доходы" HorizontalOptions="Center" Margin="10" FontSize="Large" FontAttributes="Bold"/>
+            <microcharts:ChartView
+                x:Name="DiagramDoh"
+                Margin="10,0,10,10"
+                Chart="{Binding DonutChartDoh}"
+                HeightRequest="300"
+                VerticalOptions="Start"
+                HorizontalOptions="Fill"/>
         </StackLayout>
-    </ContentPage.Content>
+    </ScrollView>
+
 </ContentPage>

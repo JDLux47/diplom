@@ -36,7 +36,7 @@ namespace diplom.Views
                 pickerType.SelectedIndex = type;
                 entrySum.Text = transaction.Sum.ToString();
                 DatePicker.Date = transaction.Date;
-                pickerCategory.SelectedIndex = transaction.CategoryId - 1;
+                pickerCategory.SelectedItem = categories.FirstOrDefault(category => category.Id == transaction.CategoryId);
             }
             base.OnAppearing();
         }
@@ -45,6 +45,7 @@ namespace diplom.Views
         {
             if (BindingContext is Transaction transaction)
             {
+                List<Category> categories = await App.Diplomdatabase.GetCategoriesAsync();
                 int type = 1;
                 if (pickerType.SelectedIndex != 0)
                     type = -1;
@@ -52,7 +53,7 @@ namespace diplom.Views
                 transaction.Type = type;
                 transaction.Sum = Convert.ToDecimal(entrySum.Text);
                 transaction.Date = DatePicker.Date;
-                transaction.CategoryId = pickerCategory.SelectedIndex + 1;
+                transaction.CategoryId = categories[pickerCategory.SelectedIndex].Id;
 
                 await App.Diplomdatabase.SaveTransactionAsync(transaction);
 
