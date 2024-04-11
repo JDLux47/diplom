@@ -17,19 +17,42 @@
             <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
         </CollectionView.ItemsLayout>
 
+        <CollectionView.Header>
+            <Grid BackgroundColor="LightGray" Padding="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="140" />
+                    <ColumnDefinition Width="75" />
+                    <ColumnDefinition Width="75" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Text="Задача" FontAttributes="Bold" HorizontalTextAlignment="Center">
+
+                </Label>
+                <Label Grid.Column="1" Text="Статус" FontAttributes="Bold" HorizontalTextAlignment="Center">
+
+                </Label>
+                <Label Grid.Column="2" Text="Приоритет" FontAttributes="Bold" HorizontalTextAlignment="Center">
+
+                </Label>
+                <Label Grid.Column="3" Text="" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+            </Grid>
+        </CollectionView.Header>
+
         <CollectionView.ItemTemplate>
             <DataTemplate>
-                <Frame CornerRadius="10" Padding="10" Margin="5" HasShadow="True">
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="{Binding Name}" FontSize="Small"/>
-                        <!--<Label Text="{Binding Note}" FontSize="Small"/>-->
-                        <!--<Label Text="{Binding DateOfCreation}" FontSize="Small"/>-->
-                        <!--<Label Text="{Binding Deadline}" FontSize="Small" />-->
-                        <!--<Label Text="{Binding OtherDealId}" FontSize="Small" />-->
-                        <Label Text="{Binding StatusId, Converter={StaticResource StatusConverter}}" TextColor="{Binding StatusId, Converter={StaticResource StatusColorConverter}}" FontSize="Small" />
-                        <Label Text="{Binding ImportanceId, Converter={StaticResource ImportanceConverter}}" TextColor="{Binding ImportanceId, Converter={StaticResource ImportanceColorConverter}}" FontSize="Small"/>
-                        <!--<CheckBox IsChecked="{Binding Notification}" IsEnabled="False"/>-->
-                    </StackLayout>
+                <Frame CornerRadius="10" Padding="10" Margin="5" HasShadow="True" BackgroundColor="Aqua">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140" />
+                            <ColumnDefinition Width="75" />
+                            <ColumnDefinition Width="65" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Text="{Binding Name}" FontSize="Small" VerticalOptions="CenterAndExpand"/>
+                        <Label Grid.Column="1" Text="{Binding StatusId, Converter={StaticResource StatusConverter}}" TextColor="{Binding StatusId, Converter={StaticResource StatusColorConverter}}" FontSize="Small" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+                        <Label Grid.Column="2" Text="{Binding ImportanceId, Converter={StaticResource ImportanceConverter}}" TextColor="{Binding ImportanceId, Converter={StaticResource ImportanceColorConverter}}" FontSize="Small" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+                        <CheckBox Grid.Column="3" Color="orange" IsChecked="False"/>
+                    </Grid>
                 </Frame>
             </DataTemplate>
         </CollectionView.ItemTemplate>
