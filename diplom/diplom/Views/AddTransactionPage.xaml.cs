@@ -32,6 +32,8 @@ namespace diplom.Views
 
         private async void Add_Clicked(object sender, EventArgs e)
         {
+            var categories = await App.Diplomdatabase.GetCategoriesAsync();
+
             int type = 1;
             if (pickerType.SelectedIndex != 0)
                 type = -1;
@@ -40,7 +42,7 @@ namespace diplom.Views
             {
                 Date = DateTime.Now,
                 Sum = Convert.ToDecimal(entrySum.Text),
-                CategoryId = pickerCategory.SelectedIndex + 1,
+                CategoryId = categories[pickerCategory.SelectedIndex].Id,
                 Type = type,
                 UserId = App.LoggedInUser.Id
             };

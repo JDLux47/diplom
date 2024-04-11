@@ -2,7 +2,18 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="diplom.App">
+    
     <Application.Resources>
-
+        <ResourceDictionary>
+            <Style x:Key="PageBackgroundColorStyle" TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="#1a1625" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
