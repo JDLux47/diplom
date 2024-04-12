@@ -26,6 +26,11 @@ namespace diplom.Views
             // Фильтруем транзакции, чтобы остались только те, где Id равен 1
             var filteredDeals = deals.Where(deal => deal.UserId == App.LoggedInUser.Id).ToList();
 
+            foreach (var deal in filteredDeals)
+            {
+                var time = deal.Deadline - deal.DateOfCreation;
+            }
+
             dealsView.ItemsSource = filteredDeals;
 
             base.OnAppearing();
@@ -42,6 +47,11 @@ namespace diplom.Views
                 
                 await Navigation.PushAsync(dealInformationPage);
             }
+        }
+
+        private async void AddButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AddDealPage());
         }
     }
 }

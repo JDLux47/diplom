@@ -2,7 +2,7 @@
 <Shell xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="diplom.AppShell"
-        xmlns:views="clr-namespace:diplom.Views">
+        xmlns:views="clr-namespace:diplom.Views" BackgroundColor="#2196F3">
 
     <TabBar>
         <ShellContent Title="Профиль" ContentTemplate="{DataTemplate views:ProfilePage}">
