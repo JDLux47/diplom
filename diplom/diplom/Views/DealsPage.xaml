@@ -5,11 +5,12 @@
              Title="Задачи">
 
     <ContentPage.Resources>
-        <local:StatusConverter  x:Key="StatusConverter" />
-        <local:ImportanceConverter x:Key="ImportanceConverter"/>
-        <local:ImportanceColorConverter x:Key="ImportanceColorConverter"/>
-        <local:StatusColorConverter  x:Key="StatusColorConverter" />
+        <local:TimeDifferenceConverter x:Key="TimeDifferenceConverter" />
     </ContentPage.Resources>
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Secondary" Text="Добавить" Clicked="AddButton_Clicked"/>
+    </ContentPage.ToolbarItems>
 
     <CollectionView x:Name="dealsView" Margin="20" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
 
@@ -21,14 +22,14 @@
             <Grid BackgroundColor="LightGray" Padding="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="140" />
-                    <ColumnDefinition Width="75" />
-                    <ColumnDefinition Width="75" />
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="90" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Text="Задача" FontAttributes="Bold" HorizontalTextAlignment="Center">
 
                 </Label>
-                <Label Grid.Column="1" Text="Статус" FontAttributes="Bold" HorizontalTextAlignment="Center">
+                <Label Grid.Column="1" Text="Срок" FontAttributes="Bold" HorizontalTextAlignment="Center">
 
                 </Label>
                 <Label Grid.Column="2" Text="Приоритет" FontAttributes="Bold" HorizontalTextAlignment="Center">
@@ -40,18 +41,55 @@
 
         <CollectionView.ItemTemplate>
             <DataTemplate>
-                <Frame CornerRadius="10" Padding="10" Margin="5" HasShadow="True" BackgroundColor="Aqua">
+                <Frame CornerRadius="10" Padding="10" Margin="5" >
+                    <Frame.Triggers>
+                        <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="1">
+                            <Setter Property="BackgroundColor" Value="Violet" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="2">
+                            <Setter Property="BackgroundColor" Value="#B8860B" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="3">
+                            <Setter Property="BackgroundColor" Value="Green" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="4">
+                            <Setter Property="BackgroundColor" Value="#800000" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="5">
+                            <Setter Property="BackgroundColor" Value="red" />
+                        </DataTrigger>
+                    </Frame.Triggers>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="140" />
-                            <ColumnDefinition Width="75" />
-                            <ColumnDefinition Width="65" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="45" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" Text="{Binding Name}" FontSize="Small" VerticalOptions="CenterAndExpand"/>
-                        <Label Grid.Column="1" Text="{Binding StatusId, Converter={StaticResource StatusConverter}}" TextColor="{Binding StatusId, Converter={StaticResource StatusColorConverter}}" FontSize="Small" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
-                        <Label Grid.Column="2" Text="{Binding ImportanceId, Converter={StaticResource ImportanceConverter}}" TextColor="{Binding ImportanceId, Converter={StaticResource ImportanceColorConverter}}" FontSize="Small" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
-                        <CheckBox Grid.Column="3" Color="orange" IsChecked="False"/>
+                        <Label Grid.Column="1" FontSize="Small" VerticalOptions="CenterAndExpand">
+                            <Label.Text>
+                                <MultiBinding Converter="{StaticResource TimeDifferenceConverter}">
+                                    <Binding Path="Deadline" />
+                                    <Binding Path="DateOfCreation" />
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+
+                        <Image Grid.Column="2" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="25" WidthRequest="25">
+                            <Image.Triggers>
+                                <DataTrigger TargetType="Image" Binding="{Binding ImportanceId}" Value="1">
+                                    <Setter Property="Source" Value="LowPr.png" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Image" Binding="{Binding ImportanceId}" Value="2">
+                                    <Setter Property="Source" Value="MediumPr.png" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Image" Binding="{Binding ImportanceId}" Value="3">
+                                    <Setter Property="Source" Value="HighPr.png" />
+                                </DataTrigger>
+                            </Image.Triggers>
+                        </Image>
+                        <CheckBox Grid.Column="3" Color="orange" IsChecked="False" HeightRequest="30" WidthRequest="30"/>
                     </Grid>
                 </Frame>
             </DataTemplate>
