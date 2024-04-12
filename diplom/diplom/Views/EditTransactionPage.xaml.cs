@@ -45,19 +45,27 @@ namespace diplom.Views
         {
             if (BindingContext is Transaction transaction)
             {
-                List<Category> categories = await App.Diplomdatabase.GetCategoriesAsync();
+                bool edit = false;
+
                 int type = 1;
                 if (pickerType.SelectedIndex != 0)
                     type = -1;
-                // Обновление данных транзакции на основе введенных значений
-                transaction.Type = type;
-                transaction.Sum = Convert.ToDecimal(entrySum.Text);
-                transaction.Date = DatePicker.Date;
-                transaction.CategoryId = categories[pickerCategory.SelectedIndex].Id;
 
-                await App.Diplomdatabase.SaveTransactionAsync(transaction);
+                List<Category> categories = await App.Diplomdatabase.GetCategoriesAsync();
 
-                await Navigation.PopAsync();
+                if (type != transaction.Type || transaction.Sum != Convert.ToDecimal(entrySum.Text) || transaction.Date != DatePicker.Date || transaction.CategoryId != categories[pickerCategory.SelectedIndex].Id)
+                    edit = true;
+
+                if(edit)
+                {
+                    // Обновление данных транзакции на основе введенных значений
+                    transaction.Type = type;
+                    transaction.Sum = Convert.ToDecimal(entrySum.Text);
+                    transaction.Date = DatePicker.Date;
+                    transaction.CategoryId = categories[pickerCategory.SelectedIndex].Id;
+                    await App.Diplomdatabase.SaveTransactionAsync(transaction);
+                    await DisplayAlert("Оповещение", "Данные транзакции были изменены!", "OK");
+                }
             }
         }
     }

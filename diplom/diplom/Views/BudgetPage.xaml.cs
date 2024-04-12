@@ -37,11 +37,11 @@ namespace diplom.Views
         {
             if (e.CurrentSelection.FirstOrDefault() is Transaction selectedItem)
             {
-                TransactionInformationPage transactionInformationPage = new TransactionInformationPage
+                EditTransactionPage editTransactionPage = new EditTransactionPage
                 {
                     BindingContext = selectedItem // Передача данных транзакции в качестве контекста привязки
                 };
-                await Navigation.PushAsync(transactionInformationPage);
+                await Navigation.PushAsync(editTransactionPage);
             }
         }
 

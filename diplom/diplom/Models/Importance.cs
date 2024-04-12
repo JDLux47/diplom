@@ -1,6 +1,7 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace diplom.Models
@@ -13,5 +14,6 @@ namespace diplom.Models
 
         [NotNull]
         public string Level { get; set; }
+
     }
 }

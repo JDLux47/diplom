@@ -2,13 +2,13 @@
 <ContentPage Visual="Material" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="diplom.Views.EditTransactionPage"
-             Title="Изменение транзакции">
+             Title="Информация о транзакции">
     
     <ContentPage.Content>
         <StackLayout Padding="20">
-            <Label Text="Изменение транзакции" FontSize="20" />
+            <Label Text="Информация о транзакции" FontSize="20" />
 
-            <Picker x:Name="pickerType" Title="Выберите тип">
+            <Picker x:Name="pickerType" Title="Тип">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>Доход</x:String>
@@ -16,11 +16,11 @@
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
-            <Picker x:Name="pickerCategory" Title="Выберите категорию" SelectedItem="{Binding SelectedCategory}" ItemDisplayBinding="{Binding Name}"/>
-            <Entry Placeholder="Новая сумма" x:Name="entrySum" />
+            <Picker x:Name="pickerCategory" Title="Категория" SelectedItem="{Binding SelectedCategory}" ItemDisplayBinding="{Binding Name}"/>
+            <Entry Placeholder="Сумма" x:Name="entrySum" />
             <DatePicker x:Name="DatePicker" />
 
-            <Button Text="Сохранить" Clicked="SaveButton_Clicked" />
+            <Button Text="Изменить" Clicked="SaveButton_Clicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
