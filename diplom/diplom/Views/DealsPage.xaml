@@ -10,6 +10,7 @@
     
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Secondary" Text="Добавить" Clicked="AddButton_Clicked"/>
+        <ToolbarItem Order="Secondary" Text="Показать/скрыть все" Clicked="ShowButton_Clicked"/>
     </ContentPage.ToolbarItems>
 
     <CollectionView x:Name="dealsView" Margin="20" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
@@ -29,7 +30,7 @@
                 <Label Grid.Column="0" Text="Задача" FontAttributes="Bold" HorizontalTextAlignment="Center">
 
                 </Label>
-                <Label Grid.Column="1" Text="Срок" FontAttributes="Bold" HorizontalTextAlignment="Center">
+                <Label Grid.Column="1" Text="Осталось" FontAttributes="Bold" HorizontalTextAlignment="Center">
 
                 </Label>
                 <Label Grid.Column="2" Text="Приоритет" FontAttributes="Bold" HorizontalTextAlignment="Center">
@@ -67,15 +68,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" Text="{Binding Name}" FontSize="Small" VerticalOptions="CenterAndExpand"/>
-                        <Label Grid.Column="1" FontSize="Small" VerticalOptions="CenterAndExpand">
-                            <Label.Text>
-                                <MultiBinding Converter="{StaticResource TimeDifferenceConverter}">
-                                    <Binding Path="Deadline" />
-                                    <Binding Path="DateOfCreation" />
-                                </MultiBinding>
-                            </Label.Text>
-                        </Label>
-
+                        <Label Grid.Column="1" FontSize="Small" VerticalOptions="CenterAndExpand" Text="{Binding Deadline, Converter={StaticResource TimeDifferenceConverter}}"/>
                         <Image Grid.Column="2" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="25" WidthRequest="25">
                             <Image.Triggers>
                                 <DataTrigger TargetType="Image" Binding="{Binding ImportanceId}" Value="1">
@@ -89,7 +82,7 @@
                                 </DataTrigger>
                             </Image.Triggers>
                         </Image>
-                        <CheckBox Grid.Column="3" Color="orange" IsChecked="False" HeightRequest="30" WidthRequest="30"/>
+                        <CheckBox Grid.Column="3" Color="orange" CheckedChanged="CheckBox_CheckedChanged" HeightRequest="30" WidthRequest="30"/>
                     </Grid>
                 </Frame>
             </DataTemplate>

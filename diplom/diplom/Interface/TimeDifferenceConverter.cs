@@ -7,13 +7,13 @@ using Xamarin.Forms;
 
 namespace diplom.Interface
 {
-    public class TimeDifferenceConverter : IMultiValueConverter
+    public class TimeDifferenceConverter : IValueConverter
     {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values.Length == 2 && values[0] is DateTime deadline && values[1] is DateTime creationDate)
+            if (values is DateTime deadline)
             {
-                TimeSpan difference = deadline - creationDate;
+                TimeSpan difference = deadline - DateTime.Now;
                 int days = difference.Days;
                 int hours = difference.Hours;
                 int minutes = difference.Minutes;
@@ -38,6 +38,13 @@ namespace diplom.Interface
                         {
                             return $"{hours} {GetHoursText(hours)} {minutes} {GetMinutesText(minutes)}";
                         }
+                    }
+                    else if (days < 1 && hours < 1)
+                    {
+                        if (minutes > 0 && hours < 1)
+                            return $"{minutes} {GetMinutesText(minutes)}";
+                        else
+                            return $"Время вышло";
                     }
                     else
                     {
@@ -82,7 +89,7 @@ namespace diplom.Interface
                 return "минут";
         }
 
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        public object ConvertBack(object value, Type targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
