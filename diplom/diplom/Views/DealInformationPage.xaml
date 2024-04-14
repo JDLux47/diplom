@@ -7,9 +7,9 @@
     <ContentPage.Content>
         <StackLayout Padding="20" x:Name="stackDeal" Spacing="10">
 
-            <Entry x:Name="entryNote" Placeholder="Заметки" FontSize="16" Text="{Binding Note}"/>
             <Entry x:Name="entryName" Placeholder="Название" FontSize="16" Text="{Binding Name}"/>
-            
+            <Entry x:Name="entryNote" Placeholder="Заметки" FontSize="16" Text="{Binding Note}"/>
+
             <Picker x:Name="pickerImportance" Title="Степень важности" SelectedItem="{Binding SelectedImportance}" ItemDisplayBinding="{Binding Level}"/>
             <Picker x:Name="pickerStatus" Title="Статус" SelectedItem="{Binding SelectedStatus}" ItemDisplayBinding="{Binding Name}"/>
 

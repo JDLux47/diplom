@@ -1,4 +1,5 @@
-﻿using diplom.Interface;
+﻿using Android.Views;
+using diplom.Interface;
 using diplom.Models;
 using System;
 using System.Collections.Generic;
@@ -14,25 +15,48 @@ namespace diplom.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DealsPage : ContentPage
     {
+
+        public bool ShowAll = false, timer = false;
         public DealsPage()
         {
             InitializeComponent();
+            Appearing += (sender, e) =>
+            {
+                Device.StartTimer(TimeSpan.FromMinutes(1), () =>
+                {
+                    timer = true;   
+                    OnAppearing();
+                    return true; // Возвращаем true для повторного запуска таймера
+                });
+            };
         }
 
-        protected override async void OnAppearing()
+        private async void ChangeStatuses()
         {
             var deals = await App.Diplomdatabase.GetDealsAsync(); // Получаем все дела
 
-            // Фильтруем транзакции, чтобы остались только те, где Id равен 1
-            var filteredDeals = deals.Where(deal => deal.UserId == App.LoggedInUser.Id).ToList();
+            if (!ShowAll)
+                deals = deals.Where(deal => deal.StatusId != 3 && deal.StatusId != 4 && deal.StatusId != 5).ToList();
 
-            foreach (var deal in filteredDeals)
+            if (timer)
             {
-                var time = deal.Deadline - deal.DateOfCreation;
+                foreach (var deal in deals)
+                {
+                    if (deal.Deadline - DateTime.Now <= TimeSpan.FromMinutes(1) && deal.StatusId != 3 && deal.StatusId != 4)
+                    {
+                        deal.StatusId = 5;
+                        await App.Diplomdatabase.SaveDealAsync(deal);
+                    }
+                }
+                timer = false;
             }
 
-            dealsView.ItemsSource = filteredDeals;
+            dealsView.ItemsSource = deals;
+        }
 
+        protected override void OnAppearing()
+        {
+            ChangeStatuses();
             base.OnAppearing();
         }
 
@@ -52,6 +76,29 @@ namespace diplom.Views
         private async void AddButton_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new AddDealPage());
+        }
+
+        private async void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            if (sender is CheckBox checkbox) // Проверка, что отправитель события - это CheckBox
+            {
+                if (checkbox.Parent is Grid grid) // Получение родительского элемента CheckBox, который у вас является Grid
+                {
+                    if (grid.BindingContext is Deal deal) // Получение объекта данных элемента внутри Grid, которого вы хотите изменить
+                    {
+                        deal.StatusId = 3;
+                        await App.Diplomdatabase.SaveDealAsync(deal);
+                        OnAppearing();
+                    }
+                }
+            }
+        }
+
+        private void ShowButton_Clicked(Object sender, EventArgs e)
+        {
+            if (ShowAll) ShowAll = false;
+            else ShowAll = true;
+            OnAppearing();
         }
     }
 }
