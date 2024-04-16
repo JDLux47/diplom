@@ -7,6 +7,6 @@
 	<item>
 		<bitmap android:src="@drawable/logo_dev"
 				android:tileMode="disabled"
-				android:gravity="center"/>
+				android:gravity="fill"/>
 	</item>
 </layer-list>
