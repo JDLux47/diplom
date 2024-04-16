@@ -28,13 +28,19 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Text="Задача" FontAttributes="Bold" HorizontalTextAlignment="Center">
-
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="SortByTasks" />
+                    </Label.GestureRecognizers>
                 </Label>
                 <Label Grid.Column="1" Text="Осталось" FontAttributes="Bold" HorizontalTextAlignment="Center">
-
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="SortByDeadline" />
+                    </Label.GestureRecognizers>
                 </Label>
                 <Label Grid.Column="2" Text="Приоритет" FontAttributes="Bold" HorizontalTextAlignment="Center">
-
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="SortByPriority" />
+                    </Label.GestureRecognizers>
                 </Label>
                 <Label Grid.Column="3" Text="" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
             </Grid>

@@ -46,6 +46,8 @@ namespace diplom.Views
             if (BindingContext is Transaction transaction)
             {
                 bool edit = false;
+                var OldType = transaction.Type;
+                var OldSum = transaction.Sum;
 
                 int type = 1;
                 if (pickerType.SelectedIndex != 0)
@@ -63,6 +65,15 @@ namespace diplom.Views
                     transaction.Sum = Convert.ToDecimal(entrySum.Text);
                     transaction.Date = DatePicker.Date;
                     transaction.CategoryId = categories[pickerCategory.SelectedIndex].Id;
+
+                    bool result = await DisplayAlert("Подтверждение", "Изменить баланс в соответствии с изменяемой транзакцией?", "Да", "Нет");
+                    if (result)
+                    {
+                        var sum = OldSum * (-1 * OldType) + transaction.Type * transaction.Sum;
+                        App.LoggedInUser.Balance = App.LoggedInUser.Balance + sum;
+                        await App.Diplomdatabase.SaveUserAsync(App.LoggedInUser);
+                    }
+
                     await App.Diplomdatabase.SaveTransactionAsync(transaction);
                     await DisplayAlert("Оповещение", "Данные транзакции были изменены!", "OK");
                 }
