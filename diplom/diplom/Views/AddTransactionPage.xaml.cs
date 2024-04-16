@@ -47,6 +47,9 @@ namespace diplom.Views
                 UserId = App.LoggedInUser.Id
             };
 
+            App.LoggedInUser.Balance = App.LoggedInUser.Balance + transaction.Sum * transaction.Type;
+
+            await App.Diplomdatabase.SaveUserAsync(App.LoggedInUser);
             await App.Diplomdatabase.SaveTransactionAsync(transaction);
             await Navigation.PopAsync();
         }

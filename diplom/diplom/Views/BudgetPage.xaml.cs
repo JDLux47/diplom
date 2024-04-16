@@ -20,15 +20,24 @@ namespace diplom.Views
         public BudgetPage()
         {
             InitializeComponent();
+            balanceToolbarItem = new ToolbarItem // Создаем новый ToolbarItem
+            {
+                Text = $"Баланс: {App.LoggedInUser.Balance}"
+            };
+            ToolbarItems.Add(balanceToolbarItem);// Добавляем созданный ToolbarItem в панель инструментов
         }
 
         public bool SortByDate = false, SortBySum = false;
+        List<Transaction> transactions;
+        ToolbarItem balanceToolbarItem;
 
         protected override async void OnAppearing()
         {
-            var transactions = await App.Diplomdatabase.GetTransactionsAsync(); // Получаем все транзакции
+            transactions = await App.Diplomdatabase.GetTransactionsAsync(); // Получаем все транзакции
 
             transactionsView.ItemsSource = transactions;
+
+            balanceToolbarItem.Text = $"Баланс: {App.LoggedInUser.Balance}";
 
             base.OnAppearing();
         }
@@ -54,14 +63,17 @@ namespace diplom.Views
         {
             var transactionToDelete = (Transaction)((ImageButton)sender).CommandParameter;
             await App.Diplomdatabase.DeleteTransactionAsync(transactionToDelete);
-
+            bool result = await DisplayAlert("Подтверждение", "Изменить баланс в соответствии с удаляемой транзакцией?", "Да", "Нет");
+            if(result)
+            {
+                App.LoggedInUser.Balance = App.LoggedInUser.Balance - transactionToDelete.Sum * transactionToDelete.Type;
+                await App.Diplomdatabase.SaveUserAsync(App.LoggedInUser);
+            }
             OnAppearing();
         }
 
-        private async void DateHeader_Tapped(object sender, EventArgs e)
+        private void DateHeader_Tapped(object sender, EventArgs e)
         {
-            var transactions = await App.Diplomdatabase.GetTransactionsAsync(); // Получаем все транзакции
-
             if (SortByDate)
             {
                 transactions = transactions.OrderBy(transaction => transaction.Date).ToList();
@@ -79,19 +91,15 @@ namespace diplom.Views
             transactionsView.ItemsSource = transactions;
         }
 
-        private async void CategoryHeader_Tapped(object sender, EventArgs e)
+        private void CategoryHeader_Tapped(object sender, EventArgs e)
         {
-            var transactions = await App.Diplomdatabase.GetTransactionsAsync(); // Получаем все транзакции
-
             transactions = transactions.OrderBy(transaction => transaction.CategoryId).ToList();
 
             transactionsView.ItemsSource = transactions;
         }
 
-        private async void SumHeader_Tapped(object sender, EventArgs e)
+        private void SumHeader_Tapped(object sender, EventArgs e)
         {
-            var transactions = await App.Diplomdatabase.GetTransactionsAsync(); // Получаем все транзакции
-
             if (SortBySum)
             {
                 transactions = transactions.OrderBy(transaction => transaction.Sum).ToList();

@@ -16,7 +16,9 @@ namespace diplom.Views
     public partial class DealsPage : ContentPage
     {
 
-        public bool ShowAll = false, timer = false;
+        public bool ShowAll = false, timer = false, SortByD, SortByT, SortByP;
+        List<Deal> deals;
+
         public DealsPage()
         {
             InitializeComponent();
@@ -33,7 +35,7 @@ namespace diplom.Views
 
         private async void ChangeStatuses()
         {
-            var deals = await App.Diplomdatabase.GetDealsAsync(); // Получаем все дела
+            deals = await App.Diplomdatabase.GetDealsAsync(); // Получаем все дела
 
             if (!ShowAll)
                 deals = deals.Where(deal => deal.StatusId != 3 && deal.StatusId != 4 && deal.StatusId != 5).ToList();
@@ -92,6 +94,54 @@ namespace diplom.Views
                     }
                 }
             }
+        }
+
+        private void SortByTasks(object sender, EventArgs e)
+        {
+            if (SortByT)
+            {
+                deals = deals.OrderBy(deal => deal.Name).ToList();
+                SortByT = false;
+            }
+            else
+            {
+                deals = deals.OrderByDescending(deal => deal.Name).ToList();
+                SortByT = true;
+            }
+
+            dealsView.ItemsSource = deals;
+        }
+
+        private void SortByDeadline(object sender, EventArgs e)
+        {
+            if (SortByD)
+            {
+                deals = deals.OrderBy(deal => deal.Deadline).ToList();
+                SortByD = false;
+            }
+            else
+            {
+                deals = deals.OrderByDescending(deal => deal.Deadline).ToList();
+                SortByD = true;
+            }
+
+            dealsView.ItemsSource = deals;
+        }
+
+        private void SortByPriority(object sender, EventArgs e)
+        {
+            if (SortByP)
+            {
+                deals = deals.OrderBy(deal => deal.ImportanceId).ToList();
+                SortByP = false;
+            }
+            else
+            {
+                deals = deals.OrderByDescending(deal => deal.ImportanceId).ToList();
+                SortByP = true;
+            }
+
+            dealsView.ItemsSource = deals;
         }
 
         private void ShowButton_Clicked(Object sender, EventArgs e)
