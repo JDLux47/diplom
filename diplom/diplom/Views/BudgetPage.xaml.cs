@@ -27,7 +27,7 @@ namespace diplom.Views
             ToolbarItems.Add(balanceToolbarItem);// Добавляем созданный ToolbarItem в панель инструментов
         }
 
-        public bool SortByDate = false, SortBySum = false;
+        public bool SortByDate, SortBySum, SortByCategory;
         List<Transaction> transactions;
         ToolbarItem balanceToolbarItem;
 
@@ -72,53 +72,79 @@ namespace diplom.Views
             OnAppearing();
         }
 
-        private void DateHeader_Tapped(object sender, EventArgs e)
+        private async void CategoriesButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ListOfCategoriesPage());
+        }
+
+        private void ButtonByDate_Clicked(object sender, EventArgs e)
         {
             if (SortByDate)
             {
                 transactions = transactions.OrderBy(transaction => transaction.Date).ToList();
-
+                ImageSortDate.Source = "/drawable/SortToMax";
                 SortByDate = false;
             }
             else
             {
                 transactions = transactions.OrderByDescending(transaction => transaction.Date).ToList();
-
+                ImageSortDate.Source = "/drawable/SortToMin";
                 SortByDate = true;
 
             }
-
+            ImageSortCategory.Source = "";
+            ImageSortSum.Source = "";
             transactionsView.ItemsSource = transactions;
+            buttonStack.IsVisible = false;
         }
-
-        private void CategoryHeader_Tapped(object sender, EventArgs e)
-        {
-            transactions = transactions.OrderBy(transaction => transaction.CategoryId).ToList();
-
-            transactionsView.ItemsSource = transactions;
-        }
-
-        private void SumHeader_Tapped(object sender, EventArgs e)
+        private void ButtonByPrice_Clicked(object sender, EventArgs e)
         {
             if (SortBySum)
             {
                 transactions = transactions.OrderBy(transaction => transaction.Sum).ToList();
-
                 SortBySum = false;
+                ImageSortSum.Source = "/drawable/SortToMax";
             }
             else
             {
                 transactions = transactions.OrderByDescending(transaction => transaction.Sum).ToList();
-
                 SortBySum = true;
+                ImageSortSum.Source = "/drawable/SortToMin";
             }
-
+            ImageSortCategory.Source = "";
+            ImageSortDate.Source = "";
             transactionsView.ItemsSource = transactions;
+            buttonStack.IsVisible = false;
         }
 
-        private async void CategoriesButton_Clicked(object sender, EventArgs e)
+        private void ButtonByCategory_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ListOfCategoriesPage());
+            if (SortByCategory)
+            {
+                transactions = transactions.OrderBy(transaction => transaction.CategoryId).ToList();
+                SortByCategory = false;
+                ImageSortCategory.Source = "/drawable/SortToMax";
+            }
+            else
+            {
+                transactions = transactions.OrderByDescending(transaction => transaction.CategoryId).ToList();
+                SortByCategory = true;
+                ImageSortCategory.Source = "/drawable/SortToMin";
+            }
+            ImageSortDate.Source = "";
+            ImageSortSum.Source = "";
+            transactionsView.ItemsSource = transactions;
+
+            buttonStack.IsVisible = false;
         }
+
+        private void OpenListButton_Clicked(object sender, EventArgs e)
+        {
+            if(buttonStack.IsVisible)
+                buttonStack.IsVisible = false;
+            else 
+                buttonStack.IsVisible = true;
+        }
+
     }
 }

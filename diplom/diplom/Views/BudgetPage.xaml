@@ -14,72 +14,97 @@
         <ToolbarItem Order="Secondary" Text="Категории" Clicked="CategoriesButton_Clicked"/>
     </ContentPage.ToolbarItems>
 
-    <CollectionView x:Name="transactionsView" Margin="20" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
-
-        <CollectionView.ItemsLayout>
-            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
-        </CollectionView.ItemsLayout>
-
-        <CollectionView.Header>
-            <Grid BackgroundColor="LightGray" Padding="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Text="Категория" FontAttributes="Bold" HorizontalTextAlignment="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="CategoryHeader_Tapped" />
-                    </Label.GestureRecognizers>
-                </Label>
-                <Label Grid.Column="1" Text="Сумма" FontAttributes="Bold" HorizontalTextAlignment="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="SumHeader_Tapped" />
-                    </Label.GestureRecognizers>
-                </Label>
-                <Label Grid.Column="2" Text="Дата" FontAttributes="Bold" HorizontalTextAlignment="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="DateHeader_Tapped" />
-                    </Label.GestureRecognizers>
-                </Label>
-                <Label Grid.Column="3" Text="        " FontAttributes="Bold" HorizontalTextAlignment="Center"/>
-            </Grid>
-        </CollectionView.Header>
-
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Frame CornerRadius="10" Padding="10" Margin="5" HasShadow="True">
-                    <Frame.Triggers>
-                        <DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="-1">
-                            <Setter Property="BackgroundColor" Value="Crimson" />
-                        </DataTrigger>
-                        <DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="1">
-                            <Setter Property="BackgroundColor" Value="Green" />
-                        </DataTrigger>
-                    </Frame.Triggers>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Text="{Binding CategoryId, Converter={StaticResource CategoryConverter}}" FontSize="Small" HorizontalTextAlignment="Center"/>
-                            <Label Grid.Column="1" Text="{Binding Sum}" FontSize="Small" HorizontalTextAlignment="Center"/>
-                        <Label Grid.Column="2" Text="{Binding Date, StringFormat='{0:dd.MM.yyyy}'}" FontSize="Small" HorizontalTextAlignment="Center"/>
-                            <ImageButton Grid.Column="3" Source="trash.png" 
-                                     BackgroundColor="Transparent" 
-                                     Clicked="DeleteButton_Clicked" 
-                                     CommandParameter="{Binding .}"
-                                     WidthRequest="30" HeightRequest="30" 
-                                     Aspect="AspectFit" 
-                                     HorizontalOptions="EndAndExpand" 
-                                     CornerRadius="30"/>
-                    </Grid>
-                </Frame>    
-            </DataTemplate>
-        </CollectionView.ItemTemplate> 
+    <AbsoluteLayout>
         
-    </CollectionView>
+        <CollectionView x:Name="transactionsView" Margin="20" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.Header>
+                <Grid BackgroundColor="LightGray" Padding="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Text="Категория" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    <Label Grid.Column="1" Text="Сумма" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    <Label Grid.Column="2" Text="Дата" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+
+                    <ImageButton Grid.Column="3"
+                                 Source="sort.png" 
+                                 BackgroundColor="Transparent"
+                                 Clicked="OpenListButton_Clicked"
+                                 WidthRequest="30" 
+                                 HeightRequest="30"
+                                 Aspect="AspectFit" 
+                                 HorizontalOptions="EndAndExpand"
+                                 VerticalOptions="CenterAndExpand"
+                                 Margin="0,0,3,0"/>
+                </Grid>
+
+            </CollectionView.Header>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame CornerRadius="10" Padding="10" Margin="5" HasShadow="True">
+                        <Frame.Triggers>
+                            <DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="-1">
+                                <Setter Property="BackgroundColor" Value="Crimson" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="1">
+                                <Setter Property="BackgroundColor" Value="Green" />
+                            </DataTrigger>
+                        </Frame.Triggers>
+                        <Grid VerticalOptions="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label VerticalOptions="Center" Grid.Column="0" Text="{Binding CategoryId, Converter={StaticResource CategoryConverter}}" FontSize="Small" HorizontalTextAlignment="Center"/>
+                            <Label VerticalOptions="Center" Grid.Column="1" Text="{Binding Sum}" FontSize="Small" HorizontalTextAlignment="Center"/>
+                            <Label VerticalOptions="Center" Grid.Column="2" Text="{Binding Date, StringFormat='{0:dd.MM.yyyy}'}" FontSize="Small" HorizontalTextAlignment="Center"/>
+                            <ImageButton Grid.Column="3" Source="trash.png" 
+                                         BackgroundColor="Transparent" 
+                                         Clicked="DeleteButton_Clicked" 
+                                         CommandParameter="{Binding .}"
+                                         WidthRequest="30" HeightRequest="30" 
+                                         Aspect="AspectFit" 
+                                         HorizontalOptions="EndAndExpand" 
+                                         VerticalOptions="Center"
+                                         CornerRadius="30"/>
+                        </Grid>
+                    </Frame>    
+                </DataTemplate>
+            </CollectionView.ItemTemplate> 
+        
+        </CollectionView>
+
+        <AbsoluteLayout x:Name="buttonStack" IsVisible="False" Margin="0, 64, 20, 0" 
+                        AbsoluteLayout.LayoutFlags="PositionProportional"
+                        AbsoluteLayout.LayoutBounds="1, 0, -1, 0">
+            
+            <StackLayout Spacing="4">
+                <StackLayout  Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
+                    <Button Visual="Default" Text="По дате                    " Clicked="ButtonByDate_Clicked" Font="12" BackgroundColor="Transparent"/>
+                    <Image Visual="Default" x:Name="ImageSortDate" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
+                </StackLayout>
+                <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
+                    <Button Visual="Default" Text="По сумме                " Clicked="ButtonByPrice_Clicked" Font="12" BackgroundColor="Transparent"/>
+                    <Image Visual="Default" x:Name="ImageSortSum" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
+                </StackLayout>
+                <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
+                    <Button Visual="Default" Text="По категории" Clicked="ButtonByCategory_Clicked" Font="12" BackgroundColor="Transparent"/>
+                    <Image Visual="Default" x:Name="ImageSortCategory" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
+                </StackLayout>
+            </StackLayout>
+
+        </AbsoluteLayout>
+        
+    </AbsoluteLayout>
 </ContentPage>

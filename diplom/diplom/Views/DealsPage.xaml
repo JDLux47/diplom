@@ -13,86 +13,112 @@
         <ToolbarItem Order="Secondary" Text="Показать/скрыть все" Clicked="ShowButton_Clicked"/>
     </ContentPage.ToolbarItems>
 
-    <CollectionView x:Name="dealsView" Margin="20" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
+    <AbsoluteLayout>
+        <CollectionView x:Name="dealsView" Margin="20" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
 
-        <CollectionView.ItemsLayout>
-            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
-        </CollectionView.ItemsLayout>
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
 
-        <CollectionView.Header>
-            <Grid BackgroundColor="LightGray" Padding="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="140" />
-                    <ColumnDefinition Width="80" />
-                    <ColumnDefinition Width="90" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Text="Задача" FontAttributes="Bold" HorizontalTextAlignment="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="SortByTasks" />
-                    </Label.GestureRecognizers>
-                </Label>
-                <Label Grid.Column="1" Text="Осталось" FontAttributes="Bold" HorizontalTextAlignment="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="SortByDeadline" />
-                    </Label.GestureRecognizers>
-                </Label>
-                <Label Grid.Column="2" Text="Приоритет" FontAttributes="Bold" HorizontalTextAlignment="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="SortByPriority" />
-                    </Label.GestureRecognizers>
-                </Label>
-                <Label Grid.Column="3" Text="" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
-            </Grid>
-        </CollectionView.Header>
+            <CollectionView.Header>
+                <Grid BackgroundColor="LightGray" Padding="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Frame CornerRadius="10" Padding="10" Margin="5" >
-                    <Frame.Triggers>
-                        <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="1">
-                            <Setter Property="BackgroundColor" Value="Violet" />
-                        </DataTrigger>
-                        <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="2">
-                            <Setter Property="BackgroundColor" Value="#B8860B" />
-                        </DataTrigger>
-                        <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="3">
-                            <Setter Property="BackgroundColor" Value="Green" />
-                        </DataTrigger>
-                        <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="4">
-                            <Setter Property="BackgroundColor" Value="#800000" />
-                        </DataTrigger>
-                        <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="5">
-                            <Setter Property="BackgroundColor" Value="red" />
-                        </DataTrigger>
-                    </Frame.Triggers>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="140" />
-                            <ColumnDefinition Width="100" />
-                            <ColumnDefinition Width="45" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Text="{Binding Name}" FontSize="Small" VerticalOptions="CenterAndExpand"/>
-                        <Label Grid.Column="1" FontSize="Small" VerticalOptions="CenterAndExpand" Text="{Binding Deadline, Converter={StaticResource TimeDifferenceConverter}}"/>
-                        <Image Grid.Column="2" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="25" WidthRequest="25">
-                            <Image.Triggers>
-                                <DataTrigger TargetType="Image" Binding="{Binding ImportanceId}" Value="1">
-                                    <Setter Property="Source" Value="LowPr.png" />
-                                </DataTrigger>
-                                <DataTrigger TargetType="Image" Binding="{Binding ImportanceId}" Value="2">
-                                    <Setter Property="Source" Value="MediumPr.png" />
-                                </DataTrigger>
-                                <DataTrigger TargetType="Image" Binding="{Binding ImportanceId}" Value="3">
-                                    <Setter Property="Source" Value="HighPr.png" />
-                                </DataTrigger>
-                            </Image.Triggers>
-                        </Image>
-                        <CheckBox Grid.Column="3" Color="orange" CheckedChanged="CheckBox_CheckedChanged" HeightRequest="30" WidthRequest="30"/>
-                    </Grid>
-                </Frame>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
+                    <Label Grid.Column="0" Text="Задача" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    <Label Grid.Column="1" Text="Осталось" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    <Label Grid.Column="2" Text="Приоритет" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
 
-    </CollectionView>
+                    <ImageButton Grid.Column="3"
+                                 Source="sort.png" 
+                                 BackgroundColor="Transparent"
+                                 Clicked="OpenListButton_Clicked"
+                                 WidthRequest="30" 
+                                 HeightRequest="30"
+                                 Aspect="AspectFit" 
+                                 HorizontalOptions="EndAndExpand"
+                                 VerticalOptions="CenterAndExpand"
+                                 Margin="0,0,3,0"/>
+                </Grid>
+            </CollectionView.Header>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame CornerRadius="10" Padding="10" Margin="5" >
+                        <Frame.Triggers>
+                            <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="1">
+                                <Setter Property="BackgroundColor" Value="Violet" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="2">
+                                <Setter Property="BackgroundColor" Value="#B8860B" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="3">
+                                <Setter Property="BackgroundColor" Value="Green" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="4">
+                                <Setter Property="BackgroundColor" Value="#800000" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="5">
+                                <Setter Property="BackgroundColor" Value="red" />
+                            </DataTrigger>
+                        </Frame.Triggers>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="{Binding Name}" FontSize="Small" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
+                            <Label Grid.Column="1" FontSize="Small" VerticalOptions="CenterAndExpand" Text="{Binding Deadline, Converter={StaticResource TimeDifferenceConverter}}" HorizontalTextAlignment="Center"/>
+                            <Image Grid.Column="2" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" HeightRequest="25" WidthRequest="25">
+                                <Image.Triggers>
+                                    <DataTrigger TargetType="Image" Binding="{Binding ImportanceId}" Value="1">
+                                        <Setter Property="Source" Value="LowPr.png" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Image" Binding="{Binding ImportanceId}" Value="2">
+                                        <Setter Property="Source" Value="MediumPr.png" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Image" Binding="{Binding ImportanceId}" Value="3">
+                                        <Setter Property="Source" Value="HighPr.png" />
+                                    </DataTrigger>
+                                </Image.Triggers>
+                            </Image>
+                            <CheckBox Grid.Column="3" Color="orange" CheckedChanged="CheckBox_CheckedChanged" HeightRequest="30" WidthRequest="30"/>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+    
+        <AbsoluteLayout x:Name="buttonStack" IsVisible="False" Margin="0, 64, 20, 0" 
+                        AbsoluteLayout.LayoutFlags="PositionProportional"
+                        AbsoluteLayout.LayoutBounds="1, 0, -1, 0">
+            
+            <StackLayout Spacing="4">
+                <StackLayout  Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
+                    <Button Visual="Default" Text="По задаче              " Clicked="ButtonByTask_Clicked" Font="12" BackgroundColor="Transparent"/>
+                    <Image Visual="Default" x:Name="ImageSortTask" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
+                </StackLayout>
+                <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
+                    <Button Visual="Default" Text="По приоритету    " Clicked="ButtonByPriority_Clicked" Font="12" BackgroundColor="Transparent"/>
+                    <Image Visual="Default" x:Name="ImageSortPriority" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
+                </StackLayout>
+                <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
+                    <Button Visual="Default" Text="По сроку                 " Clicked="ButtonByDeadline_Clicked" Font="12" BackgroundColor="Transparent"/>
+                    <Image Visual="Default" x:Name="ImageSortDeadline" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
+                </StackLayout>
+                <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
+                    <Button Visual="Default" Text="По статусу             " Clicked="ButtonByStatus_Clicked" Font="12" BackgroundColor="Transparent"/>
+                    <Image Visual="Default" x:Name="ImageSortStatus" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
+                </StackLayout>
+            </StackLayout>
+        </AbsoluteLayout>
+
+    </AbsoluteLayout>
 </ContentPage>

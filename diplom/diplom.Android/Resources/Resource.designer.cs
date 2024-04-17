@@ -24276,25 +24276,34 @@ namespace diplom.Droid
 			public const int preference_list_divider_material = 2131165332;
 			
 			// aapt resource value: 0x7F070095
-			public const int splash_screen = 2131165333;
+			public const int sort = 2131165333;
 			
 			// aapt resource value: 0x7F070096
-			public const int test_custom_background = 2131165334;
+			public const int SortToMax = 2131165334;
 			
 			// aapt resource value: 0x7F070097
-			public const int test_level_drawable = 2131165335;
+			public const int SortToMin = 2131165335;
 			
 			// aapt resource value: 0x7F070098
-			public const int toolMenu = 2131165336;
+			public const int splash_screen = 2131165336;
 			
 			// aapt resource value: 0x7F070099
-			public const int tooltip_frame_dark = 2131165337;
+			public const int test_custom_background = 2131165337;
 			
 			// aapt resource value: 0x7F07009A
-			public const int tooltip_frame_light = 2131165338;
+			public const int test_level_drawable = 2131165338;
 			
 			// aapt resource value: 0x7F07009B
-			public const int trash = 2131165339;
+			public const int toolMenu = 2131165339;
+			
+			// aapt resource value: 0x7F07009C
+			public const int tooltip_frame_dark = 2131165340;
+			
+			// aapt resource value: 0x7F07009D
+			public const int tooltip_frame_light = 2131165341;
+			
+			// aapt resource value: 0x7F07009E
+			public const int trash = 2131165342;
 			
 			static Drawable()
 			{
