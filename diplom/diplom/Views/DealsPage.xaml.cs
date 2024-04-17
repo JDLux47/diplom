@@ -16,7 +16,7 @@ namespace diplom.Views
     public partial class DealsPage : ContentPage
     {
 
-        public bool ShowAll = false, timer = false, SortByD, SortByT, SortByP;
+        public bool ShowAll = false, timer = false, SortByDeadline, SortByTask, SortByPriority, SortByStatus;
         List<Deal> deals;
 
         public DealsPage()
@@ -96,59 +96,102 @@ namespace diplom.Views
             }
         }
 
-        private void SortByTasks(object sender, EventArgs e)
-        {
-            if (SortByT)
-            {
-                deals = deals.OrderBy(deal => deal.Name).ToList();
-                SortByT = false;
-            }
-            else
-            {
-                deals = deals.OrderByDescending(deal => deal.Name).ToList();
-                SortByT = true;
-            }
-
-            dealsView.ItemsSource = deals;
-        }
-
-        private void SortByDeadline(object sender, EventArgs e)
-        {
-            if (SortByD)
-            {
-                deals = deals.OrderBy(deal => deal.Deadline).ToList();
-                SortByD = false;
-            }
-            else
-            {
-                deals = deals.OrderByDescending(deal => deal.Deadline).ToList();
-                SortByD = true;
-            }
-
-            dealsView.ItemsSource = deals;
-        }
-
-        private void SortByPriority(object sender, EventArgs e)
-        {
-            if (SortByP)
-            {
-                deals = deals.OrderBy(deal => deal.ImportanceId).ToList();
-                SortByP = false;
-            }
-            else
-            {
-                deals = deals.OrderByDescending(deal => deal.ImportanceId).ToList();
-                SortByP = true;
-            }
-
-            dealsView.ItemsSource = deals;
-        }
-
         private void ShowButton_Clicked(Object sender, EventArgs e)
         {
             if (ShowAll) ShowAll = false;
             else ShowAll = true;
             OnAppearing();
+        }
+
+        private void ButtonByTask_Clicked(object sender, EventArgs e)
+        {
+            if (SortByTask)
+            {
+                deals = deals.OrderBy(deal => deal.Name).ToList();
+                SortByTask = false;
+                ImageSortTask.Source = "/drawable/SortToMax";
+            }
+            else
+            {
+                deals = deals.OrderByDescending(deal => deal.Name).ToList();
+                SortByTask = true;
+                ImageSortTask.Source = "/drawable/SortToMin";
+            }
+            ImageSortDeadline.Source = "";
+            ImageSortPriority.Source = "";
+            ImageSortStatus.Source = "";
+            dealsView.ItemsSource = deals;
+            buttonStack.IsVisible = false;
+        }
+        private void ButtonByPriority_Clicked(object sender, EventArgs e)
+        {
+            if (SortByPriority)
+            {
+                deals = deals.OrderBy(deal => deal.ImportanceId).ToList();
+                SortByPriority = false;
+                ImageSortPriority.Source = "/drawable/SortToMax";
+            }
+            else
+            {
+                deals = deals.OrderByDescending(deal => deal.ImportanceId).ToList();
+                SortByPriority = true;
+                ImageSortPriority.Source = "/drawable/SortToMin";
+            }
+            ImageSortDeadline.Source = "";
+            ImageSortTask.Source = "";
+            ImageSortStatus.Source = "";
+            dealsView.ItemsSource = deals;
+            buttonStack.IsVisible = false;
+        }
+
+        private void ButtonByDeadline_Clicked(object sender, EventArgs e)
+        {
+            if (SortByDeadline)
+            {
+                deals = deals.OrderBy(deal => deal.Deadline).ToList();
+                SortByDeadline = false;
+                ImageSortDeadline.Source = "/drawable/SortToMax";
+            }
+            else
+            {
+                deals = deals.OrderByDescending(deal => deal.Deadline).ToList();
+                SortByDeadline = true;
+                ImageSortDeadline.Source = "/drawable/SortToMin";
+            }
+            ImageSortPriority.Source = "";
+            ImageSortTask.Source = "";
+            ImageSortStatus.Source = "";
+            dealsView.ItemsSource = deals;
+            buttonStack.IsVisible = false;
+        }
+
+        private void ButtonByStatus_Clicked (object sender, EventArgs e)
+        {
+            if (SortByStatus)
+            {
+                deals = deals.OrderBy(deal => deal.StatusId).ToList();
+                SortByStatus = false;
+                ImageSortStatus.Source = "/drawable/SortToMax";
+            }
+            else
+            {
+                deals = deals.OrderByDescending(deal => deal.StatusId).ToList();
+                SortByStatus = true;
+                ImageSortStatus.Source = "/drawable/SortToMin";
+            }
+            ImageSortPriority.Source = "";
+            ImageSortDeadline.Source = "";
+            ImageSortTask.Source = "";
+            dealsView.ItemsSource = deals;
+            buttonStack.IsVisible = false;
+        }
+
+        private void OpenListButton_Clicked(object sender, EventArgs e)
+        {
+            if (buttonStack.IsVisible)
+                buttonStack.IsVisible = false;
+            else
+                buttonStack.IsVisible = true;
         }
     }
 }

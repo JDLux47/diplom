@@ -3,6 +3,7 @@ using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,7 +15,7 @@ namespace diplom.Views
 {
     public partial class GraphicPage : ContentPage
     {
-        private DonutChart donutChartRas, donutChartDoh;
+        private DonutChart donutChartRas, donutChartDoh, donutChartDeals;
         public DonutChart DonutChartRas
         {
             get => donutChartRas;
@@ -24,6 +25,17 @@ namespace diplom.Views
                 OnPropertyChanged(); 
             }
         }
+
+        public DonutChart DonutChartDeals
+        {
+            get => donutChartDeals;
+            set
+            {
+                donutChartDeals = value;
+                OnPropertyChanged();
+            }
+        } 
+
         public DonutChart DonutChartDoh
         {
             get => donutChartDoh;
@@ -33,6 +45,8 @@ namespace diplom.Views
                 OnPropertyChanged();
             }
         }
+
+        public DateTime StartDate;
 
         public List<SKColor> ExpenseColorsDictionary { get; } = new List<SKColor>
         {
@@ -90,10 +104,12 @@ namespace diplom.Views
 
         private void GiveEntries(List<Models.Transaction> transactions, List<Models.Category> categories, int Type)
         {
+            var filteredtransactions = transactions.Where(t => t.Date >= StartDate);
+
             var spendingByCategory = categories.Select(category => new //список категорий и суммы потраченных на неё денег
             {
                 Category = category,
-                TotalSpent = transactions.Where(transaction => transaction.CategoryId == category.Id && transaction.Type == Type).Sum(transaction => transaction.Sum)
+                TotalSpent = filteredtransactions.Where(transaction => transaction.CategoryId == category.Id && transaction.Type == Type).Sum(transaction => transaction.Sum)
             });
 
             spendingByCategory = spendingByCategory.Where(category => category.TotalSpent > 0);
@@ -133,13 +149,111 @@ namespace diplom.Views
             }   
         }
 
+        private void DealsDisplay(List<Models.Deal> deals, List<Models.Status> statuses)
+        {
+            var dealsAfterStartDate = deals.Where(deal => deal.DateOfCreation > StartDate);
+
+            var dealsByStatus = statuses.Select(status => new
+            {
+                Status = status,
+                DealCount = dealsAfterStartDate.Count(deal => deal.StatusId == status.Id)
+            });
+
+            var chartEntries = dealsByStatus.Select(item => new ChartEntry(item.DealCount)
+            {
+                Label = item.Status.Name,
+                ValueLabel = item.DealCount.ToString(),
+            }).ToList();
+
+            for (int i = 0; i < chartEntries.Count; i++)
+            {
+                switch (chartEntries[i].Label)
+                {
+                    case "В работе":
+                        chartEntries[i].Color = SKColor.Parse("#EE82EE");
+                        chartEntries[i].ValueLabelColor = SKColor.Parse("#EE82EE");
+                        chartEntries[i].TextColor = SKColor.Parse("#EE82EE");
+                        break;
+                    case "Отложено":
+                        chartEntries[i].Color = SKColor.Parse("#B8860B");
+                        chartEntries[i].ValueLabelColor = SKColor.Parse("#B8860B");
+                        chartEntries[i].TextColor = SKColor.Parse("#B8860B");
+                        break;
+                    case "Сделано":
+                        chartEntries[i].Color = SKColor.Parse("#00FF00");
+                        chartEntries[i].ValueLabelColor = SKColor.Parse("#00FF00");
+                        chartEntries[i].TextColor = SKColor.Parse("#00FF00");
+                        break;
+                    case "Отменено":
+                        chartEntries[i].Color = SKColor.Parse("#800000");
+                        chartEntries[i].ValueLabelColor = SKColor.Parse("#800000");
+                        chartEntries[i].TextColor = SKColor.Parse("#800000");
+                        break;
+                    default:
+                        chartEntries[i].Color = SKColor.Parse("#FF0000");
+                        chartEntries[i].ValueLabelColor = SKColor.Parse("#FF0000");
+                        chartEntries[i].TextColor = SKColor.Parse("#FF0000");
+                        break;
+                }
+            }
+
+            DonutChartDeals = new DonutChart { Entries = chartEntries, LabelTextSize = 30f, BackgroundColor = SKColor.Empty };
+        }
+
         private async void DisplayChart()
         {
             var transactions = await App.Diplomdatabase.GetTransactionsAsync();
             var categories = await App.Diplomdatabase.GetCategoriesAsync();
+            var deals = await App.Diplomdatabase.GetDealsAsync();
+            var statuses = await App.Diplomdatabase.GetStatusesAsync();
             
             GiveEntries(transactions, categories, -1);
             GiveEntries(transactions, categories, 1);
+            DealsDisplay(deals, statuses);
+        }
+
+        private void DayButton_Clicked(object sender, EventArgs e)
+        {
+            StartDate = DateTime.Now.AddDays(-1);
+            Filter("За последние сутки");
+        }
+
+        private void WeekButton_Clicked(object sender, EventArgs e)
+        {
+            StartDate = DateTime.Now.AddDays(-7);
+            Filter("За последнюю неделю");
+        }
+
+        private void MonthButton_Clicked(object sender, EventArgs e)
+        {
+            StartDate = DateTime.Now.AddDays(-30);
+            Filter("За последний месяц");
+        }
+
+        private void YearButton_Clicked(object sender, EventArgs e)
+        {
+            StartDate = DateTime.Now.AddDays(-365);
+            Filter("За последний год");
+        }
+
+        private void AllTimeButton_Clicked (object sender, EventArgs e)
+        {
+            StartDate = DateTime.MinValue;
+            CostLabel.IsVisible = false;
+            IncomeLabel.IsVisible = false;
+            DealsLabel.IsVisible = false;
+            OnAppearing();
+        }
+
+        private void Filter(string time)
+        {
+            IncomeLabel.Text = "(" + time + ")";
+            CostLabel.Text = "(" + time + ")";
+            DealsLabel.Text = "(" + time + ")"; 
+            CostLabel.IsVisible = true;
+            IncomeLabel.IsVisible = true;
+            DealsLabel.IsVisible = true;
+            OnAppearing();
         }
     }
 }

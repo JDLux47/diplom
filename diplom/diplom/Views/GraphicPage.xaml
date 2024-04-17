@@ -5,9 +5,18 @@
              x:Class="diplom.Views.GraphicPage"
              Title="Статистика">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Secondary" Text="За сутки" Clicked="DayButton_Clicked"/>
+        <ToolbarItem Order="Secondary" Text="За неделю" Clicked="WeekButton_Clicked"/>
+        <ToolbarItem Order="Secondary" Text="За месяц" Clicked="MonthButton_Clicked"/>
+        <ToolbarItem Order="Secondary" Text="За год" Clicked="YearButton_Clicked"/>
+        <ToolbarItem Order="Secondary" Text="За всё время" Clicked="AllTimeButton_Clicked"/>
+    </ContentPage.ToolbarItems>
+
     <ScrollView>
         <StackLayout Orientation="Vertical" Padding="10">
-            <Label Text="Расходы" HorizontalOptions="Center" Margin="10" FontSize="Large" FontAttributes="Bold"/>
+            <Label Text="Расходы" HorizontalOptions="Center" Margin="0,10,0,0" FontSize="Large" FontAttributes="Bold"/>
+            <Label x:Name="CostLabel" Text="" HorizontalOptions="Center" FontSize="Large" FontAttributes="Bold" IsVisible="false"/>
             <microcharts:ChartView
                 x:Name="DiagramRas"
                 Margin="10,0,10,10"
@@ -15,11 +24,21 @@
                 HeightRequest="300"
                 VerticalOptions="Start"
                 HorizontalOptions="Fill"/>
-            <Label Text="Доходы" HorizontalOptions="Center" Margin="10" FontSize="Large" FontAttributes="Bold"/>
+            <Label Text="Доходы" HorizontalOptions="Center" Margin="0,10,0,0" FontSize="Large" FontAttributes="Bold"/>
+            <Label x:Name="IncomeLabel" Text="" HorizontalOptions="Center" FontSize="Large" FontAttributes="Bold" IsVisible="false"/>
             <microcharts:ChartView
                 x:Name="DiagramDoh"
                 Margin="10,0,10,10"
                 Chart="{Binding DonutChartDoh}"
+                HeightRequest="300"
+                VerticalOptions="Start"
+                HorizontalOptions="Fill"/>
+            <Label Text="Задачи" HorizontalOptions="Center" Margin="0,10,0,0" FontSize="Large" FontAttributes="Bold"/>
+            <Label x:Name="DealsLabel" Text="" HorizontalOptions="Center" FontSize="Large" FontAttributes="Bold" IsVisible="false"/>
+            <microcharts:ChartView
+                x:Name="DiagramDeals"
+                Margin="10,0,10,10"
+                Chart="{Binding DonutChartDeals}"
                 HeightRequest="300"
                 VerticalOptions="Start"
                 HorizontalOptions="Fill"/>
