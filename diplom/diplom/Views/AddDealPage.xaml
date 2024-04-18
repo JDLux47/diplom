@@ -28,11 +28,8 @@
                     <TimePicker Grid.Column="3" x:Name="timepickerDeadline" Format="H:mm" />
                 </Grid>
             </StackLayout>
-
-            <StackLayout Orientation="Horizontal">
-                <Label VerticalOptions="CenterAndExpand" Text="Уведомление в календаре" FontSize="16"/>
-                <Button Text="Создать" Clicked="Notification_Clicked" />
-            </StackLayout>
+            
+            <Button Text="Создать уведомление в календаре" Clicked="Notification_Clicked" />
 
             <Button Text="Добавить" Clicked="SaveButton_Clicked" />
         </StackLayout>

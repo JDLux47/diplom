@@ -1,4 +1,5 @@
-﻿using Microcharts;
+﻿using diplom.Models;
+using Microcharts;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
@@ -46,7 +47,8 @@ namespace diplom.Views
             }
         }
 
-        public DateTime StartDate;
+        public DateTime StartDate, EndDate = DateTime.Now;
+        public string time="";
 
         public List<SKColor> ExpenseColorsDictionary { get; } = new List<SKColor>
         {
@@ -104,7 +106,7 @@ namespace diplom.Views
 
         private void GiveEntries(List<Models.Transaction> transactions, List<Models.Category> categories, int Type)
         {
-            var filteredtransactions = transactions.Where(t => t.Date >= StartDate);
+            var filteredtransactions = transactions.Where(transaction => transaction.Date >= StartDate && transaction.Date <= EndDate);
 
             var spendingByCategory = categories.Select(category => new //список категорий и суммы потраченных на неё денег
             {
@@ -135,7 +137,20 @@ namespace diplom.Views
                     chartEntries[i].TextColor = ExpenseColorsDictionary[i];
                     chartEntries[i].ValueLabelColor = ExpenseColorsDictionary[i];
                 }
-                DonutChartRas = new DonutChart { Entries = chartEntries, LabelTextSize = 30f, BackgroundColor = SKColor.Empty };
+                if (chartEntries.Count() != 0)
+                {
+                    DonutChartRas = new DonutChart { Entries = chartEntries, LabelTextSize = 30f, BackgroundColor = SKColor.Empty };
+                    DiagramRas.IsVisible = true;
+                    CostTitleLabel.IsVisible = true;
+                    CostLabel.IsVisible = true;
+                    CostLabel.Text = time;
+                }
+                else
+                {
+                    CostLabel.IsVisible = false;
+                    DiagramRas.IsVisible = false;
+                    CostTitleLabel.IsVisible = false;
+                }
             }
             else
             {
@@ -145,13 +160,27 @@ namespace diplom.Views
                     chartEntries[i].TextColor = IncomeColorsDictionary[i];
                     chartEntries[i].ValueLabelColor = IncomeColorsDictionary[i];
                 }
-                DonutChartDoh = new DonutChart { Entries = chartEntries, LabelTextSize = 30f, BackgroundColor = SKColor.Empty };
-            }   
+
+                if(chartEntries.Count() != 0)
+                {
+                    DonutChartDoh = new DonutChart { Entries = chartEntries, LabelTextSize = 30f, BackgroundColor = SKColor.Empty };
+                    DiagramDoh.IsVisible = true;
+                    IncomeTitleLabel.IsVisible = true;
+                    IncomeLabel.Text = time;
+                    IncomeLabel.IsVisible = true;
+                }
+                else
+                {
+                    IncomeLabel.IsVisible = false;
+                    DiagramDoh.IsVisible = false;
+                    IncomeTitleLabel.IsVisible = false;
+                }
+            }
         }
 
         private void DealsDisplay(List<Models.Deal> deals, List<Models.Status> statuses)
         {
-            var dealsAfterStartDate = deals.Where(deal => deal.DateOfCreation > StartDate);
+            var dealsAfterStartDate = deals.Where(deal => deal.DateOfCreation >= StartDate && deal.Deadline <= EndDate);
 
             var dealsByStatus = statuses.Select(status => new
             {
@@ -196,8 +225,20 @@ namespace diplom.Views
                         break;
                 }
             }
-
-            DonutChartDeals = new DonutChart { Entries = chartEntries, LabelTextSize = 30f, BackgroundColor = SKColor.Empty };
+            if (chartEntries[0].Value != 0 || chartEntries[1].Value != 0 || chartEntries[2].Value != 0 || chartEntries[3].Value != 0 || chartEntries[4].Value != 0)
+            {
+                DonutChartDeals = new DonutChart { Entries = chartEntries, LabelTextSize = 30f, BackgroundColor = SKColor.Empty };
+                DealsTitleLabel.IsVisible = true;
+                DiagramDeals.IsVisible = true;
+                DealsLabel.IsVisible = true;
+                DealsLabel.Text = time;
+            }
+            else
+            {
+                DealsTitleLabel.IsVisible = false;
+                DiagramDeals.IsVisible = false;
+                DealsLabel.IsVisible = false;
+            }
         }
 
         private async void DisplayChart()
@@ -210,30 +251,39 @@ namespace diplom.Views
             GiveEntries(transactions, categories, -1);
             GiveEntries(transactions, categories, 1);
             DealsDisplay(deals, statuses);
+            Filter();
         }
 
         private void DayButton_Clicked(object sender, EventArgs e)
         {
             StartDate = DateTime.Now.AddDays(-1);
-            Filter("За последние сутки");
+            EndDate = DateTime.Now;
+            time = "За последние сутки";
+            OnAppearing();
         }
 
         private void WeekButton_Clicked(object sender, EventArgs e)
         {
             StartDate = DateTime.Now.AddDays(-7);
-            Filter("За последнюю неделю");
+            EndDate = DateTime.Now;
+            time = "За последнюю неделю";
+            OnAppearing();
         }
 
         private void MonthButton_Clicked(object sender, EventArgs e)
         {
             StartDate = DateTime.Now.AddDays(-30);
-            Filter("За последний месяц");
+            EndDate = DateTime.Now;
+            time = "За последний месяц";
+            OnAppearing();
         }
 
         private void YearButton_Clicked(object sender, EventArgs e)
         {
             StartDate = DateTime.Now.AddDays(-365);
-            Filter("За последний год");
+            EndDate = DateTime.Now;
+            time = "За последний год";
+            OnAppearing();
         }
 
         private void AllTimeButton_Clicked (object sender, EventArgs e)
@@ -242,18 +292,37 @@ namespace diplom.Views
             CostLabel.IsVisible = false;
             IncomeLabel.IsVisible = false;
             DealsLabel.IsVisible = false;
+            time = "За всё время";
             OnAppearing();
         }
 
-        private void Filter(string time)
+        private async void YourTimeButton_Clicked(object sender, EventArgs e)
         {
-            IncomeLabel.Text = "(" + time + ")";
-            CostLabel.Text = "(" + time + ")";
-            DealsLabel.Text = "(" + time + ")"; 
-            CostLabel.IsVisible = true;
-            IncomeLabel.IsVisible = true;
-            DealsLabel.IsVisible = true;
-            OnAppearing();
+            PickDatePage pickDatePage = new PickDatePage();
+            await Navigation.PushAsync(pickDatePage);
+            pickDatePage.Disappearing += (senderObj, eventArgs) =>
+            {
+                var page = senderObj as PickDatePage;
+                if (page != null )
+                {
+                    if (page.StartDate != DateTime.MinValue && page.EndDate != DateTime.MinValue)
+                    {
+                        StartDate = page.StartDate;
+                        EndDate = page.EndDate;
+                        time = StartDate.Date.ToShortDateString() + "-" + EndDate.Date.ToShortDateString();
+                        OnAppearing();
+                    }
+                }
+            };
+        }
+
+        private void Filter()
+        {
+            if (!CostTitleLabel.IsVisible && !IncomeTitleLabel.IsVisible && !DealsTitleLabel.IsVisible)
+            {
+                CostLabel.Text = "Нет данных за указанный промежуток времени...";
+                CostLabel.IsVisible = true;
+            }
         }
     }
 }
