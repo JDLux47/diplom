@@ -45,11 +45,8 @@
                 </Grid>
             </StackLayout>
 
-            <StackLayout Orientation="Horizontal">
-                <Label VerticalOptions="CenterAndExpand" Text="Уведомление в календаре" FontSize="16"/>
-                <Button Text="Создать" Clicked="Notification_Clicked"  HorizontalOptions="FillAndExpand"/>
-            </StackLayout>
-            
+            <Button Text="Создать уведомление в календаре" Clicked="Notification_Clicked"  HorizontalOptions="FillAndExpand"/>
+
             <StackLayout Orientation="Horizontal">
                 <Button Text="Изменить" Clicked="SaveButton_Clicked"  HorizontalOptions="FillAndExpand"/>
                 <Button Text="Удалить" Clicked="DeleteButton_Clicked"  HorizontalOptions="FillAndExpand"/>

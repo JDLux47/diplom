@@ -11,11 +11,12 @@
         <ToolbarItem Order="Secondary" Text="За месяц" Clicked="MonthButton_Clicked"/>
         <ToolbarItem Order="Secondary" Text="За год" Clicked="YearButton_Clicked"/>
         <ToolbarItem Order="Secondary" Text="За всё время" Clicked="AllTimeButton_Clicked"/>
+        <ToolbarItem Order="Secondary" Text="Свой промежуток времени" Clicked="YourTimeButton_Clicked"/>
     </ContentPage.ToolbarItems>
 
     <ScrollView>
         <StackLayout Orientation="Vertical" Padding="10">
-            <Label Text="Расходы" HorizontalOptions="Center" Margin="0,10,0,0" FontSize="Large" FontAttributes="Bold"/>
+            <Label x:Name="CostTitleLabel" Text="Расходы" HorizontalOptions="Center" Margin="0,10,0,0" FontSize="Large" FontAttributes="Bold"/>
             <Label x:Name="CostLabel" Text="" HorizontalOptions="Center" FontSize="Large" FontAttributes="Bold" IsVisible="false"/>
             <microcharts:ChartView
                 x:Name="DiagramRas"
@@ -24,7 +25,7 @@
                 HeightRequest="300"
                 VerticalOptions="Start"
                 HorizontalOptions="Fill"/>
-            <Label Text="Доходы" HorizontalOptions="Center" Margin="0,10,0,0" FontSize="Large" FontAttributes="Bold"/>
+            <Label x:Name="IncomeTitleLabel" Text="Доходы" HorizontalOptions="Center" Margin="0,10,0,0" FontSize="Large" FontAttributes="Bold"/>
             <Label x:Name="IncomeLabel" Text="" HorizontalOptions="Center" FontSize="Large" FontAttributes="Bold" IsVisible="false"/>
             <microcharts:ChartView
                 x:Name="DiagramDoh"
@@ -33,7 +34,7 @@
                 HeightRequest="300"
                 VerticalOptions="Start"
                 HorizontalOptions="Fill"/>
-            <Label Text="Задачи" HorizontalOptions="Center" Margin="0,10,0,0" FontSize="Large" FontAttributes="Bold"/>
+            <Label x:Name="DealsTitleLabel" Text="Задачи" HorizontalOptions="Center" Margin="0,10,0,0" FontSize="Large" FontAttributes="Bold"/>
             <Label x:Name="DealsLabel" Text="" HorizontalOptions="Center" FontSize="Large" FontAttributes="Bold" IsVisible="false"/>
             <microcharts:ChartView
                 x:Name="DiagramDeals"
