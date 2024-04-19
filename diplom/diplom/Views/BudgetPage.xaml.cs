@@ -146,5 +146,16 @@ namespace diplom.Views
                 buttonStack.IsVisible = true;
         }
 
+        private void CollectionView_Scrolled(object sender, ItemsViewScrolledEventArgs e)
+        {
+            if (e.VerticalOffset >= 0) // Проверяем, что произошло вертикальное прокручивание вниз
+            {
+                buttonStack.IsVisible = false; // Скрываем AbsoluteLayout при прокрутке вниз
+            }
+            else
+            {
+                buttonStack.IsVisible = true; // Показываем AbsoluteLayout при прокрутке вверх или в начальном положении
+            }
+        }
     }
 }

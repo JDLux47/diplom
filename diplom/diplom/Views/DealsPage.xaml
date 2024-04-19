@@ -6,6 +6,7 @@
 
     <ContentPage.Resources>
         <local:TimeDifferenceConverter x:Key="TimeDifferenceConverter" />
+        <local:StatusToIsCheckedConverter x:Key="StatusToIsCheckedConverter" />
     </ContentPage.Resources>
     
     <ContentPage.ToolbarItems>
@@ -14,7 +15,7 @@
     </ContentPage.ToolbarItems>
 
     <AbsoluteLayout>
-        <CollectionView x:Name="dealsView" Margin="20" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
+        <CollectionView x:Name="dealsView" Margin="20" SelectionMode="Single" SelectionChanged="OnSelectionChanged" Scrolled="CollectionView_Scrolled">
 
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
@@ -48,24 +49,7 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame CornerRadius="10" Padding="10" Margin="5" >
-                        <Frame.Triggers>
-                            <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="1">
-                                <Setter Property="BackgroundColor" Value="Violet" />
-                            </DataTrigger>
-                            <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="2">
-                                <Setter Property="BackgroundColor" Value="#B8860B" />
-                            </DataTrigger>
-                            <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="3">
-                                <Setter Property="BackgroundColor" Value="Green" />
-                            </DataTrigger>
-                            <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="4">
-                                <Setter Property="BackgroundColor" Value="#800000" />
-                            </DataTrigger>
-                            <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="5">
-                                <Setter Property="BackgroundColor" Value="red" />
-                            </DataTrigger>
-                        </Frame.Triggers>
+                    <Frame CornerRadius="10" Padding="0" Margin="5" BackgroundColor="Aqua">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="120" />
@@ -73,9 +57,9 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="{Binding Name}" FontSize="Small" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
-                            <Label Grid.Column="1" FontSize="Small" VerticalOptions="CenterAndExpand" Text="{Binding Deadline, Converter={StaticResource TimeDifferenceConverter}}" HorizontalTextAlignment="Center"/>
-                            <Image Grid.Column="2" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" HeightRequest="25" WidthRequest="25">
+                            <Label Margin="10,10,0,10" Grid.Column="0" Text="{Binding Name}" FontSize="Small" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
+                            <Label Margin="5,10,0,10" Grid.Column="1" FontSize="Small" VerticalOptions="CenterAndExpand" Text="{Binding Deadline, Converter={StaticResource TimeDifferenceConverter}}" HorizontalTextAlignment="Center"/>
+                            <Image Margin="0,10,0,10" Grid.Column="2" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" HeightRequest="25" WidthRequest="25">
                                 <Image.Triggers>
                                     <DataTrigger TargetType="Image" Binding="{Binding ImportanceId}" Value="1">
                                         <Setter Property="Source" Value="LowPr.png" />
@@ -88,37 +72,65 @@
                                     </DataTrigger>
                                 </Image.Triggers>
                             </Image>
-                            <CheckBox Grid.Column="3" Color="orange" CheckedChanged="CheckBox_CheckedChanged" HeightRequest="30" WidthRequest="30"/>
+                            <Frame Grid.Column="3" CornerRadius="0" Padding="10,0,10,0">
+                                <Frame.Triggers>
+                                    <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="1">
+                                        <Setter Property="BackgroundColor" Value="Violet" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="2">
+                                        <Setter Property="BackgroundColor" Value="#B8860B" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="3">
+                                        <Setter Property="BackgroundColor" Value="Green" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="4">
+                                        <Setter Property="BackgroundColor" Value="#800000" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="5">
+                                        <Setter Property="BackgroundColor" Value="red" />
+                                    </DataTrigger>
+                                </Frame.Triggers>
+                                <CheckBox Color="White" 
+                                          IsChecked="{Binding StatusId, Converter={StaticResource StatusToIsCheckedConverter}}" 
+                                          CheckedChanged="CheckBox_CheckedChanged" 
+                                          HeightRequest="30" WidthRequest="30">
+                                    <CheckBox.Triggers>
+                                        <DataTrigger TargetType="CheckBox" Binding="{Binding StatusId}" Value="3">
+                                            <Setter Property="IsEnabled" Value="False" />
+                                        </DataTrigger>
+                                    </CheckBox.Triggers>
+                                </CheckBox>
+                            </Frame>
                         </Grid>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
 
         </CollectionView>
-    
+        
         <AbsoluteLayout x:Name="buttonStack" IsVisible="False" Margin="0, 64, 20, 0" 
                         AbsoluteLayout.LayoutFlags="PositionProportional"
                         AbsoluteLayout.LayoutBounds="1, 0, -1, 0">
-            
-            <StackLayout Spacing="4">
-                <StackLayout  Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
-                    <Button Visual="Default" Text="По задаче              " Clicked="ButtonByTask_Clicked" Font="12" BackgroundColor="Transparent"/>
-                    <Image Visual="Default" x:Name="ImageSortTask" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
+
+                <StackLayout Spacing="4">
+                    <StackLayout  Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
+                        <Button Visual="Default" Text="По задаче              " Clicked="ButtonByTask_Clicked" Font="12" BackgroundColor="Transparent"/>
+                        <Image Visual="Default" x:Name="ImageSortTask" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
+                    </StackLayout>
+                    <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
+                        <Button Visual="Default" Text="По приоритету    " Clicked="ButtonByPriority_Clicked" Font="12" BackgroundColor="Transparent"/>
+                        <Image Visual="Default" x:Name="ImageSortPriority" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
+                    </StackLayout>
+                    <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
+                        <Button Visual="Default" Text="По сроку                 " Clicked="ButtonByDeadline_Clicked" Font="12" BackgroundColor="Transparent"/>
+                        <Image Visual="Default" x:Name="ImageSortDeadline" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
+                    </StackLayout>
+                    <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
+                        <Button Visual="Default" Text="По статусу             " Clicked="ButtonByStatus_Clicked" Font="12" BackgroundColor="Transparent"/>
+                        <Image Visual="Default" x:Name="ImageSortStatus" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
+                    </StackLayout>
                 </StackLayout>
-                <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
-                    <Button Visual="Default" Text="По приоритету    " Clicked="ButtonByPriority_Clicked" Font="12" BackgroundColor="Transparent"/>
-                    <Image Visual="Default" x:Name="ImageSortPriority" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
-                </StackLayout>
-                <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
-                    <Button Visual="Default" Text="По сроку                 " Clicked="ButtonByDeadline_Clicked" Font="12" BackgroundColor="Transparent"/>
-                    <Image Visual="Default" x:Name="ImageSortDeadline" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
-                </StackLayout>
-                <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
-                    <Button Visual="Default" Text="По статусу             " Clicked="ButtonByStatus_Clicked" Font="12" BackgroundColor="Transparent"/>
-                    <Image Visual="Default" x:Name="ImageSortStatus" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
-                </StackLayout>
-            </StackLayout>
-        </AbsoluteLayout>
+            </AbsoluteLayout>
 
     </AbsoluteLayout>
 </ContentPage>

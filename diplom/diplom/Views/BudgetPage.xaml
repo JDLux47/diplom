@@ -16,7 +16,7 @@
 
     <AbsoluteLayout>
         
-        <CollectionView x:Name="transactionsView" Margin="20" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
+        <CollectionView x:Name="transactionsView" Margin="20" SelectionMode="Single" SelectionChanged="OnSelectionChanged" Scrolled="CollectionView_Scrolled">
 
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
