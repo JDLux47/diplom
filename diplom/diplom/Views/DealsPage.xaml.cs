@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -82,19 +83,30 @@ namespace diplom.Views
 
         private async void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
-            if (sender is CheckBox checkbox) // Проверка, что отправитель события - это CheckBox
+            if (sender is CheckBox checkbox && checkbox.BindingContext is Deal deal)
             {
-                if (checkbox.Parent is Grid grid) // Получение родительского элемента CheckBox, который у вас является Grid
+                // Проверяем, изменилось ли значение
+                if (checkbox.IsChecked && deal.StatusId != 3)
                 {
-                    if (grid.BindingContext is Deal deal) // Получение объекта данных элемента внутри Grid, которого вы хотите изменить
-                    {
-                        deal.StatusId = 3;
-                        await App.Diplomdatabase.SaveDealAsync(deal);
-                        OnAppearing();
-                    }
+                    deal.StatusId = 3; // Устанавливаем 3 только если до этого было другое значение
+                    await App.Diplomdatabase.SaveDealAsync(deal);
+
+                    // Обновляем только чекбокс, без вызова OnAppearing()
+                    checkbox.BindingContext = null;
+                    checkbox.BindingContext = deal;
+                }
+                else if (!checkbox.IsChecked && deal.StatusId != 0)
+                {
+                    deal.StatusId = 0; // Устанавливаем 0 если чекбокс не отмечен и значение не равно 0
+                    await App.Diplomdatabase.SaveDealAsync(deal);
+
+                    // Обновляем только чекбокс, без вызова OnAppearing()
+                    checkbox.BindingContext = null;
+                    checkbox.BindingContext = deal;
                 }
             }
         }
+
 
         private void ShowButton_Clicked(Object sender, EventArgs e)
         {
@@ -192,6 +204,18 @@ namespace diplom.Views
                 buttonStack.IsVisible = false;
             else
                 buttonStack.IsVisible = true;
+        }
+
+        private void CollectionView_Scrolled(object sender, ItemsViewScrolledEventArgs e)
+        {
+            if (e.VerticalOffset >= 0) // Проверяем, что произошло вертикальное прокручивание вниз
+            {
+                buttonStack.IsVisible = false; // Скрываем AbsoluteLayout при прокрутке вниз
+            }
+            else
+            {
+                buttonStack.IsVisible = true; // Показываем AbsoluteLayout при прокрутке вверх или в начальном положении
+            }
         }
     }
 }
