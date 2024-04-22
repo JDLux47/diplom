@@ -41,7 +41,6 @@ namespace diplom.Views
             {
                 // Сохраняем информацию о пользователе в SecureStorage
                 Application.Current.MainPage = new AppShell();
-                await DisplayAlert("Успешная авторизация", "Добро пожаловать, " + App.LoggedInUser.Name.ToString() + "!", "Приветствую!");
             }
             else
                 await DisplayAlert("Неуспешная авторизация", "Нет такого пользователя!", "OK");

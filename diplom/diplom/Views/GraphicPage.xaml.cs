@@ -3,6 +3,7 @@ using Microcharts;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
@@ -180,7 +181,7 @@ namespace diplom.Views
 
         private void DealsDisplay(List<Models.Deal> deals, List<Models.Status> statuses)
         {
-            var dealsAfterStartDate = deals.Where(deal => deal.DateOfCreation >= StartDate && deal.Deadline <= EndDate);
+            var dealsAfterStartDate = deals.Where(deal => deal.DateOfCreation >= StartDate && deal.DateOfCreation <= EndDate);
 
             var dealsByStatus = statuses.Select(status => new
             {
@@ -302,7 +303,7 @@ namespace diplom.Views
             await Navigation.PushAsync(pickDatePage);
             pickDatePage.Disappearing += (senderObj, eventArgs) =>
             {
-                var page = senderObj as PickDatePage;
+                    var page = senderObj as PickDatePage;
                 if (page != null )
                 {
                     if (page.StartDate != DateTime.MinValue && page.EndDate != DateTime.MinValue)
@@ -323,6 +324,12 @@ namespace diplom.Views
                 CostLabel.Text = "Нет данных за указанный промежуток времени...";
                 CostLabel.IsVisible = true;
             }
+        }
+
+        private async void BarButton_Clicked(object sender, EventArgs e)
+        {
+            SecondGraphicPage secondGraphicPage = new SecondGraphicPage();
+            await Navigation.PushAsync(secondGraphicPage);
         }
     }
 }

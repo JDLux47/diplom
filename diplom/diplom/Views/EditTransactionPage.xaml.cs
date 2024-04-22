@@ -60,13 +60,16 @@ namespace diplom.Views
 
                 if(edit)
                 {
+                    bool result = false;
+                    if (transaction.Sum != Convert.ToDecimal(entrySum.Text) || transaction.Type != type)
+                        result = await DisplayAlert("Подтверждение", "Изменить баланс в соответствии с изменяемой транзакцией?", "Да", "Нет");
+
                     // Обновление данных транзакции на основе введенных значений
                     transaction.Type = type;
                     transaction.Sum = Convert.ToDecimal(entrySum.Text);
                     transaction.Date = DatePicker.Date;
                     transaction.CategoryId = categories[pickerCategory.SelectedIndex].Id;
 
-                    bool result = await DisplayAlert("Подтверждение", "Изменить баланс в соответствии с изменяемой транзакцией?", "Да", "Нет");
                     if (result)
                     {
                         var sum = OldSum * (-1 * OldType) + transaction.Type * transaction.Sum;
