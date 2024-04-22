@@ -6,6 +6,7 @@
              Title="Статистика">
 
     <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Primary" Text="По месяцам" Clicked="BarButton_Clicked"/>
         <ToolbarItem Order="Secondary" Text="За сутки" Clicked="DayButton_Clicked"/>
         <ToolbarItem Order="Secondary" Text="За неделю" Clicked="WeekButton_Clicked"/>
         <ToolbarItem Order="Secondary" Text="За месяц" Clicked="MonthButton_Clicked"/>

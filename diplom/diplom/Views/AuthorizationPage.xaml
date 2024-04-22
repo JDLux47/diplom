@@ -7,9 +7,10 @@
     <ContentPage.Content>
         
         <StackLayout>
-            <StackLayout Padding="20" VerticalOptions="FillAndExpand">
-            
-                <Entry x:Name="EntryLogin" Placeholder="Введите логин"/>
+            <StackLayout Padding="20" VerticalOptions="CenterAndExpand">
+                <Label Text="Здравствуйте!" FontSize="25" HorizontalOptions="CenterAndExpand" Margin="0,0,0,40"/>
+                <Label Text="Для доступа введите логин и пароль" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,0,0,10"/>
+                <Entry x:Name="EntryLogin" Placeholder="Введите логин" VerticalOptions="CenterAndExpand"/>
                 <Entry x:Name="EntryPassword" Placeholder="Введите пароль" IsPassword="True"/>
             
                 <Button Text="Войти" Clicked="LoginButton_Clicked" />
