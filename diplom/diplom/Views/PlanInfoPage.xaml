@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage Visual="Material" xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="diplom.Views.PlanInfoPage"
+             Title="Информация о плане">
+    <ContentPage.Content>
+        <StackLayout Padding="20" VerticalOptions="CenterAndExpand">
+            <Label Text="Информация о плане" HorizontalOptions="Center" FontSize="20" Margin="0,0,0,10"/>
+
+            <Entry x:Name="entryName" Placeholder="Название" FontSize="16" Text="{Binding Name}" Margin="5"/>
+            <Entry x:Name="entrySum" Placeholder="Сумма" FontSize="16" Text="{Binding Sum}" Margin="5"/>
+
+            <StackLayout Orientation="Horizontal" Margin="5">
+                <Label VerticalOptions="CenterAndExpand" Text="Срок " FontSize="16"/>
+                <DatePicker HeightRequest="50" x:Name="datapicker" Date="{Binding Deadline}" FontSize="16" Margin="25,0,0,0" HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Margin="5">
+                <Button Text="Изменить" Clicked="SaveButton_Clicked"  HorizontalOptions="FillAndExpand"/>
+                <Button Text="Удалить" Clicked="DeleteButton_Clicked"  HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

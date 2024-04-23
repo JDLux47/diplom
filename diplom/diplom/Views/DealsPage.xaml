@@ -89,6 +89,9 @@
                                     <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="5">
                                         <Setter Property="BackgroundColor" Value="red" />
                                     </DataTrigger>
+                                    <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="6">
+                                        <Setter Property="BackgroundColor" Value="DarkGreen" />
+                                    </DataTrigger>
                                 </Frame.Triggers>
                                 <CheckBox Color="White" 
                                           IsChecked="{Binding StatusId, Converter={StaticResource StatusToIsCheckedConverter}}" 

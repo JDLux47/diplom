@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage Visual="Material" xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="diplom.Views.AddPlanPage"
+             Title="Добавление плана">
+    <ContentPage.Content>
+        <StackLayout Padding="20" x:Name="stackDeal" Spacing="10" VerticalOptions="CenterAndExpand">
+
+            <Entry x:Name="entryName" Placeholder="Название" FontSize="16" />
+            <Entry x:Name="entrySum" Placeholder="Сумма" FontSize="16" />
+
+            <StackLayout Orientation="Horizontal">
+                <Label VerticalOptions="CenterAndExpand" Text="Срок " FontSize="16"/>
+                <DatePicker HeightRequest="50" x:Name="datapickerDeadline" FontSize="16"/>
+            </StackLayout>
+
+            <Button Text="Добавить" Clicked="SaveButton_Clicked" />
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

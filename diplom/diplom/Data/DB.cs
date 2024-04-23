@@ -21,7 +21,7 @@ namespace diplom.Data
             db.CreateTableAsync<Deal>().Wait();
             db.CreateTableAsync<User>().Wait();
             db.CreateTableAsync<Category>().Wait();
-
+            db.CreateTableAsync<Plan>().Wait();
         }
 
         #region User
@@ -171,6 +171,31 @@ namespace diplom.Data
         public Task<int> DeleteCategoryAsync(Category category) //удаление строки
         {
             return db.DeleteAsync(category);
+        }
+        #endregion
+
+        #region Plan
+        public Task<List<Plan>> GetPlansAsync() //получение всех
+        {
+            return db.Table<Plan>().Where(i => i.UserId == App.LoggedInUser.Id || i.UserId == 0).ToListAsync();
+        }
+
+        public Task<Plan> GetPlanAsync(int id) //получение одного 
+        {
+            return db.Table<Plan>().Where(i => i.Id == id).FirstOrDefaultAsync();
+        }
+
+        public Task<int> SavePlanAsync(Plan plan) //добавление или обновление строки
+        {
+            if (plan.Id != 0)
+                return db.UpdateAsync(plan);
+            else
+                return db.InsertAsync(plan);
+        }
+
+        public Task<int> DeletePlanAsync(Plan plan) //удаление строки
+        {
+            return db.DeleteAsync(plan);
         }
         #endregion
 
