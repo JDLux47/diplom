@@ -17,7 +17,7 @@ namespace diplom
         {
             InitializeComponent();
 
-            Routing.RegisterRoute(nameof(ProfilePage), typeof(ProfilePage));
+            Routing.RegisterRoute(nameof(PlansPage), typeof(PlansPage));
         }
     }
 }

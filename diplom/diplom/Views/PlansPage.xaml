@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage Visual="Material" xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="diplom.Views.PlansPage"
+             Title="Планы">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Secondary" Text="Добавить" Clicked="AddButton_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <CollectionView x:Name="PlansView" Margin="20" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
+
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+        </CollectionView.ItemsLayout>
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Frame CornerRadius="10" Padding="10" Margin="5" HasShadow="True" BackgroundColor="Aqua">
+                    <Grid VerticalOptions="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Label VerticalOptions="Center" Grid.Column="0" Text="{Binding Name}" FontSize="Small" HorizontalTextAlignment="Center"/>
+                        <Label VerticalOptions="Center" Grid.Column="1" Text="{Binding Sum}" FontSize="Small" HorizontalTextAlignment="Center"/>
+                        <Label VerticalOptions="Center" Grid.Column="2" Text="{Binding Deadline, StringFormat='{0:dd.MM.yyyy}'}" FontSize="Small" HorizontalTextAlignment="Center"/>
+                        <CheckBox Grid.Column="3" Color="White" 
+                                  IsChecked="{Binding Done}" 
+                                  CheckedChanged="CheckBox_CheckedChanged" 
+                                  HeightRequest="30" WidthRequest="30">
+                        </CheckBox>
+                    </Grid>
+                </Frame>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+
+    </CollectionView>
+</ContentPage>
