@@ -53,5 +53,11 @@ namespace diplom.Views
             await App.Diplomdatabase.SaveTransactionAsync(transaction);
             await Navigation.PopAsync();
         }
+
+        private void CategoryButton_Clicked(object sender, EventArgs e)
+        {
+            ListOfCategoriesPage listOfCategoriesPage = new ListOfCategoriesPage();
+            Navigation.PushAsync(listOfCategoriesPage);
+        }
     }
 }

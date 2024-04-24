@@ -15,6 +15,7 @@
                 </Picker.ItemsSource>
             </Picker>
             <Picker x:Name="pickerCategory" Title="Выберите категорию" SelectedItem="{Binding SelectedCategory}" ItemDisplayBinding="{Binding Name}"/>
+            <Button Text="Ваши категории" Clicked="CategoryButton_Clicked"/>
             <Entry Placeholder="Сумма" x:Name="entrySum" />
             <Button Text="Добавить" Clicked="Add_Clicked" />
         </StackLayout>
