@@ -22,8 +22,12 @@ namespace diplom.Views
         {
             if (BindingContext is Plan plan)
             {
-                await App.Diplomdatabase.SavePlanAsync(plan);
-                await DisplayAlert("Оповещение", "Данные плана были изменены!", "OK");
+                var planFromDb = await App.Diplomdatabase.GetPlanAsync(plan.Id);
+                if (planFromDb.Deadline.Date != plan.Deadline.Date || planFromDb.Done != plan.Done || planFromDb.Name != plan.Name || planFromDb.Sum != plan.Sum)
+                {
+                    await App.Diplomdatabase.SavePlanAsync(plan);
+                    await DisplayAlert("Оповещение", "Данные плана были изменены!", "OK");
+                }
                 //можно брать план из бд и сверять
             }
         }

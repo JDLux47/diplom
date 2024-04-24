@@ -49,7 +49,7 @@ namespace diplom.Views
         }
 
         public DateTime StartDate, EndDate = DateTime.Now;
-        public string time="";
+        public string time="За всё время";
 
         public List<SKColor> ExpenseColorsDictionary { get; } = new List<SKColor>
         {
