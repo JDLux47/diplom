@@ -8,10 +8,12 @@
         <local:SumCheckForPlan x:Key="SumCheckForPlan"/>
         <local:DeadlineCheckForPlan x:Key="DeadlineCheckForPlan"/>
         <local:SumToMonth x:Key="SumToMonth"/>
+        <local:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
     </ContentPage.Resources>
     
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Secondary" Text="Добавить" Clicked="AddButton_Clicked"/>
+        <ToolbarItem Order="Secondary" Text="Показать выполненные" Clicked="ShowButton_Clicked" x:Name="showHideItem"/>
     </ContentPage.ToolbarItems>
 
     <StackLayout Spacing="0">
@@ -30,8 +32,8 @@
                         <Grid VerticalOptions="Center">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
@@ -48,9 +50,47 @@
                                   CheckedChanged="CheckBox_CheckedChanged" 
                                   HeightRequest="30" WidthRequest="30">
                             </CheckBox>
-                            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Text="{Binding Sum, Converter={StaticResource SumCheckForPlan}, StringFormat='Осталось накопить - {0}₽'}" FontSize="Small" VerticalOptions="Center"/>
-                            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Text="{Binding Deadline, Converter={StaticResource DeadlineCheckForPlan}, StringFormat='До конца срока - {0}'}" FontSize="Small" VerticalOptions="Center"/>
-                            <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" FontSize="Small" VerticalOptions="Center">
+                            <Label x:Name="labelSumCheck" Grid.ColumnSpan="4" Text="{Binding Sum, Converter={StaticResource SumCheckForPlan}, StringFormat='Осталось накопить - {0}₽'}" FontSize="Small" VerticalOptions="Center">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding Done}" Value="True">
+                                        <Setter Property="HeightRequest" Value="0" />
+                                        <Setter Property="Grid.Row" Value="0" />
+                                        <Setter Property="IsVisible" Value="False" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label" Binding="{Binding Done}" Value="False">
+                                        <Setter Property="HeightRequest" Value="-1" />
+                                        <Setter Property="Grid.Row" Value="1" />
+                                        <Setter Property="IsVisible" Value="True" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                            <Label x:Name="labelDeadlineCheck" Grid.ColumnSpan="4" Text="{Binding Deadline, Converter={StaticResource DeadlineCheckForPlan}, StringFormat='До конца срока - {0}'}" FontSize="Small" VerticalOptions="Center">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding Done}" Value="True">
+                                        <Setter Property="HeightRequest" Value="0" />
+                                        <Setter Property="IsVisible" Value="False" />
+                                        <Setter Property="Grid.Row" Value="0" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label" Binding="{Binding Done}" Value="False">
+                                        <Setter Property="HeightRequest" Value="-1" />
+                                        <Setter Property="IsVisible" Value="True" />
+                                        <Setter Property="Grid.Row" Value="2" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                            <Label x:Name="labelSumToMonth" Grid.ColumnSpan="4" FontSize="Small" VerticalOptions="Center">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding Done}" Value="True">
+                                        <Setter Property="HeightRequest" Value="0" />
+                                        <Setter Property="IsVisible" Value="False" />
+                                        <Setter Property="Grid.Row" Value="0" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label" Binding="{Binding Done}" Value="False">
+                                        <Setter Property="HeightRequest" Value="-1" />
+                                        <Setter Property="IsVisible" Value="True" />
+                                        <Setter Property="Grid.Row" Value="3" />
+                                    </DataTrigger>
+                                </Label.Triggers>
                                 <Label.Text>
                                     <MultiBinding Converter="{StaticResource SumToMonth}">
                                         <MultiBinding.Bindings>

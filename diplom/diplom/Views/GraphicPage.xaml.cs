@@ -219,6 +219,11 @@ namespace diplom.Views
                         chartEntries[i].ValueLabelColor = SKColor.Parse("#800000");
                         chartEntries[i].TextColor = SKColor.Parse("#800000");
                         break;
+                    case "Сделано c опозданием":
+                        chartEntries[i].Color = SKColor.Parse("#006400");
+                        chartEntries[i].ValueLabelColor = SKColor.Parse("#006400");
+                        chartEntries[i].TextColor = SKColor.Parse("#006400");
+                        break;
                     default:
                         chartEntries[i].Color = SKColor.Parse("#FF0000");
                         chartEntries[i].ValueLabelColor = SKColor.Parse("#FF0000");

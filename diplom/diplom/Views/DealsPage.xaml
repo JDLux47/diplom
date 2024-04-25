@@ -11,7 +11,7 @@
     
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Secondary" Text="Добавить" Clicked="AddButton_Clicked"/>
-        <ToolbarItem Order="Secondary" Text="Показать/скрыть все" Clicked="ShowButton_Clicked"/>
+        <ToolbarItem Order="Secondary" Text="Показать остальные" Clicked="ShowButton_Clicked" x:Name="showHideItem"/>
     </ContentPage.ToolbarItems>
 
     <AbsoluteLayout>
@@ -99,6 +99,9 @@
                                           HeightRequest="30" WidthRequest="30">
                                     <CheckBox.Triggers>
                                         <DataTrigger TargetType="CheckBox" Binding="{Binding StatusId}" Value="3">
+                                            <Setter Property="IsEnabled" Value="False" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="CheckBox" Binding="{Binding StatusId}" Value="6">
                                             <Setter Property="IsEnabled" Value="False" />
                                         </DataTrigger>
                                     </CheckBox.Triggers>

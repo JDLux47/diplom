@@ -27,7 +27,7 @@ namespace diplom.Views
             ToolbarItems.Add(balanceToolbarItem);// Добавляем созданный ToolbarItem в панель инструментов
         }
 
-        public bool SortByDate, SortBySum, SortByCategory;
+        private bool SortByDate, SortBySum, SortByCategory, SortByType;
         List<Transaction> transactions;
         ToolbarItem balanceToolbarItem;
 
@@ -94,6 +94,7 @@ namespace diplom.Views
             }
             ImageSortCategory.Source = "";
             ImageSortSum.Source = "";
+            ImageSortType.Source = "";
             transactionsView.ItemsSource = transactions;
             buttonStack.IsVisible = false;
         }
@@ -101,18 +102,19 @@ namespace diplom.Views
         {
             if (SortBySum)
             {
-                transactions = transactions.OrderBy(transaction => transaction.Sum).ToList();
+                transactions = transactions.OrderBy(transaction => transaction.Sum).ThenBy(transaction => transaction.Date).ToList();
                 SortBySum = false;
                 ImageSortSum.Source = "/drawable/SortToMax";
             }
             else
             {
-                transactions = transactions.OrderByDescending(transaction => transaction.Sum).ToList();
+                transactions = transactions.OrderByDescending(transaction => transaction.Sum).ThenBy(transaction => transaction.Date).ToList();
                 SortBySum = true;
                 ImageSortSum.Source = "/drawable/SortToMin";
             }
             ImageSortCategory.Source = "";
             ImageSortDate.Source = "";
+            ImageSortType.Source = "";
             transactionsView.ItemsSource = transactions;
             buttonStack.IsVisible = false;
         }
@@ -121,18 +123,19 @@ namespace diplom.Views
         {
             if (SortByCategory)
             {
-                transactions = transactions.OrderBy(transaction => transaction.CategoryId).ToList();
+                transactions = transactions.OrderBy(transaction => transaction.CategoryId).ThenBy(transaction => transaction.Date).ToList();
                 SortByCategory = false;
                 ImageSortCategory.Source = "/drawable/SortToMax";
             }
             else
             {
-                transactions = transactions.OrderByDescending(transaction => transaction.CategoryId).ToList();
+                transactions = transactions.OrderByDescending(transaction => transaction.CategoryId).ThenBy(transaction => transaction.Date).ToList();
                 SortByCategory = true;
                 ImageSortCategory.Source = "/drawable/SortToMin";
             }
             ImageSortDate.Source = "";
             ImageSortSum.Source = "";
+            ImageSortType.Source = "";
             transactionsView.ItemsSource = transactions;
 
             buttonStack.IsVisible = false;
@@ -144,6 +147,28 @@ namespace diplom.Views
                 buttonStack.IsVisible = false;
             else 
                 buttonStack.IsVisible = true;
+        }
+
+       private void ButtonByType_Clicked(object sender, EventArgs e)
+       {
+            if (SortByType)
+            {
+                transactions = transactions.OrderBy(transaction => transaction.Type).ThenBy(transaction => transaction.Sum).ToList();
+                SortByType = false;
+                ImageSortType.Source = "/drawable/SortToMax";
+            }
+            else
+            {
+                transactions = transactions.OrderByDescending(transaction => transaction.Type).ThenBy(transaction => transaction.Sum).ToList();
+                SortByType = true;
+                ImageSortType.Source = "/drawable/SortToMin";
+            }
+            ImageSortDate.Source = "";
+            ImageSortSum.Source = "";
+            ImageSortCategory.Source = "";
+            transactionsView.ItemsSource = transactions;
+
+            buttonStack.IsVisible = false;
         }
 
         private void CollectionView_Scrolled(object sender, ItemsViewScrolledEventArgs e)

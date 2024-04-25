@@ -23,7 +23,7 @@ namespace diplom.Interface
                 }
 
                 if (totalMonths > 0)
-                    sum = Math.Round((sum - App.LoggedInUser.Balance) / totalMonths, 0, MidpointRounding.AwayFromZero);
+                    sum = Math.Round((sum - App.LoggedInUser.Balance) / (totalMonths + 1), 0, MidpointRounding.AwayFromZero);
                 else
                     sum = Math.Round(sum - App.LoggedInUser.Balance, 0, MidpointRounding.AwayFromZero);
 

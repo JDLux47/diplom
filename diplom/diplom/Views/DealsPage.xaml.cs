@@ -16,9 +16,7 @@ namespace diplom.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DealsPage : ContentPage
     {
-
         public bool ShowAll = false, timer = false, SortByDeadline, SortByTask, SortByPriority, SortByStatus;
-        List<Deal> deals;
 
         public DealsPage()
         {
@@ -36,16 +34,18 @@ namespace diplom.Views
 
         private async void ChangeStatuses()
         {
-            deals = await App.Diplomdatabase.GetDealsAsync(); // Получаем все дела
+            var deals = await App.Diplomdatabase.GetDealsAsync(); // Получаем все дела
 
             if (!ShowAll)
-                deals = deals.Where(deal => deal.StatusId != 3 && deal.StatusId != 4 && deal.StatusId != 5).ToList();
+                deals = deals.Where(deal => deal.StatusId == 1 || deal.StatusId == 2).ToList();
+            else 
+                deals = deals.Where(deal => deal.StatusId != 1 && deal.StatusId != 2).ToList();
 
             if (timer)
             {
                 foreach (var deal in deals)
                 {
-                    if (deal.Deadline - DateTime.Now <= TimeSpan.FromMinutes(1) && deal.StatusId != 3 && deal.StatusId != 4)
+                    if (deal.Deadline - DateTime.Now <= TimeSpan.FromMinutes(1) && deal.StatusId != 3 && deal.StatusId != 4 && deal.StatusId != 6)
                     {
                         deal.StatusId = 5;
                         await App.Diplomdatabase.SaveDealAsync(deal);
@@ -86,18 +86,13 @@ namespace diplom.Views
             if (sender is CheckBox checkbox && checkbox.BindingContext is Deal deal)
             {
                 // Проверяем, изменилось ли значение
-                if (checkbox.IsChecked && deal.StatusId != 3)
+                if (checkbox.IsChecked && (deal.StatusId != 3 || deal.StatusId != 6))
                 {
-                    deal.StatusId = 3; // Устанавливаем 3 только если до этого было другое значение
-                    await App.Diplomdatabase.SaveDealAsync(deal);
+                    if (deal.Deadline >= DateTime.Now)
+                        deal.StatusId = 3; // Устанавливаем 3 только если до этого было другое значение
+                    else 
+                        deal.StatusId = 6;
 
-                    // Обновляем только чекбокс, без вызова OnAppearing()
-                    checkbox.BindingContext = null;
-                    checkbox.BindingContext = deal;
-                }
-                else if (!checkbox.IsChecked && deal.StatusId != 0)
-                {
-                    deal.StatusId = 0; // Устанавливаем 0 если чекбокс не отмечен и значение не равно 0
                     await App.Diplomdatabase.SaveDealAsync(deal);
 
                     // Обновляем только чекбокс, без вызова OnAppearing()
@@ -110,13 +105,22 @@ namespace diplom.Views
 
         private void ShowButton_Clicked(Object sender, EventArgs e)
         {
-            if (ShowAll) ShowAll = false;
-            else ShowAll = true;
+            if (ShowAll)
+            {
+                ShowAll = false;
+                showHideItem.Text = "Показать все";
+            }
+            else
+            {
+                ShowAll = true;
+                showHideItem.Text = "Показать актуальные";
+            }
             OnAppearing();
         }
 
-        private void ButtonByTask_Clicked(object sender, EventArgs e)
+        private async void ButtonByTask_Clicked(object sender, EventArgs e)
         {
+            var deals = await App.Diplomdatabase.GetDealsAsync();
             if (SortByTask)
             {
                 deals = deals.OrderBy(deal => deal.Name).ToList();
@@ -135,8 +139,9 @@ namespace diplom.Views
             dealsView.ItemsSource = deals;
             buttonStack.IsVisible = false;
         }
-        private void ButtonByPriority_Clicked(object sender, EventArgs e)
+        private async void ButtonByPriority_Clicked(object sender, EventArgs e)
         {
+            var deals = await App.Diplomdatabase.GetDealsAsync();
             if (SortByPriority)
             {
                 deals = deals.OrderBy(deal => deal.ImportanceId).ToList();
@@ -156,8 +161,9 @@ namespace diplom.Views
             buttonStack.IsVisible = false;
         }
 
-        private void ButtonByDeadline_Clicked(object sender, EventArgs e)
+        private async void ButtonByDeadline_Clicked(object sender, EventArgs e)
         {
+            var deals = await App.Diplomdatabase.GetDealsAsync();
             if (SortByDeadline)
             {
                 deals = deals.OrderBy(deal => deal.Deadline).ToList();
@@ -177,8 +183,9 @@ namespace diplom.Views
             buttonStack.IsVisible = false;
         }
 
-        private void ButtonByStatus_Clicked (object sender, EventArgs e)
+        private async void ButtonByStatus_Clicked (object sender, EventArgs e)
         {
+            var deals = await App.Diplomdatabase.GetDealsAsync();
             if (SortByStatus)
             {
                 deals = deals.OrderBy(deal => deal.StatusId).ToList();
