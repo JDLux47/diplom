@@ -23,8 +23,8 @@ namespace diplom.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AddDealPage : ContentPage
 	{
-        public List<Importance> importances;
-        public List<Status> statuses;
+        private List<Importance> importances;
+        private List<Status> statuses;
         DateTime date;
         public AddDealPage()
 		{

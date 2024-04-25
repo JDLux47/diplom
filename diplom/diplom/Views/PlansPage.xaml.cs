@@ -19,9 +19,18 @@ namespace diplom.Views
 			InitializeComponent ();
 		}
 
+        private bool ShowAll;
+
         protected override async void OnAppearing()
         {
             var plans = await App.Diplomdatabase.GetPlansAsync();
+            
+            if (!ShowAll)
+                plans = plans.Where(plan => plan.Done == false).ToList();
+            else
+            {
+                plans = plans.Where(plan => plan.Done == true).ToList();
+            }
 
             IncomeToMonthCheckAsync();
 
@@ -47,9 +56,28 @@ namespace diplom.Views
             await Navigation.PushAsync(new AddPlanPage());
         }
 
-        private void CheckBox_CheckedChanged(object sender, EventArgs e)
+        private async void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
+            if (sender is CheckBox checkBox && checkBox.BindingContext is Plan plan)
+            {
+                plan.Done = e.Value;
+                await App.Diplomdatabase.SavePlanAsync(plan);
+            }
+        }
 
+        private void ShowButton_Clicked(object sender, EventArgs e)
+        {
+            if(ShowAll)
+            {
+                ShowAll = false;
+                showHideItem.Text = "Показать выполненные";
+            }
+            else
+            {
+                ShowAll = true;
+                showHideItem.Text = "Показать актуальные";
+            }
+            OnAppearing();
         }
 
         private async void IncomeToMonthCheckAsync()

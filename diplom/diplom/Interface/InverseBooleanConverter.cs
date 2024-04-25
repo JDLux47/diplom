@@ -5,21 +5,20 @@ using Xamarin.Forms;
 
 namespace diplom.Interface
 {
-    public class StatusToIsCheckedConverter : IValueConverter
+    public class InverseBooleanConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (int.TryParse(value.ToString(), out int statusId))
+            if (value is bool)
             {
-                return statusId == 3 || statusId == 6;
+                return !(bool)value; // Инвертировать значение
             }
-            return false;
+            return value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            // Обратное преобразование не требуется, поэтому просто возвращаем null
-            return null;
+            throw new NotImplementedException();
         }
     }
 }
