@@ -1,5 +1,6 @@
 ﻿using Android.Content;
 using Android.Provider;
+using Android.Widget;
 using diplom.Interface;
 using diplom.Models;
 using Ical.Net;
@@ -108,10 +109,10 @@ namespace diplom.Views
                     await Navigation.PopAsync();
                 }
                 else
-                    await DisplayAlert("Ошибка!", "Дата выполнения должна быть позже даты создания задачи!", "OK");
+                    DependencyService.Get<ICustomToast>().ShowCustomToast("Дата выполнения должна быть позже даты создания задачи!", Color.Red.ToHex(), Color.White.ToHex());
             }
             else
-                await DisplayAlert("Ошибка!", "Не все обязательные поля заполнены!", "ОК");
+                DependencyService.Get<ICustomToast>().ShowCustomToast("Не все обязательные поля заполнены!", Color.Red.ToHex(), Color.White.ToHex());
         }
 
         private async void Notification_Clicked(object sender, EventArgs e)

@@ -108,7 +108,7 @@ namespace diplom.Views
             if (ShowAll)
             {
                 ShowAll = false;
-                showHideItem.Text = "Показать все";
+                showHideItem.Text = "Показать остальные";
             }
             else
             {

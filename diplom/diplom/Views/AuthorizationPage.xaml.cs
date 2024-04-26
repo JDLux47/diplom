@@ -1,4 +1,5 @@
-﻿using diplom.Models;
+﻿using diplom.Interface;
+using diplom.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,7 +44,7 @@ namespace diplom.Views
                 Application.Current.MainPage = new AppShell();
             }
             else
-                await DisplayAlert("Неуспешная авторизация", "Нет такого пользователя!", "OK");
+                DependencyService.Get<ICustomToast>().ShowCustomToast("Неуспешная авторизация", Color.Red.ToHex(), Color.White.ToHex());
         }
     }
 }

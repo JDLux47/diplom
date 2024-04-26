@@ -1,4 +1,5 @@
-﻿using diplom.Models;
+﻿using diplom.Interface;
+using diplom.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace diplom.Views
                 if (planFromDb.Deadline.Date != plan.Deadline.Date || planFromDb.Done != plan.Done || planFromDb.Name != plan.Name || planFromDb.Sum != plan.Sum)
                 {
                     await App.Diplomdatabase.SavePlanAsync(plan);
-                    await DisplayAlert("Оповещение", "Данные плана были изменены!", "OK");
+                    DependencyService.Get<ICustomToast>().ShowCustomToast("Данные плана были изменены!", Color.Green.ToHex(), Color.White.ToHex());
                 }
                 //можно брать план из бд и сверять
             }

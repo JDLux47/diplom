@@ -18,7 +18,6 @@ namespace diplom.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
             StartActivity(new Intent(ApplicationContext, typeof(MainActivity)));
             // Create your application here
         }

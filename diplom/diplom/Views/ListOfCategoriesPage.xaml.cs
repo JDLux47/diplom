@@ -1,4 +1,5 @@
-﻿using diplom.Models;
+﻿using diplom.Interface;
+using diplom.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +48,7 @@ namespace diplom.Views
                     {
                         if (category.Name == newName)
                         {
-                            await DisplayAlert("Ошибка!", $"Категория с таким именем уже существует!", "OK");
+                            DependencyService.Get<ICustomToast>().ShowCustomToast("Категория с таким именем уже существует!", Color.Red.ToHex(), Color.White.ToHex());
                             error = true;
                             break;
                         }
@@ -79,7 +80,7 @@ namespace diplom.Views
                 {
                     if (category.Name == result)
                     {
-                        await DisplayAlert("Ошибка!", $"Категория с таким именем уже существует!", "OK");
+                        DependencyService.Get<ICustomToast>().ShowCustomToast("Категория с таким именем уже существует!", Color.Red.ToHex(), Color.White.ToHex());
                         error = true;
                         break;
                     }
@@ -113,7 +114,7 @@ namespace diplom.Views
                 {
                     result = await DisplayAlert("Нарушение связей", $"Существуют транзакции с данной категорией. Удалить категорию?", "Да", "Отмена");
                     if (result)
-                        await DisplayAlert("Оповещение", $"Категории у связанных транзакций будут изменены на 'Без категории'", "ОК");
+                        DependencyService.Get<ICustomToast>().ShowCustomToast("Категории у связанных транзакций будут изменены на 'Без категории'", Color.Yellow.ToHex(), Color.White.ToHex());
                     break;
                 }
             }

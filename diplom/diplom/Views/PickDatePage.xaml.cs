@@ -1,4 +1,5 @@
-﻿using System;
+﻿using diplom.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,8 +28,7 @@ namespace diplom.Views
             if (StartDate != null && EndDate != null && EndDate > StartDate)
                 await Navigation.PopAsync();
             else
-                await DisplayAlert("Ошибка!", "Дата начала промежутка больше даты конца промежутка", "Вернуться");
-
+                DependencyService.Get<ICustomToast>().ShowCustomToast("Дата начала промежутка больше даты конца промежутка", Color.Red.ToHex(), Color.White.ToHex());
         }
     }
 }
