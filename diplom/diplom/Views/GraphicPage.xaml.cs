@@ -17,7 +17,8 @@ namespace diplom.Views
 {
     public partial class GraphicPage : ContentPage
     {
-        private DonutChart donutChartRas, donutChartDoh, donutChartDeals;
+        private PieChart donutChartDeals;
+        private DonutChart donutChartRas, donutChartDoh;
         public DonutChart DonutChartRas
         {
             get => donutChartRas;
@@ -28,7 +29,7 @@ namespace diplom.Views
             }
         }
 
-        public DonutChart DonutChartDeals
+        public PieChart DonutChartDeals
         {
             get => donutChartDeals;
             set
@@ -117,10 +118,16 @@ namespace diplom.Views
 
             spendingByCategory = spendingByCategory.Where(category => category.TotalSpent > 0);
 
-            var chartEntries = spendingByCategory.Select(item => new ChartEntry((float)item.TotalSpent)
+            var totalSpentOverall = spendingByCategory.Sum(item => item.TotalSpent); // Общая сумма потраченных средств
+
+            var chartEntries = spendingByCategory.Select(item =>
             {
-                Label = item.Category.Name,
-                ValueLabel = item.TotalSpent.ToString(), // Преобразование суммы в строку для отображения
+                decimal percentage = item.TotalSpent / totalSpentOverall * 100; // Рассчет процентного соотношения
+                return new ChartEntry((float)item.TotalSpent)
+                {
+                    Label = item.Category.Name.ToString(), // Добавление процентного значения к названию
+                    ValueLabel = $"{item.TotalSpent} ({percentage:0.##}%)", // Преобразование суммы в строку для отображения
+                };
             }).ToList();
 
             for (int i = 0; i < chartEntries.Count(); i++)
@@ -189,10 +196,16 @@ namespace diplom.Views
                 DealCount = dealsAfterStartDate.Count(deal => deal.StatusId == status.Id)
             });
 
-            var chartEntries = dealsByStatus.Select(item => new ChartEntry(item.DealCount)
+            var totalDealCount = dealsByStatus.Sum(item => item.DealCount);
+
+            var chartEntries = dealsByStatus.Select(item =>
             {
-                Label = item.Status.Name,
-                ValueLabel = item.DealCount.ToString(),
+                float percentage = (float)item.DealCount / totalDealCount * 100;
+                return new ChartEntry(item.DealCount)
+                {
+                    Label = item.Status.Name,
+                    ValueLabel = $"{item.DealCount} ({ percentage:0.##}%)",
+                };
             }).ToList();
 
             for (int i = 0; i < chartEntries.Count; i++)
@@ -220,9 +233,9 @@ namespace diplom.Views
                         chartEntries[i].TextColor = SKColor.Parse("#800000");
                         break;
                     case "Сделано c опозданием":
-                        chartEntries[i].Color = SKColor.Parse("#006400");
-                        chartEntries[i].ValueLabelColor = SKColor.Parse("#006400");
-                        chartEntries[i].TextColor = SKColor.Parse("#006400");
+                        chartEntries[i].Color = SKColor.Parse("#026340");
+                        chartEntries[i].ValueLabelColor = SKColor.Parse("#026340");
+                        chartEntries[i].TextColor = SKColor.Parse("#026340");
                         break;
                     default:
                         chartEntries[i].Color = SKColor.Parse("#FF0000");
@@ -233,7 +246,7 @@ namespace diplom.Views
             }
             if (chartEntries[0].Value != 0 || chartEntries[1].Value != 0 || chartEntries[2].Value != 0 || chartEntries[3].Value != 0 || chartEntries[4].Value != 0)
             {
-                DonutChartDeals = new DonutChart { Entries = chartEntries, LabelTextSize = 30f, BackgroundColor = SKColor.Empty };
+                DonutChartDeals = new PieChart { Entries = chartEntries, LabelTextSize = 30f, BackgroundColor = SKColor.Empty, LabelMode = LabelMode.RightOnly};
                 DealsTitleLabel.IsVisible = true;
                 DiagramDeals.IsVisible = true;
                 DealsLabel.IsVisible = true;

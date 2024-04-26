@@ -1,4 +1,5 @@
 ﻿using diplom.ComponentsInterface;
+using diplom.Interface;
 using diplom.Models;
 using System;
 using System.Collections.Generic;
@@ -40,7 +41,7 @@ namespace diplom.Views
                 await Navigation.PopAsync();
             }
             else
-                await DisplayAlert("Ошибка!", "Не все обязательные поля заполнены!", "Назад");
+                DependencyService.Get<ICustomToast>().ShowCustomToast("Не все обязательные поля заполнены!", Color.Red.ToHex(), Color.White.ToHex());
         }
 
     }

@@ -1,4 +1,5 @@
 ﻿using diplom.ComponentsInterface;
+using diplom.Interface;
 using diplom.Models;
 using System;
 using System.Collections.Generic;
@@ -78,7 +79,8 @@ namespace diplom.Views
                     }
 
                     await App.Diplomdatabase.SaveTransactionAsync(transaction);
-                    await DisplayAlert("Оповещение", "Данные транзакции были изменены!", "OK");
+
+                    DependencyService.Get<ICustomToast>().ShowCustomToast("Данные транзакции были изменены!", Color.Green.ToHex(), Color.White.ToHex());
                 }
             }
         }

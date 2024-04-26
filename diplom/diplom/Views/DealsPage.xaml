@@ -90,7 +90,7 @@
                                         <Setter Property="BackgroundColor" Value="red" />
                                     </DataTrigger>
                                     <DataTrigger TargetType="Frame" Binding="{Binding StatusId}" Value="6">
-                                        <Setter Property="BackgroundColor" Value="DarkGreen" />
+                                        <Setter Property="BackgroundColor" Value="#026340" />
                                     </DataTrigger>
                                 </Frame.Triggers>
                                 <CheckBox Color="White" 

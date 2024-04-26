@@ -42,7 +42,7 @@
                 Margin="10,0,10,10"
                 Chart="{Binding DonutChartDeals}"
                 HeightRequest="300"
-                VerticalOptions="Start"
+                VerticalOptions="FillAndExpand"
                 HorizontalOptions="Fill"/>
         </StackLayout>
     </ScrollView>

@@ -1,4 +1,5 @@
-﻿using diplom.Models;
+﻿using diplom.Interface;
+using diplom.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,13 +38,13 @@ namespace diplom.Views
 
                 bool isSuccess = Convert.ToBoolean(await App.Diplomdatabase.SaveUserAsync(newUser)); // Вставка нового пользователя в базу данных
                 if (isSuccess)
-                    await DisplayAlert("Успех!", "Мы зарегистрировали Вас в системе!", "OK");
+                    DependencyService.Get<ICustomToast>().ShowCustomToast("Мы зарегистрировали Вас в системе!", Color.Green.ToHex(), Color.White.ToHex());
                 else
-                    await DisplayAlert("Ошибка!", "К сожалению, мы не смогли Вас зарегистрировать :(", "OK");
+                    DependencyService.Get<ICustomToast>().ShowCustomToast("К сожалению, мы не смогли Вас зарегистрировать :(", Color.Red.ToHex(), Color.White.ToHex());
             }
             else
             {
-                await DisplayAlert("Ошибка!", "Пожалуйста, заполните поля 'Имя', 'Логин' и 'Пароль'!", "OK");
+                DependencyService.Get<ICustomToast>().ShowCustomToast("Пожалуйста, заполните поля 'Имя', 'Логин' и 'Пароль'!", Color.Red.ToHex(), Color.White.ToHex());
             }
         }
     }

@@ -70,7 +70,7 @@ namespace diplom.Views
                     deal.DateOfCreation = dateCr;
 
                     await App.Diplomdatabase.SaveDealAsync(deal);
-                    await DisplayAlert("Оповещение", "Данные задачи были изменены!", "OK");
+                    DependencyService.Get<ICustomToast>().ShowCustomToast("Данные задачи были изменены!", Color.Green.ToHex(), Color.White.ToHex());
                 }
             }
         }
