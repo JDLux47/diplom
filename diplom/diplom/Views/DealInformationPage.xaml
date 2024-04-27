@@ -2,7 +2,7 @@
 <ContentPage Visual="Material" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="diplom.Views.DealInformationPage"
-             Title="Информация о задаче" BackgroundColor="#323232">
+             Title="Информация о задаче" BackgroundColor="#B8A4C2">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -11,33 +11,32 @@
             </Style>
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="BackgroundColor" Value="#282828" />
+                <Setter Property="BackgroundColor" Value="#B8A4C2" />
             </Style>
             <Style TargetType="Entry">
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="BackgroundColor" Value="#282828" />
-                <Setter Property="PlaceholderColor" Value="gray" />
+                <Setter Property="BackgroundColor" Value="#B8A4C2" />
+                <Setter Property="PlaceholderColor" Value="lightgray" />
             </Style>
             <Style TargetType="Picker">
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="BackgroundColor" Value="#282828" />
-                <Setter Property="TitleColor" Value="gray" />
+                <Setter Property="BackgroundColor" Value="#B8A4C2" />
+                <Setter Property="TitleColor" Value="lightgray" />
             </Style>
             <Style TargetType="DatePicker">
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="TextColor" Value="White" />
-                <Setter Property="BackgroundColor" Value="#282828" />
+                <Setter Property="BackgroundColor" Value="#B8A4C2" />
             </Style>
             <Style TargetType="TimePicker">
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="BackgroundColor" Value="#282828" />
+                <Setter Property="BackgroundColor" Value="#B8A4C2" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.Content>
         <ScrollView>
-            <Frame BackgroundColor="Violet" CornerRadius="40" VerticalOptions="CenterAndExpand" Padding="5" Margin="10">
+            <Frame BackgroundColor="#9C80A9" CornerRadius="40" VerticalOptions="CenterAndExpand" Padding="5" Margin="10">
                 <StackLayout Padding="20" x:Name="stackDeal" Spacing="10" VerticalOptions="Center">
 
                     <Label Text="Информация о задаче" FontSize="20" HorizontalOptions="Center" Margin="0,0,0,10"/>
@@ -48,8 +47,8 @@
                     <Picker x:Name="pickerImportance" Title="Степень важности" SelectedItem="{Binding SelectedImportance}" ItemDisplayBinding="{Binding Level}"/>
                     <Picker x:Name="pickerStatus" Title="Статус" SelectedItem="{Binding SelectedStatus}" ItemDisplayBinding="{Binding Name}"/>
 
-                    <Label Text="Момент создания" FontSize="20" Margin="0,10,0,10"/>
-                    <StackLayout Orientation="Horizontal">
+                    <Label Text="───── Момент создания ─────" FontSize="18" Margin="0,10,0,10" HorizontalOptions="Center"/>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -64,8 +63,8 @@
                         </Grid>
                     </StackLayout>
 
-                    <Label Text="Срок выполнения" FontSize="20" Margin="0,10,0,10"/>
-                    <StackLayout Orientation="Horizontal">
+                    <Label Text="──── Срок выполнения ────" FontSize="18" Margin="0,10,0,10" HorizontalOptions="Center"/>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -80,11 +79,11 @@
                         </Grid>
                     </StackLayout>
 
-                    <Button Text="Создать уведомление в календаре" Clicked="Notification_Clicked"  HorizontalOptions="FillAndExpand"/>
+                    <Button Text="⎋ Создать уведомление в календаре" Clicked="Notification_Clicked"  HorizontalOptions="FillAndExpand" CornerRadius="40"/>
 
                     <StackLayout Orientation="Horizontal">
-                        <Button Text="Изменить" Clicked="SaveButton_Clicked"  HorizontalOptions="FillAndExpand"/>
-                        <Button Text="Удалить" Clicked="DeleteButton_Clicked"  HorizontalOptions="FillAndExpand"/>
+                        <Button Text="✎ Изменить" Clicked="SaveButton_Clicked"  HorizontalOptions="FillAndExpand" CornerRadius="40"/>
+                        <Button Text="✗ Удалить" Clicked="DeleteButton_Clicked"  HorizontalOptions="FillAndExpand" CornerRadius="40"/>
                     </StackLayout>
 
                 </StackLayout>
