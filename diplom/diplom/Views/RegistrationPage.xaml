@@ -19,12 +19,12 @@
             <Style TargetType="Entry">
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="BackgroundColor" Value="#B8A4C2" />
-                <Setter Property="PlaceholderColor" Value="gray" />
+                <Setter Property="PlaceholderColor" Value="lightgray" />
             </Style>
             <Style TargetType="Picker">
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="BackgroundColor" Value="#282828" />
-                <Setter Property="TitleColor" Value="gray" />
+                <Setter Property="TitleColor" Value="lightgray" />
             </Style>
             <Style TargetType="DatePicker">
                 <Setter Property="TextColor" Value="White" />
@@ -45,7 +45,7 @@
             <Entry x:Name="entryPassword" Placeholder="Введите пароль" IsPassword="True" />
             <Entry x:Name="entryBalance" Placeholder="Введите начальный баланс" Keyboard="Numeric" />
 
-            <Button Text="Зарегистироваться" Clicked="Register_Clicked" CornerRadius="40"/>
+            <Button Text="➤ Зарегистироваться" Clicked="Register_Clicked" CornerRadius="40"/>
         </StackLayout>
     </Frame>
 
