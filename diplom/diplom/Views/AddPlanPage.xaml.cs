@@ -25,7 +25,7 @@ namespace diplom.Views
 
 		private async void SaveButton_Clicked(object sender, EventArgs e)
 		{
-            if (entrySum != null && entryName != null)
+            if (entrySum.Text != null && entryName.Text != null)
             {
                 Plan plan = new Plan
                 {
