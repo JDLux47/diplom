@@ -2,20 +2,55 @@
 <ContentPage Visual="Material" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="diplom.Views.AddPlanPage"
-             Title="Добавление плана">
+             Title="Добавление плана" BackgroundColor="#323232">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+                <Setter Property="PlaceholderColor" Value="gray" />
+            </Style>
+            <Style TargetType="Picker">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+                <Setter Property="TitleColor" Value="gray" />
+            </Style>
+            <Style TargetType="DatePicker">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+            </Style>
+            <Style TargetType="TimePicker">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
-        <StackLayout Padding="20" x:Name="stackDeal" Spacing="10" VerticalOptions="CenterAndExpand">
-
-            <Entry x:Name="entryName" Placeholder="Название" FontSize="16" />
-            <Entry x:Name="entrySum" Placeholder="Сумма" FontSize="16" />
-
-            <StackLayout Orientation="Horizontal">
-                <Label VerticalOptions="CenterAndExpand" Text="Срок " FontSize="16"/>
-                <DatePicker HeightRequest="50" x:Name="datapickerDeadline" FontSize="16"/>
-            </StackLayout>
-
-            <Button Text="Добавить" Clicked="SaveButton_Clicked" />
+        <Frame BackgroundColor="Violet" CornerRadius="40" VerticalOptions="CenterAndExpand" Padding="5" Margin="10">
             
-        </StackLayout>
+            <StackLayout Padding="20" x:Name="stackDeal" Spacing="10" VerticalOptions="CenterAndExpand">
+
+                <Label Text="План" HorizontalOptions="Center" FontSize="20" Margin="0,0,0,10"/>
+                <Entry x:Name="entryName" Placeholder="Название" FontSize="16" />
+                <Entry x:Name="entrySum" Placeholder="Сумма" FontSize="16" />
+
+                <StackLayout Orientation="Horizontal">
+                    <Label VerticalOptions="CenterAndExpand" Text="Срок " FontSize="16"/>
+                    <DatePicker HeightRequest="50" x:Name="datapickerDeadline" FontSize="16"/>
+                </StackLayout>
+
+                <Button Text="Добавить" Clicked="SaveButton_Clicked" />
+
+            </StackLayout>
+        </Frame>
     </ContentPage.Content>
 </ContentPage>

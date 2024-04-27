@@ -3,14 +3,50 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="diplom.Views.RegistrationPage"
              Title="Регистрация">
-
-    <StackLayout Padding="20">
-        <Entry x:Name="entryName" Placeholder="Введите имя"/>
-        <Entry x:Name="entryLogin" Placeholder="Введите логин"/>
-        <Entry x:Name="entryPassword" Placeholder="Введите пароль" IsPassword="True" />
-        <Entry x:Name="entryBalance" Placeholder="Введите начальный баланс" Keyboard="Numeric" />
-
-        <Button Text="Зарегистироваться" Clicked="Register_Clicked" />
-    </StackLayout>
     
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="PageBackgroundColorStyle" TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="#323232" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+                <Setter Property="PlaceholderColor" Value="gray" />
+            </Style>
+            <Style TargetType="Picker">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+                <Setter Property="TitleColor" Value="gray" />
+            </Style>
+            <Style TargetType="DatePicker">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+            </Style>
+            <Style TargetType="TimePicker">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Frame BackgroundColor="Violet" CornerRadius="40" VerticalOptions="CenterAndExpand" Padding="5" Margin="10">
+        <StackLayout Padding="20">
+            <Label Text="Пользователь" HorizontalOptions="Center" FontSize="20" Margin="0,0,0,10"/>
+            <Entry x:Name="entryName" Placeholder="Введите имя"/>
+            <Entry x:Name="entryLogin" Placeholder="Введите логин"/>
+            <Entry x:Name="entryPassword" Placeholder="Введите пароль" IsPassword="True" />
+            <Entry x:Name="entryBalance" Placeholder="Введите начальный баланс" Keyboard="Numeric" />
+
+            <Button Text="Зарегистироваться" Clicked="Register_Clicked" />
+        </StackLayout>
+    </Frame>
+
 </ContentPage>

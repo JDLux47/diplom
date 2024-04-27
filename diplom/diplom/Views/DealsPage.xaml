@@ -2,19 +2,45 @@
 <ContentPage Visual ="Material" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:diplom.Interface"
              x:Class="diplom.Views.DealsPage"
-             Title="Задачи">
+             Title="Задачи" BackgroundColor="#323232">
 
     <ContentPage.Resources>
         <local:TimeDifferenceConverter x:Key="TimeDifferenceConverter" />
         <local:StatusToIsCheckedConverter x:Key="StatusToIsCheckedConverter" />
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+                <Setter Property="PlaceholderColor" Value="gray" />
+            </Style>
+            <Style TargetType="Picker">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+                <Setter Property="TitleColor" Value="gray" />
+            </Style>
+            <Style TargetType="DatePicker">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+            </Style>
+            <Style TargetType="TimePicker">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+            </Style>
+        </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <ContentPage.ToolbarItems>
-        <ToolbarItem Order="Secondary" Text="Добавить" Clicked="AddButton_Clicked"/>
         <ToolbarItem Order="Secondary" Text="Показать остальные" Clicked="ShowButton_Clicked" x:Name="showHideItem"/>
     </ContentPage.ToolbarItems>
 
-    <AbsoluteLayout>
+    <Grid>
         <CollectionView x:Name="dealsView" Margin="20" SelectionMode="Single" SelectionChanged="OnSelectionChanged" Scrolled="CollectionView_Scrolled">
 
             <CollectionView.ItemsLayout>
@@ -114,29 +140,31 @@
 
         </CollectionView>
         
-        <AbsoluteLayout x:Name="buttonStack" IsVisible="False" Margin="0, 64, 20, 0" 
+        <AbsoluteLayout x:Name="buttonStack" IsVisible="False" Margin="0, 64, 20, 0" HorizontalOptions="End" 
                         AbsoluteLayout.LayoutFlags="PositionProportional"
                         AbsoluteLayout.LayoutBounds="1, 0, -1, 0">
 
-                <StackLayout Spacing="4">
-                    <StackLayout  Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
-                        <Button Visual="Default" Text="По задаче              " Clicked="ButtonByTask_Clicked" Font="12" BackgroundColor="Transparent"/>
-                        <Image Visual="Default" x:Name="ImageSortTask" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
-                    </StackLayout>
-                    <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
-                        <Button Visual="Default" Text="По приоритету    " Clicked="ButtonByPriority_Clicked" Font="12" BackgroundColor="Transparent"/>
-                        <Image Visual="Default" x:Name="ImageSortPriority" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
-                    </StackLayout>
-                    <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
-                        <Button Visual="Default" Text="По сроку                 " Clicked="ButtonByDeadline_Clicked" Font="12" BackgroundColor="Transparent"/>
-                        <Image Visual="Default" x:Name="ImageSortDeadline" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
-                    </StackLayout>
-                    <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
-                        <Button Visual="Default" Text="По статусу             " Clicked="ButtonByStatus_Clicked" Font="12" BackgroundColor="Transparent"/>
-                        <Image Visual="Default" x:Name="ImageSortStatus" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
-                    </StackLayout>
+            <StackLayout Spacing="4">
+                <StackLayout  Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
+                    <Button Visual="Default" Text="По задаче              " Clicked="ButtonByTask_Clicked" Font="12" BackgroundColor="Transparent"/>
+                    <Image Visual="Default" x:Name="ImageSortTask" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
                 </StackLayout>
-            </AbsoluteLayout>
+                <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
+                    <Button Visual="Default" Text="По приоритету    " Clicked="ButtonByPriority_Clicked" Font="12" BackgroundColor="Transparent"/>
+                    <Image Visual="Default" x:Name="ImageSortPriority" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
+                </StackLayout>
+                <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
+                    <Button Visual="Default" Text="По сроку                 " Clicked="ButtonByDeadline_Clicked" Font="12" BackgroundColor="Transparent"/>
+                    <Image Visual="Default" x:Name="ImageSortDeadline" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
+                </StackLayout>
+                <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
+                    <Button Visual="Default" Text="По статусу             " Clicked="ButtonByStatus_Clicked" Font="12" BackgroundColor="Transparent"/>
+                    <Image Visual="Default" x:Name="ImageSortStatus" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
+                </StackLayout>
+            </StackLayout>
+        </AbsoluteLayout>
 
-    </AbsoluteLayout>
+        <Button ImageSource="adbutsmall" HorizontalOptions="End" VerticalOptions="End" BackgroundColor="#A445AC"  Margin="0,0,5,15" CornerRadius="40" HeightRequest="70" WidthRequest="70" Clicked="AddButton_Clicked"/>
+
+    </Grid>
 </ContentPage>

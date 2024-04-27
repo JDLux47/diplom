@@ -119,12 +119,6 @@
     <AndroidResource Include="Resources\drawable\trash.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\add.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\toolMenu.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\MediumPr.png" />
   </ItemGroup>
   <ItemGroup>
@@ -192,6 +186,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\ToastLayout.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\adbutsmall.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

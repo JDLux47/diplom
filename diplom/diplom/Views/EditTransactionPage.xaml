@@ -2,25 +2,57 @@
 <ContentPage Visual="Material" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="diplom.Views.EditTransactionPage"
-             Title="Информация о транзакции">
-    
+             Title="Информация о транзакции" BackgroundColor="#323232">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+                <Setter Property="PlaceholderColor" Value="gray" />
+            </Style>
+            <Style TargetType="Picker">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+                <Setter Property="TitleColor" Value="gray" />
+            </Style>
+            <Style TargetType="DatePicker">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+            </Style>
+            <Style TargetType="TimePicker">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <StackLayout Padding="20">
-            <Label Text="Информация о транзакции" FontSize="20" />
+        <Frame BackgroundColor="Violet" CornerRadius="40" VerticalOptions="CenterAndExpand" Padding="5" Margin="10">
+            <StackLayout Padding="20" VerticalOptions="Center">
+                <Label Text="Информация о транзакции" FontSize="20" HorizontalOptions="Center" Margin="0,0,0,10"/>
 
-            <Picker x:Name="pickerType" Title="Тип">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Доход</x:String>
-                        <x:String>Расход</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
-            <Picker x:Name="pickerCategory" Title="Категория" SelectedItem="{Binding SelectedCategory}" ItemDisplayBinding="{Binding Name}"/>
-            <Entry Placeholder="Сумма" x:Name="entrySum" />
-            <DatePicker x:Name="DatePicker" />
+                <Picker x:Name="pickerType" Title="Тип">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Доход</x:String>
+                            <x:String>Расход</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+                <Picker x:Name="pickerCategory" Title="Категория" SelectedItem="{Binding SelectedCategory}" ItemDisplayBinding="{Binding Name}"/>
+                <Entry Placeholder="Сумма" x:Name="entrySum" />
+                <DatePicker x:Name="DatePicker" />
 
-            <Button Text="Изменить" Clicked="SaveButton_Clicked" />
-        </StackLayout>
+                <Button Text="Изменить" Clicked="SaveButton_Clicked" />
+            </StackLayout>
+        </Frame>
     </ContentPage.Content>
 </ContentPage>

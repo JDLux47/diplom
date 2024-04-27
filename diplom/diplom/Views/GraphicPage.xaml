@@ -3,8 +3,38 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              x:Class="diplom.Views.GraphicPage"
-             Title="Статистика">
+             Title="Статистика" BackgroundColor="#323232">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+                <Setter Property="PlaceholderColor" Value="gray" />
+            </Style>
+            <Style TargetType="Picker">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+                <Setter Property="TitleColor" Value="gray" />
+            </Style>
+            <Style TargetType="DatePicker">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+            </Style>
+            <Style TargetType="TimePicker">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Primary" Text="По месяцам" Clicked="BarButton_Clicked"/>
         <ToolbarItem Order="Secondary" Text="За сутки" Clicked="DayButton_Clicked"/>

@@ -2,21 +2,52 @@
 <ContentPage Visual ="Material" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="diplom.Views.AuthorizationPage"
-             Title="Авторизация">
+             Title="Авторизация" BackgroundColor="#323232">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+                <Setter Property="PlaceholderColor" Value="gray" />
+            </Style>
+            <Style TargetType="Picker">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+                <Setter Property="TitleColor" Value="gray" />
+            </Style>
+            <Style TargetType="DatePicker">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+            </Style>
+            <Style TargetType="TimePicker">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.Content>
-        
-        <StackLayout>
-            <StackLayout Padding="20" VerticalOptions="CenterAndExpand">
-                <Label Text="Здравствуйте!" FontSize="25" HorizontalOptions="CenterAndExpand" Margin="0,0,0,40"/>
-                <Label Text="Для доступа введите логин и пароль" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,0,0,10"/>
-                <Entry x:Name="EntryLogin" Placeholder="Введите логин" VerticalOptions="CenterAndExpand"/>
-                <Entry x:Name="EntryPassword" Placeholder="Введите пароль" IsPassword="True"/>
-            
-                <Button Text="Войти" Clicked="LoginButton_Clicked" />
-            </StackLayout>
-            
-            <StackLayout Padding="20" HorizontalOptions="Center">
+        <StackLayout Padding="20">
+
+            <Frame BackgroundColor="Violet" CornerRadius="40" VerticalOptions="CenterAndExpand">
+                <StackLayout>
+                    <Label Text="Здравствуйте!" FontSize="25" HorizontalOptions="CenterAndExpand" Margin="0,0,0,40"/>
+                    <Entry x:Name="EntryLogin" Placeholder="Введите логин" VerticalOptions="CenterAndExpand"/>
+                    <Entry x:Name="EntryPassword" Placeholder="Введите пароль" IsPassword="True"/>
+
+                    <Button Text="Войти" Clicked="LoginButton_Clicked" />
+                </StackLayout>
+            </Frame>
+
+            <StackLayout HorizontalOptions="Center">
                 <Label>
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="RegisterLabel_Tapped"/>
@@ -30,7 +61,7 @@
                 </Label>
             </StackLayout>
         </StackLayout>
-        
+
     </ContentPage.Content>
     
 </ContentPage>

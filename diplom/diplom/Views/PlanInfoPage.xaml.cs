@@ -1,4 +1,5 @@
-﻿using diplom.Interface;
+﻿using diplom.ComponentsInterface;
+using diplom.Interface;
 using diplom.Models;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,10 @@ namespace diplom.Views
 		public PlanInfoPage()
 		{
 			InitializeComponent();
-		}
+
+            EntryInterface entryInterface = new EntryInterface();
+            entryInterface.OnlyNumbers(entrySum);
+        }
 
         private async void SaveButton_Clicked(object sender, EventArgs e)
         {
