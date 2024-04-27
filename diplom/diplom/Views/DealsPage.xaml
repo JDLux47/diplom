@@ -48,7 +48,7 @@
             </CollectionView.ItemsLayout>
 
             <CollectionView.Header>
-                <Grid BackgroundColor="LightGray" Padding="5">
+                <Grid BackgroundColor="Gray" Padding="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="120" />
                         <ColumnDefinition Width="*" />
@@ -75,7 +75,7 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame CornerRadius="10" Padding="0" Margin="5" BackgroundColor="Aqua">
+                    <Frame CornerRadius="10" Padding="0" Margin="5" BackgroundColor="#5149AC">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="120" />

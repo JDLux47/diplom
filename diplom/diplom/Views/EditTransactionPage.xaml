@@ -2,7 +2,7 @@
 <ContentPage Visual="Material" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="diplom.Views.EditTransactionPage"
-             Title="Информация о транзакции" BackgroundColor="#323232">
+             Title="Информация о транзакции" BackgroundColor="#B8A4C2">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -11,21 +11,21 @@
             </Style>
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="BackgroundColor" Value="#282828" />
+                <Setter Property="BackgroundColor" Value="#B8A4C2" />
             </Style>
             <Style TargetType="Entry">
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="BackgroundColor" Value="#282828" />
-                <Setter Property="PlaceholderColor" Value="gray" />
+                <Setter Property="BackgroundColor" Value="#B8A4C2" />
+                <Setter Property="PlaceholderColor" Value="lightgray" />
             </Style>
             <Style TargetType="Picker">
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="BackgroundColor" Value="#282828" />
-                <Setter Property="TitleColor" Value="gray" />
+                <Setter Property="BackgroundColor" Value="#B8A4C2" />
+                <Setter Property="TitleColor" Value="lightgray" />
             </Style>
             <Style TargetType="DatePicker">
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="BackgroundColor" Value="#282828" />
+                <Setter Property="BackgroundColor" Value="#B8A4C2" />
             </Style>
             <Style TargetType="TimePicker">
                 <Setter Property="TextColor" Value="White" />
@@ -35,7 +35,7 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <Frame BackgroundColor="Violet" CornerRadius="40" VerticalOptions="CenterAndExpand" Padding="5" Margin="10">
+        <Frame BackgroundColor="#9C80A9" CornerRadius="40" VerticalOptions="CenterAndExpand" Padding="5" Margin="10">
             <StackLayout Padding="20" VerticalOptions="Center">
                 <Label Text="Информация о транзакции" FontSize="20" HorizontalOptions="Center" Margin="0,0,0,10"/>
 
@@ -49,9 +49,10 @@
                 </Picker>
                 <Picker x:Name="pickerCategory" Title="Категория" SelectedItem="{Binding SelectedCategory}" ItemDisplayBinding="{Binding Name}"/>
                 <Entry Placeholder="Сумма" x:Name="entrySum" />
-                <DatePicker x:Name="DatePicker" />
+                <Label Text="────── Дата ──────" HorizontalOptions="Center" FontSize="18"/>
+                <DatePicker x:Name="DatePicker" HeightRequest="53"/>
 
-                <Button Text="Изменить" Clicked="SaveButton_Clicked" />
+                <Button Text="✎ Изменить" Clicked="SaveButton_Clicked" CornerRadius="40"/>
             </StackLayout>
         </Frame>
     </ContentPage.Content>
