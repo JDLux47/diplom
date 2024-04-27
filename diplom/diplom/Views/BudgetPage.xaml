@@ -2,19 +2,45 @@
 <ContentPage Visual ="Material" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:diplom.Interface" xmlns:views="clr-namespace:diplom.Views"
              x:Class="diplom.Views.BudgetPage"
-             Title="Бюджет">
-    
+             Title="Бюджет" BackgroundColor="#323232">
+
     <ContentPage.Resources>
         <local:TypeConverter x:Key="TypeConverter" />
         <local:CategoryConverter x:Key="CategoryConverter"/>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+                <Setter Property="PlaceholderColor" Value="gray" />
+            </Style>
+            <Style TargetType="Picker">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+                <Setter Property="TitleColor" Value="gray" />
+            </Style>
+            <Style TargetType="DatePicker">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+            </Style>
+            <Style TargetType="TimePicker">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+            </Style>
+        </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Order="Secondary" Text="Добавить" Clicked="AddButton_Clicked"/>
         <ToolbarItem Order="Secondary" Text="Категории" Clicked="CategoriesButton_Clicked"/>
     </ContentPage.ToolbarItems>
 
-    <AbsoluteLayout>
+    <Grid>
         
         <CollectionView x:Name="transactionsView" Margin="20" SelectionMode="Single" SelectionChanged="OnSelectionChanged" Scrolled="CollectionView_Scrolled">
 
@@ -85,7 +111,7 @@
         
         </CollectionView>
 
-        <AbsoluteLayout x:Name="buttonStack" IsVisible="False" Margin="0, 64, 20, 0" 
+        <AbsoluteLayout x:Name="buttonStack" IsVisible="False" Margin="0, 64, 20, 0" HorizontalOptions="End"
                         AbsoluteLayout.LayoutFlags="PositionProportional"
                         AbsoluteLayout.LayoutBounds="1, 0, -1, 0">
             
@@ -109,6 +135,6 @@
             </StackLayout>
 
         </AbsoluteLayout>
-        
-    </AbsoluteLayout>
+        <Button ImageSource="adbutsmall" HorizontalOptions="End" VerticalOptions="End" BackgroundColor="#A445AC"  Margin="0,0,5,15" CornerRadius="40" HeightRequest="70" WidthRequest="70" Clicked="AddButton_Clicked"/>
+    </Grid>
 </ContentPage>

@@ -6,13 +6,19 @@
     <Application.Resources>
         <ResourceDictionary>
             <Style x:Key="PageBackgroundColorStyle" TargetType="ContentPage">
-                <Setter Property="BackgroundColor" Value="#1a1625" />
+                <Setter Property="BackgroundColor" Value="#323232" />
             </Style>
             <Style TargetType="Label">
                 <Setter Property="TextColor" Value="White" />
             </Style>
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+            </Style>
             <Style TargetType="Entry">
                 <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+                <Setter Property="PlaceholderColor" Value="gray" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

@@ -2,43 +2,74 @@
 <ContentPage Visual="Material" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:diplom.Interface"
              x:Class="diplom.Views.ListOfCategoriesPage"
-             Title="Категории">
+             Title="Категории" BackgroundColor="#323232">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Order="Secondary" Text="Добавить" Clicked="AddButton_Clicked"/>
-    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+                <Setter Property="PlaceholderColor" Value="gray" />
+            </Style>
+            <Style TargetType="Picker">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+                <Setter Property="TitleColor" Value="gray" />
+            </Style>
+            <Style TargetType="DatePicker">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+            </Style>
+            <Style TargetType="TimePicker">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#282828" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
-    <CollectionView x:Name="categoriesView" Margin="20" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
+    <Grid>
+        <CollectionView x:Name="categoriesView" Margin="20" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
 
-        <CollectionView.ItemsLayout>
-            <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="5" VerticalItemSpacing="10" />
-        </CollectionView.ItemsLayout>
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="5" VerticalItemSpacing="10" />
+            </CollectionView.ItemsLayout>
 
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Frame CornerRadius="10" Padding="10" Margin="5" HasShadow="True" BackgroundColor="Orange">
-                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                        
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        
-                        <Label Grid.Column="0" Text="{Binding Name}" VerticalOptions="Center" HorizontalOptions="Start" />
-                        
-                        <ImageButton Grid.Column="1"
-                                     BackgroundColor="Transparent" 
-                                     Clicked="DeleteButton_Clicked" 
-                                     CommandParameter="{Binding .}"
-                                     WidthRequest="30" HeightRequest="30" 
-                                     Aspect="AspectFit" 
-                                     HorizontalOptions="EndAndExpand" 
-                                     CornerRadius="30" 
-                                     Source="trash.png"/>
-                    </Grid>
-                </Frame>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame CornerRadius="10" Padding="10" Margin="5" HasShadow="True" BackgroundColor="Orange">
+                        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
-    </CollectionView>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0" Text="{Binding Name}" VerticalOptions="Center" HorizontalOptions="Start" />
+
+                            <ImageButton Grid.Column="1"
+                                         BackgroundColor="Transparent" 
+                                         Clicked="DeleteButton_Clicked" 
+                                         CommandParameter="{Binding .}"
+                                         WidthRequest="30" HeightRequest="30" 
+                                         Aspect="AspectFit" 
+                                         HorizontalOptions="EndAndExpand" 
+                                         CornerRadius="30" 
+                                         Source="trash.png"/>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+        <Button ImageSource="adbutsmall" HorizontalOptions="End" VerticalOptions="End" BackgroundColor="#A445AC"  Margin="0,0,5,15" CornerRadius="40" HeightRequest="70" WidthRequest="70" Clicked="AddButton_Clicked"/>
+
+    </Grid>
 </ContentPage>
