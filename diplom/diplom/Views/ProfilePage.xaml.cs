@@ -27,5 +27,14 @@ namespace diplom.Views
             userView.ItemsSource = userList;
             base.OnAppearing();
         }
+
+        private async void Logout_Clicked(object sender, EventArgs e)
+        {
+            Application.Current.MainPage = new NavigationPage(new AuthorizationPage());
+
+            SecureStorage.Remove("User");
+
+            await Navigation.PopToRootAsync();
+        }
     }
 }

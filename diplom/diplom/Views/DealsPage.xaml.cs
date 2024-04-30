@@ -224,5 +224,11 @@ namespace diplom.Views
                 buttonStack.IsVisible = true; // Показываем AbsoluteLayout при прокрутке вверх или в начальном положении
             }
         }
+
+        private async void UserAccount_Clicked(object sender, EventArgs e)
+        {
+            ProfilePage profilePage = new ProfilePage();
+            await Navigation.PushAsync(profilePage);
+        }
     }
 }

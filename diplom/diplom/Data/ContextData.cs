@@ -9,6 +9,51 @@ namespace diplom.Data
 {
     public class ContextData
     {
+        public static async Task SeedNeededInfoAsync(DB diplomdatabase)
+        {
+            try
+            {
+                var importances = new Importance[]
+                {
+                    new Importance { Level = "Низкий"},
+                    new Importance { Level = "Средний"},
+                    new Importance { Level = "Высокий"}
+                };
+                foreach (Importance p in importances)
+                {
+                    await diplomdatabase.SaveImportanceAsync(p);
+                }
+
+                var statuses = new Status[]
+                {
+                    new Status { Name = "В работе"},
+                    new Status { Name = "Отложено"},
+                    new Status { Name = "Сделано"},
+                    new Status { Name = "Отменено"},
+                    new Status { Name = "Просрочено"},
+                    new Status { Name = "Сделано c опозданием"}
+                };
+                foreach (Status p in statuses)
+                {
+                    await diplomdatabase.SaveStatusAsync(p);
+                }
+
+                var categories = new Category[]
+                {
+                    new Category { Name = "Без категории"}
+                };
+                foreach (Category p in categories)
+                {
+                    await diplomdatabase.SaveCategoryAsync(p);
+                }
+
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public static async Task SeedAsync(DB diplomdatabase)
         {
             try

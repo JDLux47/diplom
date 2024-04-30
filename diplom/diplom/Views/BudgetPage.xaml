@@ -38,6 +38,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Secondary" Text="Категории" Clicked="CategoriesButton_Clicked"/>
+        <ToolbarItem Order="Secondary" Text="Об аккаунте" Clicked="UserAccount_Clicked"/>
     </ContentPage.ToolbarItems>
 
     <Grid>

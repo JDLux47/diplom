@@ -41,6 +41,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Secondary" Text="Показать выполненные" Clicked="ShowButton_Clicked" x:Name="showHideItem"/>
+        <ToolbarItem Order="Secondary" Text="Об аккаунте" Clicked="UserAccount_Clicked"/>
     </ContentPage.ToolbarItems>
 
     <Grid>

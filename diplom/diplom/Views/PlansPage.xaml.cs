@@ -105,5 +105,11 @@ namespace diplom.Views
 
             labelMonthProfit.Text = "Ваш среднемесячный заработок с учётом всех расходов и доходов: " + averageProfitPerMonth + "₽";
         }
+
+        private async void UserAccount_Clicked(object sender, EventArgs e)
+        {
+            ProfilePage profilePage = new ProfilePage();
+            await Navigation.PushAsync(profilePage);
+        }
     }
 }

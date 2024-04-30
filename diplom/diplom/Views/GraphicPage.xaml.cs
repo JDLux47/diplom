@@ -349,5 +349,11 @@ namespace diplom.Views
             SecondGraphicPage secondGraphicPage = new SecondGraphicPage();
             await Navigation.PushAsync(secondGraphicPage);
         }
+
+        private async void UserAccount_Clicked(object sender, EventArgs e)
+        {
+            ProfilePage profilePage = new ProfilePage();
+            await Navigation.PushAsync(profilePage);
+        }
     }
 }

@@ -43,6 +43,7 @@
         <ToolbarItem Order="Secondary" Text="За год" Clicked="YearButton_Clicked"/>
         <ToolbarItem Order="Secondary" Text="За всё время" Clicked="AllTimeButton_Clicked"/>
         <ToolbarItem Order="Secondary" Text="Свой промежуток времени" Clicked="YourTimeButton_Clicked"/>
+        <ToolbarItem Order="Secondary" Text="Об аккаунте" Clicked="UserAccount_Clicked"/>
     </ContentPage.ToolbarItems>
 
     <ScrollView>
