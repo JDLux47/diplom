@@ -31,6 +31,9 @@
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="BackgroundColor" Value="#282828" />
             </Style>
+            <Style TargetType="CheckBox">
+                <Setter Property="Color" Value="White" />
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -42,7 +45,10 @@
                     <Label Text="Здравствуйте!" FontSize="25" HorizontalOptions="CenterAndExpand" Margin="0,0,0,40"/>
                     <Entry x:Name="EntryLogin" Placeholder="Введите логин" VerticalOptions="CenterAndExpand"/>
                     <Entry x:Name="EntryPassword" Placeholder="Введите пароль" IsPassword="True"/>
-
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Входить автоматически " FontSize ="18" VerticalOptions="Center"/>
+                        <CheckBox x:Name="Checkbox"/>
+                    </StackLayout>
                     <Button Text="➲ Войти" Clicked="LoginButton_Clicked" CornerRadius="40"/>
                 </StackLayout>
             </Frame>

@@ -4,6 +4,8 @@ using diplom.Views;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -44,7 +46,6 @@ namespace diplom
             { 
                 loggedInUser = value; 
             }
-
         }
 
         public static void DataBaseCopy()
@@ -54,11 +55,40 @@ namespace diplom
             File.Copy(destination, desktopPath, true);
         }
 
+        public async void IsDatabaseExist()
+        {
+            await ContextData.SeedNeededInfoAsync(diplomdatabase);
+        }
+
         public App()
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new AuthorizationPage());
+            string destination = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Diplomdatabase.db3");
+            if (File.Exists(destination))
+            {
+                var logUser = SecureStorage.GetAsync("User").Result;
+
+                if (logUser != null)
+                {
+                    LoggedInUser = Diplomdatabase.GetUserAsync(Convert.ToInt32(logUser)).Result;
+                    MainPage = new AppShell();
+                }
+                else
+                {
+                    MainPage = new NavigationPage(new AuthorizationPage());
+                }
+            }
+            else
+            {
+                // Создание новой базы данных и добавление данных
+                diplomdatabase = new DB(destination);
+
+                // Добавление данных в базу данных
+                IsDatabaseExist();
+
+                MainPage = new NavigationPage(new AuthorizationPage());
+            }
         }
 
         protected override async void OnStart()

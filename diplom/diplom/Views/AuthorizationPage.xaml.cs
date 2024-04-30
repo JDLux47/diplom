@@ -1,4 +1,5 @@
-﻿using diplom.Interface;
+﻿using Android.Widget;
+using diplom.Interface;
 using diplom.Models;
 using System;
 using System.Collections.Generic;
@@ -27,22 +28,23 @@ namespace diplom.Views
         private async void LoginButton_Clicked(object sender, EventArgs e)
         {
             var users = await App.Diplomdatabase.GetUsersAsync();
-            bool login = true;
-            App.LoggedInUser = users.FirstOrDefault();
-            //foreach (var user in users)
-            //{
-            //    if (user.Login == EntryLogin.Text && user.Password == EntryPassword.Text)
-            //    {
-            //        login = true;
-            //        thisuser = user;
-            //    }
-            //}
+            bool login = false;
+            //App.LoggedInUser = users.FirstOrDefault();
+
+            foreach (var user in users)
+            {
+                if (user.Login == EntryLogin.Text && user.Password == EntryPassword.Text)
+                {
+                    login = true;
+                    App.LoggedInUser = user;
+                    SecureStorage.Remove("User");
+                    if (Checkbox.IsChecked)
+                        await SecureStorage.SetAsync("User", user.Id.ToString());
+                }
+            }
 
             if (login)
-            {
-                // Сохраняем информацию о пользователе в SecureStorage
                 Application.Current.MainPage = new AppShell();
-            }
             else
                 DependencyService.Get<ICustomToast>().ShowCustomToast("Неуспешная авторизация", Color.Red.ToHex(), Color.White.ToHex());
         }

@@ -47,7 +47,7 @@ namespace diplom.Droid.Services
 
             Toast toast = new Toast(Application.Context);
             toast.SetGravity(GravityFlags.Center, 0, 0);
-            toast.Duration = ToastLength.Short;
+            toast.Duration = ToastLength.Long;
             toast.View = layout;
             toast.Show();
         }
