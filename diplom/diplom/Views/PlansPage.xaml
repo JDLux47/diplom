@@ -133,7 +133,7 @@
 
             </CollectionView>
 
-            <Button ImageSource="adbutsmall" HorizontalOptions="End" VerticalOptions="End" BackgroundColor="#A445AC"  Margin="0,0,5,15" CornerRadius="40" HeightRequest="70" WidthRequest="70" Clicked="AddButton_Clicked"/>
+            <Button ImageSource="adbutsmall" HorizontalOptions="End" VerticalOptions="End" BackgroundColor="#B8A4C2"  Margin="0,0,10,15" CornerRadius="40" HeightRequest="70" WidthRequest="70" Clicked="AddButton_Clicked"/>
             <Label x:Name="labelMonthProfit" FontSize="Medium" HorizontalTextAlignment="Center" HorizontalOptions="Center" Margin="20,20,20,0" VerticalOptions="Start"/>
     </Grid>
 </ContentPage>

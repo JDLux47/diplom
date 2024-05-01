@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage Visual="Material" xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:diplom.Interface"
              x:Class="diplom.Views.DealInformationPage"
              Title="Информация о задаче" BackgroundColor="#B8A4C2">
 
     <ContentPage.Resources>
         <ResourceDictionary>
+            <local:StatusToIsCheckedConverter x:Key="StatusToIsCheckedConverter" />
             <Style TargetType="Label">
                 <Setter Property="TextColor" Value="White" />
             </Style>
@@ -35,7 +36,7 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <ScrollView>
+        <ScrollView >
             <Frame BackgroundColor="#9C80A9" CornerRadius="40" VerticalOptions="CenterAndExpand" Padding="5" Margin="10">
                 <StackLayout Padding="20" x:Name="stackDeal" Spacing="10" VerticalOptions="Center">
 
@@ -78,6 +79,10 @@
                             <TimePicker Grid.Column="3" x:Name="timepickerDeadline" Time="{Binding Deadline}" Format="H:mm" />
                         </Grid>
                     </StackLayout>
+
+                    <Label Text="───── Подзадачи ─────" FontSize="18" Margin="0,10,0,10" HorizontalOptions="Center"/>
+
+                    <Button Text="✚ Добавить подзадачи" Clicked="TaskAdd_Clicked" HorizontalOptions="FillAndExpand" CornerRadius="40"/>
 
                     <Button Text="⎋ Создать уведомление в календаре" Clicked="Notification_Clicked"  HorizontalOptions="FillAndExpand" CornerRadius="40"/>
 
