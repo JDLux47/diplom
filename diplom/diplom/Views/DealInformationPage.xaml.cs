@@ -41,6 +41,10 @@ namespace diplom.Views
 
 				pickerImportance.SelectedIndex = deal.ImportanceId - 1;
                 pickerStatus.SelectedIndex = deal.StatusId - 1;
+
+                var deals = await App.Diplomdatabase.GetDealsAsync();
+                deals = deals.Where(d => d.OtherDealId != deal.Id).ToList();
+                //ListDealsView.ItemsSource = deals;
             }
 
             base.OnAppearing();
@@ -129,6 +133,24 @@ namespace diplom.Views
         {
             if (BindingContext is Deal deal)
                 await SetNotificationAsync(deal.Deadline, entryName.Text);
+        }
+
+        private async void TaskAdd_Clicked(object sender, EventArgs e)
+        {
+            if (BindingContext is Deal deal)
+            {
+                ListOfDealsPage listOfDealsPage = new ListOfDealsPage
+                {
+                    BindingContext = deal,
+                };
+                await Navigation.PushAsync(listOfDealsPage);
+            }
+            
+        }
+
+        private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+
         }
     }
 }
