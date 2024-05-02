@@ -321,7 +321,7 @@ namespace diplom.Views
             await Navigation.PushAsync(pickDatePage);
             pickDatePage.Disappearing += (senderObj, eventArgs) =>
             {
-                    var page = senderObj as PickDatePage;
+                var page = senderObj as PickDatePage;
                 if (page != null )
                 {
                     if (page.StartDate != DateTime.MinValue && page.EndDate != DateTime.MinValue)

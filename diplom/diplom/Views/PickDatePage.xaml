@@ -11,7 +11,7 @@
             </Style>
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="BackgroundColor" Value="#282828" />
+                <Setter Property="BackgroundColor" Value="#B8A4C2" />
             </Style>
             <Style TargetType="Entry">
                 <Setter Property="TextColor" Value="White" />
@@ -25,7 +25,7 @@
             </Style>
             <Style TargetType="DatePicker">
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="BackgroundColor" Value="#282828" />
+                <Setter Property="BackgroundColor" Value="#B8A4C2" />
             </Style>
             <Style TargetType="TimePicker">
                 <Setter Property="TextColor" Value="White" />
@@ -35,13 +35,15 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout VerticalOptions="CenterAndExpand" Padding="20">
-            <Label HorizontalOptions="CenterAndExpand" Text="Укажите промежуток времени" FontSize="20" Margin="0,0,0,30"/>
-            <Label HorizontalOptions="StartAndExpand" Text="От даты: " FontSize="16"/>
-            <DatePicker x:Name="datapickerStartDate" FontSize="16"/>
-            <Label HorizontalOptions="StartAndExpand" Text="До даты: " FontSize="16"/>
-            <DatePicker x:Name="datapickerEndDate" FontSize="16"/>
-            <Button HorizontalOptions="FillAndExpand" Text="Указать" Clicked="Button_Clicked" Margin="0,20,0,0"/>
-        </StackLayout>
+        <Frame BackgroundColor="#9C80A9" CornerRadius="40" VerticalOptions="CenterAndExpand" Padding="5" Margin="10">
+            <StackLayout VerticalOptions="CenterAndExpand" Padding="20">
+                <Label HorizontalOptions="CenterAndExpand" Text="Укажите промежуток времени" FontSize="20" Margin="0,0,0,10"/>
+                <Label HorizontalOptions="StartAndExpand" Text="От даты: " FontSize="16"/>
+                <DatePicker x:Name="datapickerStartDate" FontSize="16"/>
+                <Label HorizontalOptions="StartAndExpand" Text="До даты: " FontSize="16"/>
+                <DatePicker x:Name="datapickerEndDate" FontSize="16"/>
+                <Button HorizontalOptions="FillAndExpand" Text="✓ Указать" Clicked="Button_Clicked" Margin="0,20,0,0" CornerRadius="40"/>
+            </StackLayout>
+        </Frame>
     </ContentPage.Content>
 </ContentPage>

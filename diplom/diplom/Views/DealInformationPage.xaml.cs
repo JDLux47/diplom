@@ -24,10 +24,17 @@ namespace diplom.Views
 			InitializeComponent ();
         }
 
-		protected override async void OnAppearing()
+        protected override async void OnAppearing()
 		{
 			if(BindingContext is Deal deal)
 			{
+                entryName.Text = deal.Name;
+                entryNote.Text = deal.Note;
+                datapickerCreation.Date = deal.DateOfCreation;
+                datapickerDeadline.Date = deal.Deadline;
+                timepickerCreation.Time = deal.DateOfCreation.TimeOfDay;
+                timepickerDeadline.Time = deal.Deadline.TimeOfDay;
+
                 deal = await App.Diplomdatabase.GetDealAsync(deal.Id);
 
 				timepickerCreation.Time = deal.DateOfCreation.TimeOfDay;

@@ -21,6 +21,12 @@ namespace diplom.Views
             InitializeComponent();
         }
 
+        protected override async void OnDisappearing()
+        {
+            await Navigation.PopAsync();
+            base.OnDisappearing();
+        }
+
         private async void Button_Clicked(object sender, EventArgs e)
         {
             StartDate = datapickerStartDate.Date;

@@ -49,6 +49,12 @@ namespace diplom.Views
             base.OnAppearing();
         }
 
+        protected override async void OnDisappearing()
+        {
+            await Navigation.PopAsync();
+            base.OnDisappearing();
+        }
+
         private async Task SetNotificationAsync(DateTime date, string name)
         {
             // Создание нового события

@@ -39,7 +39,7 @@
             <Frame BackgroundColor="#9C80A9" CornerRadius="40" VerticalOptions="CenterAndExpand" Padding="5" Margin="10">
                 <StackLayout Padding="20" x:Name="stackDeal" Spacing="10" VerticalOptions="Center">
 
-                    <Label Text="Информация о плане" HorizontalOptions="Center" FontSize="20" Margin="0,0,0,10"/>
+                    <Label Text="Информация о задаче" HorizontalOptions="Center" FontSize="20" Margin="0,0,0,10"/>
                 
                     <Entry x:Name="entryName" Placeholder="Название" FontSize="16"/>
                     <Entry x:Name="entryNote" Placeholder="Заметки" FontSize="16"/>

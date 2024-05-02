@@ -23,6 +23,12 @@ namespace diplom.Views
             entryInterface.OnlyNumbers(entrySum);
         }
 
+        protected override async void OnDisappearing()
+        {
+            await Navigation.PopAsync();
+            base.OnDisappearing();
+        }
+
         private async void SaveButton_Clicked(object sender, EventArgs e)
         {
             if (BindingContext is Plan plan)
