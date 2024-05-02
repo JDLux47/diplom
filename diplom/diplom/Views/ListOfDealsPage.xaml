@@ -1,31 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage Visual="Material"  xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:diplom.Interface"
              x:Class="diplom.Views.ListOfDealsPage"
              Title="Выбор подзадач" BackgroundColor="#323232">
 
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:OtherDealIdToIsCheckedConverter x:Key="OtherDealIdToIsCheckedConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <CollectionView x:Name="dealsView" Margin="20" SelectionMode="Single">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
-            </CollectionView.ItemsLayout>
+            <CollectionView x:Name="dealsView" Margin="20" SelectionMode="Single">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame CornerRadius="10" Padding="0" Margin="5" BackgroundColor="#5149AC">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <Label Margin="10,10,0,10" Grid.Column="0" Text="{Binding Name}" FontSize="Small" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Start"/>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="10" Padding="0" Margin="5" BackgroundColor="#5149AC">
+                            <Grid x:Name="grid">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Label Margin="10,10,0,10" Grid.Column="0" Text="{Binding Name}" FontSize="Small" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Start"/>
 
-                            <CheckBox Color="White" CheckedChanged="CheckBox_CheckedChanged" HeightRequest="30" WidthRequest="30" Grid.Column="1" Margin="0,0,10,0"/>
+                                <CheckBox x:Name="CheckBoxTask" Color="White" CheckedChanged="CheckBox_CheckedChanged" 
+                                          HeightRequest="30" WidthRequest="30" Grid.Column="1" Margin="0,0,10,0"
+                                          IsChecked="{Binding OtherDealId, Converter={StaticResource OtherDealIdToIsCheckedConverter}}"/>
 
-                        </Grid>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </ContentPage.Content>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ContentPage.Content>
 </ContentPage>

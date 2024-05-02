@@ -1,6 +1,7 @@
 ﻿using Android.Views;
 using diplom.Interface;
 using diplom.Models;
+using Java.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace diplom.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DealsPage : ContentPage
     {
-        public bool ShowAll = false, timer = false, SortByDeadline, SortByTask, SortByPriority, SortByStatus;
+        bool ShowAll = false, timer = false, SortByDeadline, SortByTask, SortByPriority, SortByStatus;
 
         public DealsPage()
         {
@@ -32,14 +33,21 @@ namespace diplom.Views
             };
         }
 
+        private List<Deal> Deals_ShowAll(List<Deal> deals)
+        {
+            if (!ShowAll)
+                deals = deals.Where(deal => deal.StatusId == 1 || deal.StatusId == 2).ToList();
+            else
+                deals = deals.Where(deal => deal.StatusId != 1 && deal.StatusId != 2).ToList();
+
+            return deals;
+        }
+
         private async void ChangeStatuses()
         {
             var deals = await App.Diplomdatabase.GetDealsAsync(); // Получаем все дела
 
-            if (!ShowAll)
-                deals = deals.Where(deal => deal.StatusId == 1 || deal.StatusId == 2).ToList();
-            else 
-                deals = deals.Where(deal => deal.StatusId != 1 && deal.StatusId != 2).ToList();
+            deals = Deals_ShowAll(deals);
 
             if (timer)
             {
@@ -53,7 +61,6 @@ namespace diplom.Views
                 }
                 timer = false;
             }
-
             dealsView.ItemsSource = deals;
         }
 
@@ -71,7 +78,6 @@ namespace diplom.Views
                 {
                     BindingContext = selectedItem
                 };
-                
                 await Navigation.PushAsync(dealInformationPage);
             }
         }
@@ -121,6 +127,7 @@ namespace diplom.Views
         private async void ButtonByTask_Clicked(object sender, EventArgs e)
         {
             var deals = await App.Diplomdatabase.GetDealsAsync();
+            deals = Deals_ShowAll(deals);
             if (SortByTask)
             {
                 deals = deals.OrderBy(deal => deal.Name).ToList();
@@ -142,6 +149,7 @@ namespace diplom.Views
         private async void ButtonByPriority_Clicked(object sender, EventArgs e)
         {
             var deals = await App.Diplomdatabase.GetDealsAsync();
+            deals = Deals_ShowAll(deals);
             if (SortByPriority)
             {
                 deals = deals.OrderBy(deal => deal.ImportanceId).ToList();
@@ -164,6 +172,7 @@ namespace diplom.Views
         private async void ButtonByDeadline_Clicked(object sender, EventArgs e)
         {
             var deals = await App.Diplomdatabase.GetDealsAsync();
+            deals = Deals_ShowAll(deals);
             if (SortByDeadline)
             {
                 deals = deals.OrderBy(deal => deal.Deadline).ToList();
@@ -186,6 +195,7 @@ namespace diplom.Views
         private async void ButtonByStatus_Clicked (object sender, EventArgs e)
         {
             var deals = await App.Diplomdatabase.GetDealsAsync();
+            deals = Deals_ShowAll(deals);
             if (SortByStatus)
             {
                 deals = deals.OrderBy(deal => deal.StatusId).ToList();
@@ -216,13 +226,9 @@ namespace diplom.Views
         private void CollectionView_Scrolled(object sender, ItemsViewScrolledEventArgs e)
         {
             if (e.VerticalOffset >= 0) // Проверяем, что произошло вертикальное прокручивание вниз
-            {
                 buttonStack.IsVisible = false; // Скрываем AbsoluteLayout при прокрутке вниз
-            }
             else
-            {
                 buttonStack.IsVisible = true; // Показываем AbsoluteLayout при прокрутке вверх или в начальном положении
-            }
         }
 
         private async void UserAccount_Clicked(object sender, EventArgs e)

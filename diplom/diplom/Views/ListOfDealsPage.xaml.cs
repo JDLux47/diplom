@@ -23,7 +23,7 @@ namespace diplom.Views
             var deals = await App.Diplomdatabase.GetDealsAsync();
             if (BindingContext is Deal deal) 
             {
-                deals = deals.Where(d => d.OtherDealId == 0 && d.Id != deal.Id).ToList();
+                deals = deals.Where(d => (d.OtherDealId == 0 || d.OtherDealId == deal.Id) && d.Id != deal.Id).ToList();
             }
             dealsView.ItemsSource = deals;
 
@@ -44,6 +44,7 @@ namespace diplom.Views
                     {
                         deal.OtherDealId = 0; // Сброс значения OtherDealId
                     }
+
                     await App.Diplomdatabase.SaveDealAsync(deal);
                 }
             }

@@ -80,7 +80,38 @@
                         </Grid>
                     </StackLayout>
 
-                    <Label Text="───── Подзадачи ─────" FontSize="18" Margin="0,10,0,10" HorizontalOptions="Center"/>
+                    <Label Text="───── Подзадачи ─────" FontSize="18" Margin="0,10,0,10" HorizontalOptions="Center" x:Name="LabelTasks"/>
+
+                    <CollectionView x:Name="ListDealsView" SelectionMode="None" VerticalOptions="StartAndExpand" SizeChanged="ListDealsView_SizeChanged" Margin="0">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0"  Text="{Binding Name}" FontSize="16" HorizontalOptions="Start" VerticalOptions="Center"/>
+                                    <CheckBox Color="White" Grid.Column="1"
+                                              IsChecked="{Binding StatusId, Converter={StaticResource StatusToIsCheckedConverter}}" 
+                                              CheckedChanged="CheckBox_CheckedChanged" 
+                                              HeightRequest="30" WidthRequest="30"
+                                              Margin="0,0,10,0" HorizontalOptions="End">
+                                        <CheckBox.Triggers>
+                                            <DataTrigger TargetType="CheckBox" Binding="{Binding StatusId}" Value="3">
+                                                <Setter Property="IsEnabled" Value="False" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="CheckBox" Binding="{Binding StatusId}" Value="6">
+                                                <Setter Property="IsEnabled" Value="False" />
+                                            </DataTrigger>
+                                        </CheckBox.Triggers>
+                                    </CheckBox>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" />
+                        </CollectionView.ItemsLayout>
+                    </CollectionView>
 
                     <Button Text="✚ Добавить подзадачи" Clicked="TaskAdd_Clicked" HorizontalOptions="FillAndExpand" CornerRadius="40"/>
 

@@ -19,7 +19,7 @@ namespace diplom.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class DealInformationPage : ContentPage
 	{
-		public DealInformationPage ()
+        public DealInformationPage ()
 		{
 			InitializeComponent ();
         }
@@ -43,9 +43,22 @@ namespace diplom.Views
                 pickerStatus.SelectedIndex = deal.StatusId - 1;
 
                 var deals = await App.Diplomdatabase.GetDealsAsync();
-                deals = deals.Where(d => d.OtherDealId != deal.Id).ToList();
-                //ListDealsView.ItemsSource = deals;
+                deals = deals.Where(d => d.OtherDealId == deal.Id).ToList();
+
+                if (deals.Count > 0)
+                {
+                    ListDealsView.ItemsSource = deals;
+                    LabelTasks.IsVisible = true;
+                    ListDealsView.IsVisible = true;
+                }
+                else
+                {
+                    LabelTasks.IsVisible = false;
+                    ListDealsView.IsVisible = false;
+                }
             }
+
+            ListDealsView_SizeChanged(ListDealsView, EventArgs.Empty);
 
             base.OnAppearing();
 		}
@@ -148,9 +161,41 @@ namespace diplom.Views
             
         }
 
-        private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        private async void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
+            if (sender is CheckBox checkbox && checkbox.BindingContext is Deal deal)
+            {
+                // Проверяем, изменилось ли значение
+                if (checkbox.IsChecked && (deal.StatusId != 3 || deal.StatusId != 6))
+                {
+                    if (deal.Deadline >= DateTime.Now)
+                        deal.StatusId = 3; // Устанавливаем 3 только если до этого было другое значение
+                    else
+                        deal.StatusId = 6;
 
+                    await App.Diplomdatabase.SaveDealAsync(deal);
+
+                    // Обновляем только чекбокс, без вызова OnAppearing()
+                    checkbox.BindingContext = null;
+                    checkbox.BindingContext = deal;
+                }
+            }
+        }
+
+        private async void ListDealsView_SizeChanged(object sender, EventArgs e)
+        {
+            var collectionView = sender as CollectionView;
+            if (collectionView == null) return;
+
+            var deals = await App.Diplomdatabase.GetDealsAsync();
+            if (BindingContext is Deal deal)
+            {
+                deals = deals.Where(d => d.OtherDealId == deal.Id).ToList();
+            }
+
+            double totalHeight = deals.Count() * 35;
+
+            collectionView.HeightRequest = totalHeight;
         }
     }
 }
