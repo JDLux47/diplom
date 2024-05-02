@@ -93,6 +93,7 @@ namespace diplom
 
         protected override async void OnStart()
         {
+            //SecureStorage.Remove("User");
             //await ContextData.SeedAsync(Diplomdatabase);
             //DataBaseCopy();
         }
