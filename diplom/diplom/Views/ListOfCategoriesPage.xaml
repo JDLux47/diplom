@@ -69,7 +69,7 @@
 
         </CollectionView>
 
-        <Button ImageSource="adbutsmall" HorizontalOptions="End" VerticalOptions="End" BackgroundColor="#A445AC"  Margin="0,0,5,15" CornerRadius="40" HeightRequest="70" WidthRequest="70" Clicked="AddButton_Clicked"/>
+        <Button ImageSource="adbutsmall" HorizontalOptions="End" VerticalOptions="End" BackgroundColor="#B8A4C2"  Margin="0,0,5,15" CornerRadius="40" HeightRequest="70" WidthRequest="70" Clicked="AddButton_Clicked"/>
 
     </Grid>
 </ContentPage>

@@ -19,22 +19,15 @@ namespace diplom.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class DealInformationPage : ContentPage
 	{
-        public DealInformationPage ()
-		{
-			InitializeComponent ();
+        public DealInformationPage()
+        {
+            InitializeComponent();
         }
 
         protected override async void OnAppearing()
 		{
-			if(BindingContext is Deal deal)
+            if (BindingContext is Deal deal)
 			{
-                entryName.Text = deal.Name;
-                entryNote.Text = deal.Note;
-                datapickerCreation.Date = deal.DateOfCreation;
-                datapickerDeadline.Date = deal.Deadline;
-                timepickerCreation.Time = deal.DateOfCreation.TimeOfDay;
-                timepickerDeadline.Time = deal.Deadline.TimeOfDay;
-
                 deal = await App.Diplomdatabase.GetDealAsync(deal.Id);
 
 				timepickerCreation.Time = deal.DateOfCreation.TimeOfDay;
@@ -63,14 +56,36 @@ namespace diplom.Views
                     LabelTasks.IsVisible = false;
                     ListDealsView.IsVisible = false;
                 }
+
+                entryName.Text = deal.Name;
+                entryNote.Text = deal.Note;
+                datapickerCreation.Date = deal.DateOfCreation;
+                datapickerDeadline.Date = deal.Deadline;
+                timepickerCreation.Time = deal.DateOfCreation.TimeOfDay;
+                timepickerDeadline.Time = deal.Deadline.TimeOfDay;
             }
 
             ListDealsView_SizeChanged(ListDealsView, EventArgs.Empty);
-
             base.OnAppearing();
-		}
 
-		private async void SaveButton_Clicked(object sender, EventArgs e)
+            
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            if (BindingContext is Deal deal)
+            {
+                //entryName.Text = "";
+                //entryNote.Text = "";
+                datapickerCreation.Date = DateTime.MinValue;
+                datapickerDeadline.Date = DateTime.MinValue;
+                timepickerCreation.Time = DateTime.MinValue.TimeOfDay;
+                timepickerDeadline.Time = DateTime.MinValue.TimeOfDay;
+            }
+        }
+
+        private async void SaveButton_Clicked(object sender, EventArgs e)
 		{
             if (BindingContext is Deal deal)
             {

@@ -130,13 +130,6 @@ namespace diplom.Views
                 };
             }).ToList();
 
-            for (int i = 0; i < chartEntries.Count(); i++)
-            {
-                chartEntries[i].Color = ExpenseColorsDictionary[i];
-                chartEntries[i].TextColor = ExpenseColorsDictionary[i];
-                chartEntries[i].ValueLabelColor = ExpenseColorsDictionary[i];
-            }
-
             if (Type == -1)
             {
                 for (int i = 0; i < chartEntries.Count(); i++)

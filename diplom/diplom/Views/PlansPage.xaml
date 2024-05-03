@@ -45,7 +45,11 @@
     </ContentPage.ToolbarItems>
 
     <Grid>
-        <CollectionView x:Name="PlansView" Margin="20,80,20,20" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <CollectionView Grid.Row="1" x:Name="PlansView" Margin="20" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
 
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="20"/>
@@ -133,7 +137,7 @@
 
             </CollectionView>
 
-            <Button ImageSource="adbutsmall" HorizontalOptions="End" VerticalOptions="End" BackgroundColor="#B8A4C2"  Margin="0,0,10,15" CornerRadius="40" HeightRequest="70" WidthRequest="70" Clicked="AddButton_Clicked"/>
-            <Label x:Name="labelMonthProfit" FontSize="Medium" HorizontalTextAlignment="Center" HorizontalOptions="Center" Margin="20,20,20,0" VerticalOptions="Start"/>
+            <Button Grid.Row="1" ImageSource="adbutsmall" HorizontalOptions="End" VerticalOptions="End" BackgroundColor="#B8A4C2"  Margin="0,0,10,15" CornerRadius="40" HeightRequest="70" WidthRequest="70" Clicked="AddButton_Clicked"/>
+            <Label Grid.Row="0" x:Name="labelMonthProfit" FontSize="Medium" HorizontalTextAlignment="Center" HorizontalOptions="Center" Margin="20,20,20,0" VerticalOptions="Start"/>
     </Grid>
 </ContentPage>
