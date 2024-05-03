@@ -18,6 +18,12 @@ namespace diplom.Views
             InitializeComponent();
         }
 
+        protected override async void OnDisappearing()
+        {
+            await Navigation.PopAsync();
+            base.OnDisappearing();
+        }
+
         protected override void OnAppearing()
         {
             List<User> userList = new List<User>

@@ -23,7 +23,13 @@ namespace diplom.Views
             entryInterface.OnlyNumbers(entrySum);
         }
 
-		private async void SaveButton_Clicked(object sender, EventArgs e)
+        protected override async void OnDisappearing()
+        {
+            await Navigation.PopAsync();
+            base.OnDisappearing();
+        }
+
+        private async void SaveButton_Clicked(object sender, EventArgs e)
 		{
             if (entrySum.Text != null && entryName.Text != null)
             {

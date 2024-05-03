@@ -23,6 +23,12 @@ namespace diplom.Views
             entryInterface.OnlyNumbers(entrySum);
         }
 
+        protected override async void OnDisappearing()
+        {
+            await Navigation.PopAsync();
+            base.OnDisappearing();
+        }
+
         protected override async void OnAppearing()
         {
             List<Category> categories = await App.Diplomdatabase.GetCategoriesAsync();
