@@ -12,6 +12,8 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
+        <Grid>
+            <Image AbsoluteLayout.LayoutFlags="All" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Aspect="AspectFill" Source="BackgroundEmpty.png"/>
             <CollectionView x:Name="dealsView" Margin="20" SelectionMode="Single">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
@@ -36,5 +38,6 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-        </ContentPage.Content>
+        </Grid>
+    </ContentPage.Content>
 </ContentPage>

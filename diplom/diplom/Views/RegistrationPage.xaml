@@ -37,16 +37,18 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Frame BackgroundColor="#9C80A9" CornerRadius="40" VerticalOptions="CenterAndExpand" Padding="5" Margin="10">
-        <StackLayout Padding="20">
-            <Label Text="Пользователь" HorizontalOptions="Center" FontSize="20" Margin="0,0,0,10"/>
-            <Entry x:Name="entryName" Placeholder="Введите имя"/>
-            <Entry x:Name="entryLogin" Placeholder="Введите логин"/>
-            <Entry x:Name="entryPassword" Placeholder="Введите пароль" IsPassword="True" />
-            <Entry x:Name="entryBalance" Placeholder="Введите начальный баланс" Keyboard="Numeric" />
+    <Grid>
+        <Image AbsoluteLayout.LayoutFlags="All" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Aspect="AspectFill" Source="BackgroundForm.png"/>
+        <Frame BackgroundColor="#9C80A9" CornerRadius="40" VerticalOptions="CenterAndExpand" Padding="5" Margin="10">
+            <StackLayout Padding="20">
+                <Label Text="Пользователь" HorizontalOptions="Center" FontSize="20" Margin="0,0,0,10"/>
+                <Entry x:Name="entryName" Placeholder="Введите имя"/>
+                <Entry x:Name="entryLogin" Placeholder="Введите логин"/>
+                <Entry x:Name="entryPassword" Placeholder="Введите пароль" IsPassword="True" />
+                <Entry x:Name="entryBalance" Placeholder="Введите начальный баланс" Keyboard="Numeric" />
 
-            <Button Text="➤ Зарегистироваться" Clicked="Register_Clicked" CornerRadius="40"/>
-        </StackLayout>
-    </Frame>
-
+                <Button Text="➤ Зарегистироваться" Clicked="Register_Clicked" CornerRadius="40"/>
+            </StackLayout>
+        </Frame>
+    </Grid>
 </ContentPage>

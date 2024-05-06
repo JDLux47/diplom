@@ -33,18 +33,23 @@ namespace diplom.Views
 		{
             if (entrySum.Text != null && entryName.Text != null)
             {
-                Plan plan = new Plan
+                if(DateTime.Now < datapickerDeadline.Date)
                 {
-                    Name = entryName.Text,
-                    Sum = Convert.ToDecimal(entrySum.Text),
-                    Deadline = datapickerDeadline.Date,
-                    Done = false,
-                    UserId = App.LoggedInUser.Id
-                };
+                    Plan plan = new Plan
+                    {
+                        Name = entryName.Text,
+                        Sum = Convert.ToDecimal(entrySum.Text),
+                        Deadline = datapickerDeadline.Date,
+                        Done = false,
+                        UserId = App.LoggedInUser.Id
+                    };
 
-                await App.Diplomdatabase.SaveUserAsync(App.LoggedInUser);
-                await App.Diplomdatabase.SavePlanAsync(plan);
-                await Navigation.PopAsync();
+                    await App.Diplomdatabase.SaveUserAsync(App.LoggedInUser);
+                    await App.Diplomdatabase.SavePlanAsync(plan);
+                    await Navigation.PopAsync();
+                }
+                else
+                    DependencyService.Get<ICustomToast>().ShowCustomToast("Указанная дата уже не актуальна! Пожалуйста, укажите будущую дату", Color.Red.ToHex(), Color.White.ToHex());
             }
             else
                 DependencyService.Get<ICustomToast>().ShowCustomToast("Не все обязательные поля заполнены!", Color.Red.ToHex(), Color.White.ToHex());

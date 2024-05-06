@@ -42,7 +42,7 @@
     </ContentPage.ToolbarItems>
 
     <Grid>
-        
+        <Image AbsoluteLayout.LayoutFlags="All" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Aspect="AspectFill" Source="BackgroundBudget.png"/>
         <CollectionView x:Name="transactionsView" Margin="20" SelectionMode="Single" SelectionChanged="OnSelectionChanged" Scrolled="CollectionView_Scrolled">
 
             <CollectionView.ItemsLayout>
@@ -117,19 +117,19 @@
                         AbsoluteLayout.LayoutBounds="1, 0, -1, 0">
             
             <StackLayout Spacing="4">
-                <StackLayout  Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
+                <StackLayout  Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="Gray">
                     <Button Visual="Default" Text="По дате                    " Clicked="ButtonByDate_Clicked" Font="12" BackgroundColor="Transparent"/>
                     <Image Visual="Default" x:Name="ImageSortDate" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
                 </StackLayout>
-                <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
+                <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="Gray">
                     <Button Visual="Default" Text="По сумме                " Clicked="ButtonByPrice_Clicked" Font="12" BackgroundColor="Transparent"/>
                     <Image Visual="Default" x:Name="ImageSortSum" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
                 </StackLayout>
-                <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
+                <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="Gray">
                     <Button Visual="Default" Text="По категории       " Clicked="ButtonByCategory_Clicked" Font="12" BackgroundColor="Transparent"/>
                     <Image Visual="Default" x:Name="ImageSortCategory" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
                 </StackLayout>
-                <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
+                <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="Gray">
                     <Button Visual="Default" Text="По типу                   " Clicked="ButtonByType_Clicked" Font="12" BackgroundColor="Transparent"/>
                     <Image Visual="Default" x:Name="ImageSortType" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
                 </StackLayout>

@@ -35,25 +35,28 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <Frame BackgroundColor="#9C80A9" CornerRadius="40" VerticalOptions="CenterAndExpand" Padding="5" Margin="10">
-            <StackLayout Padding="20" VerticalOptions="Center">
-                <Label Text="Информация о транзакции" FontSize="20" HorizontalOptions="Center" Margin="0,0,0,10"/>
+        <Grid>
+            <Image AbsoluteLayout.LayoutFlags="All" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Aspect="AspectFill" Source="BackgroundForm.png"/>
+            <Frame BackgroundColor="#9C80A9" CornerRadius="40" VerticalOptions="CenterAndExpand" Padding="5" Margin="10">
+                <StackLayout Padding="20" VerticalOptions="Center">
+                    <Label Text="Информация о транзакции" FontSize="20" HorizontalOptions="Center" Margin="0,0,0,10"/>
 
-                <Picker x:Name="pickerType" Title="Тип">
-                    <Picker.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>Доход</x:String>
-                            <x:String>Расход</x:String>
-                        </x:Array>
-                    </Picker.ItemsSource>
-                </Picker>
-                <Picker x:Name="pickerCategory" Title="Категория" SelectedItem="{Binding SelectedCategory}" ItemDisplayBinding="{Binding Name}"/>
-                <Entry Placeholder="Сумма" x:Name="entrySum" />
-                <Label Text="────── Дата ──────" HorizontalOptions="Center" FontSize="18"/>
-                <DatePicker x:Name="DatePicker" HeightRequest="53"/>
+                    <Picker x:Name="pickerType" Title="Тип">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Доход</x:String>
+                                <x:String>Расход</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                    <Picker x:Name="pickerCategory" Title="Категория" SelectedItem="{Binding SelectedCategory}" ItemDisplayBinding="{Binding Name}"/>
+                    <Entry Placeholder="Сумма" x:Name="entrySum" />
+                    <Label Text="────── Дата ──────" HorizontalOptions="Center" FontSize="18"/>
+                    <DatePicker x:Name="DatePicker" HeightRequest="53"/>
 
-                <Button Text="✎ Изменить" Clicked="SaveButton_Clicked" CornerRadius="40"/>
-            </StackLayout>
-        </Frame>
+                    <Button Text="✎ Изменить" Clicked="SaveButton_Clicked" CornerRadius="40"/>
+                </StackLayout>
+            </Frame>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

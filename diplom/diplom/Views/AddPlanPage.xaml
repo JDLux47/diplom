@@ -35,21 +35,24 @@
     </ContentPage.Resources>
     
     <ContentPage.Content>
-        <Frame BackgroundColor="#9C80A9" CornerRadius="40" VerticalOptions="CenterAndExpand" Padding="5" Margin="10">
-            
-            <StackLayout Padding="20" x:Name="stackDeal" Spacing="10" VerticalOptions="CenterAndExpand">
+        <Grid>
+            <Image AbsoluteLayout.LayoutFlags="All" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Aspect="AspectFill" Source="BackgroundForm.png"/>
+            <Frame BackgroundColor="#9C80A9" CornerRadius="40" VerticalOptions="CenterAndExpand" Padding="5" Margin="10">
 
-                <Label Text="План" HorizontalOptions="Center" FontSize="20" Margin="0,0,0,10"/>
-                <Entry x:Name="entryName" Placeholder="Название" FontSize="16" />
-                <Entry x:Name="entrySum" Placeholder="Сумма" FontSize="16" />
-                <Label VerticalOptions="CenterAndExpand" Text="────── Срок ──────" FontSize="16" HorizontalOptions="Center"/>
-                <StackLayout Orientation="Horizontal">
-                    <DatePicker HeightRequest="50" x:Name="datapickerDeadline" FontSize="16" HorizontalOptions="FillAndExpand"/>
+                <StackLayout Padding="20" x:Name="stackDeal" Spacing="10" VerticalOptions="CenterAndExpand">
+
+                    <Label Text="План" HorizontalOptions="Center" FontSize="20" Margin="0,0,0,10"/>
+                    <Entry x:Name="entryName" Placeholder="Название" FontSize="16" />
+                    <Entry x:Name="entrySum" Placeholder="Сумма" FontSize="16" />
+                    <Label VerticalOptions="CenterAndExpand" Text="────── Срок ──────" FontSize="16" HorizontalOptions="Center"/>
+                    <StackLayout Orientation="Horizontal">
+                        <DatePicker HeightRequest="50" x:Name="datapickerDeadline" FontSize="16" HorizontalOptions="FillAndExpand"/>
+                    </StackLayout>
+
+                    <Button Text="✚ Добавить" Clicked="SaveButton_Clicked" CornerRadius="40"/>
+
                 </StackLayout>
-
-                <Button Text="✚ Добавить" Clicked="SaveButton_Clicked" CornerRadius="40"/>
-
-            </StackLayout>
-        </Frame>
+            </Frame>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
