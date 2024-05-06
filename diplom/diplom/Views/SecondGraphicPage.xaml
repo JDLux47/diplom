@@ -37,23 +37,26 @@
     </ContentPage.Resources>
 
     <ScrollView>
-        <StackLayout Padding="10">
-            <Label x:Name="CostTitleLabel" Text="Расходы" HorizontalOptions="Center" Margin="0,10,0,20" FontSize="Large" FontAttributes="Bold"/>
-            <microcharts:ChartView
-                x:Name="DiagramBarRas"
-                Margin="10,0,10,10"
-                Chart="{Binding BarChartRas}"
-                HeightRequest="300"
-                VerticalOptions="Start"
-                HorizontalOptions="Fill"/>
-            <Label x:Name="IncomeTitleLabel" Text="Доходы" HorizontalOptions="Center" Margin="0,10,0,20" FontSize="Large" FontAttributes="Bold"/>
-            <microcharts:ChartView
-                x:Name="DiagramBarDoh"
-                Margin="10,0,10,10"
-                Chart="{Binding BarChartDoh}"
-                HeightRequest="300"
-                VerticalOptions="Start"
-                HorizontalOptions="Fill"/>
-        </StackLayout>
+        <Grid>
+            <Image AbsoluteLayout.LayoutFlags="All" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Aspect="AspectFill" Source="BackgroundEmpty.png"/>
+            <StackLayout Padding="10">
+                <Label x:Name="CostTitleLabel" Text="Расходы" HorizontalOptions="Center" Margin="0,10,0,20" FontSize="Large" FontAttributes="Bold"/>
+                <microcharts:ChartView
+                        x:Name="DiagramBarRas"
+                        Margin="10,0,10,10"
+                        Chart="{Binding BarChartRas}"
+                        HeightRequest="300"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Fill"/>
+                <Label x:Name="IncomeTitleLabel" Text="Доходы" HorizontalOptions="Center" Margin="0,10,0,20" FontSize="Large" FontAttributes="Bold"/>
+                <microcharts:ChartView
+                        x:Name="DiagramBarDoh"
+                        Margin="10,0,10,10"
+                        Chart="{Binding BarChartDoh}"
+                        HeightRequest="300"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Fill"/>
+            </StackLayout>
+        </Grid>
     </ScrollView>
 </ContentPage>

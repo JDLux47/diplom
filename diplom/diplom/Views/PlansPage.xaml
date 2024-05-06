@@ -45,11 +45,13 @@
     </ContentPage.ToolbarItems>
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <CollectionView Grid.Row="1" x:Name="PlansView" Margin="20" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
+        <Image AbsoluteLayout.LayoutFlags="All" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Aspect="AspectFill" Source="BackgroundPlan.png"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <CollectionView Grid.Row="1" x:Name="PlansView" Margin="20" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
 
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="20"/>
@@ -58,7 +60,7 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                    <Frame CornerRadius="10" Padding="12" Margin="5" HasShadow="True" BackgroundColor="#5149AC">
+                        <Frame CornerRadius="10" Padding="12" Margin="5" HasShadow="True" BackgroundColor="#5149AC">
                             <Grid VerticalOptions="Center">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
@@ -76,9 +78,9 @@
                                 <Label VerticalOptions="Center" Grid.Row="0" Grid.Column="1" Text="{Binding Sum, StringFormat='{0}₽'}" FontSize="Small" HorizontalTextAlignment="Center"/>
                                 <Label VerticalOptions="Center" Grid.Row="0" Grid.Column="2" Text="{Binding Deadline, StringFormat='{0:dd.MM.yyyy}'}" FontSize="Small" HorizontalTextAlignment="Center"/>
                                 <CheckBox Grid.Column="3" Color="White" 
-                                      IsChecked="{Binding Done}" 
-                                      CheckedChanged="CheckBox_CheckedChanged" 
-                                      HeightRequest="30" WidthRequest="30">
+                                    IsChecked="{Binding Done}" 
+                                    CheckedChanged="CheckBox_CheckedChanged" 
+                                    HeightRequest="30" WidthRequest="30">
                                 </CheckBox>
                                 <Label x:Name="labelSumCheck" Grid.ColumnSpan="4" Text="{Binding Sum, Converter={StaticResource SumCheckForPlan}, StringFormat='Осталось накопить - {0}₽'}" FontSize="Small" VerticalOptions="Center">
                                     <Label.Triggers>
@@ -139,5 +141,6 @@
 
             <Button Grid.Row="1" ImageSource="adbutsmall" HorizontalOptions="End" VerticalOptions="End" BackgroundColor="#B8A4C2"  Margin="0,0,10,15" CornerRadius="40" HeightRequest="70" WidthRequest="70" Clicked="AddButton_Clicked"/>
             <Label Grid.Row="0" x:Name="labelMonthProfit" FontSize="Medium" HorizontalTextAlignment="Center" HorizontalOptions="Center" Margin="20,20,20,0" VerticalOptions="Start"/>
+        </Grid>
     </Grid>
 </ContentPage>

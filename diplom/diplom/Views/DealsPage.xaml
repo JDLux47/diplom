@@ -42,6 +42,7 @@
     </ContentPage.ToolbarItems>
 
     <Grid>
+        <Image AbsoluteLayout.LayoutFlags="All" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Aspect="AspectFill" Source="BackgroundDeal.png"/>
         <CollectionView x:Name="dealsView" Margin="20" SelectionMode="Single" SelectionChanged="OnSelectionChanged" Scrolled="CollectionView_Scrolled">
 
             <CollectionView.ItemsLayout>
@@ -146,19 +147,19 @@
                         AbsoluteLayout.LayoutBounds="1, 0, -1, 0">
 
             <StackLayout Spacing="4">
-                <StackLayout  Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
+                <StackLayout  Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="Gray">
                     <Button Visual="Default" Text="По задаче              " Clicked="ButtonByTask_Clicked" Font="12" BackgroundColor="Transparent"/>
                     <Image Visual="Default" x:Name="ImageSortTask" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
                 </StackLayout>
-                <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
+                <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="Gray">
                     <Button Visual="Default" Text="По приоритету    " Clicked="ButtonByPriority_Clicked" Font="12" BackgroundColor="Transparent"/>
                     <Image Visual="Default" x:Name="ImageSortPriority" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
                 </StackLayout>
-                <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
+                <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="Gray">
                     <Button Visual="Default" Text="По сроку                 " Clicked="ButtonByDeadline_Clicked" Font="12" BackgroundColor="Transparent"/>
                     <Image Visual="Default" x:Name="ImageSortDeadline" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
                 </StackLayout>
-                <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="LightGray">
+                <StackLayout Visual="Default" Orientation="Horizontal" WidthRequest="170" BackgroundColor="Gray">
                     <Button Visual="Default" Text="По статусу             " Clicked="ButtonByStatus_Clicked" Font="12" BackgroundColor="Transparent"/>
                     <Image Visual="Default" x:Name="ImageSortStatus" HorizontalOptions="EndAndExpand" HeightRequest="25" WidthRequest="25" Margin="0,0,5,0"/>
                 </StackLayout>

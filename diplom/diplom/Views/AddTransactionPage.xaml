@@ -35,23 +35,26 @@
     </ContentPage.Resources>
     
     <ContentPage.Content>
-        <Frame BackgroundColor="#9C80A9" CornerRadius="40" VerticalOptions="CenterAndExpand" Padding="5" Margin="10">
-            <StackLayout Padding="20" Spacing="10" VerticalOptions="Center">
-                <Label Text="Транзакция" HorizontalOptions="Center" FontSize="20" Margin="0,0,0,10"/>
-                <Picker x:Name="pickerType" Title="Выберите тип">
-                    <Picker.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>Доход</x:String>
-                            <x:String>Расход</x:String>
-                        </x:Array>
-                    </Picker.ItemsSource>
-                </Picker>
-                <Picker x:Name="pickerCategory" Title="Выберите категорию" SelectedItem="{Binding SelectedCategory}" ItemDisplayBinding="{Binding Name}"/>
-                <Button Text="❖ Ваши категории" Clicked="CategoryButton_Clicked" CornerRadius="40"/>
-                <Entry Placeholder="Сумма" x:Name="entrySum" />
-                <Button Text="✚ Добавить" Clicked="Add_Clicked" CornerRadius="40"/>
-            </StackLayout>
-        </Frame>
+        <Grid>
+            <Image AbsoluteLayout.LayoutFlags="All" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Aspect="AspectFill" Source="BackgroundForm.png"/>
+            <Frame BackgroundColor="#9C80A9" CornerRadius="40" VerticalOptions="CenterAndExpand" Padding="5" Margin="10">
+                <StackLayout Padding="20" Spacing="10" VerticalOptions="Center">
+                    <Label Text="Транзакция" HorizontalOptions="Center" FontSize="20" Margin="0,0,0,10"/>
+                    <Picker x:Name="pickerType" Title="Выберите тип">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Доход</x:String>
+                                <x:String>Расход</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                    <Picker x:Name="pickerCategory" Title="Выберите категорию" SelectedItem="{Binding SelectedCategory}" ItemDisplayBinding="{Binding Name}"/>
+                    <Button Text="❖ Ваши категории" Clicked="CategoryButton_Clicked" CornerRadius="40"/>
+                    <Entry Placeholder="Сумма" x:Name="entrySum" />
+                    <Button Text="✚ Добавить" Clicked="Add_Clicked" CornerRadius="40"/>
+                </StackLayout>
+            </Frame>
+        </Grid>
     </ContentPage.Content>
     
 </ContentPage>

@@ -30,23 +30,26 @@ namespace diplom.Views
             var users = await App.Diplomdatabase.GetUsersAsync();
             bool login = false;
             //App.LoggedInUser = users.FirstOrDefault();
-
-            foreach (var user in users)
+            if(EntryLogin.Text != null && EntryPassword.Text != null)
             {
-                if (user.Login == EntryLogin.Text && user.Password == EntryPassword.Text)
+                foreach (var user in users)
                 {
-                    login = true;
-                    App.LoggedInUser = user;
-                    SecureStorage.Remove("User");
-                    if (Checkbox.IsChecked)
-                        await SecureStorage.SetAsync("User", user.Id.ToString());
+                    if (user.Login == EntryLogin.Text && user.Password == EntryPassword.Text)
+                    {
+                        login = true;
+                        App.LoggedInUser = user;
+                        SecureStorage.Remove("User");
+                        if (Checkbox.IsChecked)
+                            await SecureStorage.SetAsync("User", user.Id.ToString());
+                    }
                 }
+                if (login)
+                    Application.Current.MainPage = new AppShell();
+                else
+                    DependencyService.Get<ICustomToast>().ShowCustomToast("Логин или пароль введён неверно!", Color.Red.ToHex(), Color.White.ToHex());
             }
-
-            if (login)
-                Application.Current.MainPage = new AppShell();
             else
-                DependencyService.Get<ICustomToast>().ShowCustomToast("Неуспешная авторизация", Color.Red.ToHex(), Color.White.ToHex());
+                DependencyService.Get<ICustomToast>().ShowCustomToast("Ошибка! Пожалуйста, заполните все поля", Color.Red.ToHex(), Color.White.ToHex());
         }
     }
 }

@@ -28,9 +28,7 @@ namespace diplom.Views
             if (!ShowAll)
                 plans = plans.Where(plan => plan.Done == false).ToList();
             else
-            {
                 plans = plans.Where(plan => plan.Done == true).ToList();
-            }
 
             IncomeToMonthCheckAsync();
 
@@ -60,8 +58,18 @@ namespace diplom.Views
         {
             if (sender is CheckBox checkBox && checkBox.BindingContext is Plan plan)
             {
-                plan.Done = e.Value;
-                await App.Diplomdatabase.SavePlanAsync(plan);
+                var p = await App.Diplomdatabase.GetPlanAsync(plan.Id);
+                if (p.Done != e.Value)
+                {
+                    plan.Done = e.Value;
+                    await App.Diplomdatabase.SavePlanAsync(plan);
+                    var plans = await App.Diplomdatabase.GetPlansAsync();
+                    if (!ShowAll)
+                        plans = plans.Where(pl => pl.Done == false).ToList();
+                    else
+                        plans = plans.Where(pl => pl.Done == true).ToList();
+                    PlansView.ItemsSource = plans;
+                }
             }
         }
 

@@ -35,6 +35,7 @@
     </ContentPage.Resources>
 
     <Grid>
+        <Image AbsoluteLayout.LayoutFlags="All" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Aspect="AspectFill" Source="BackgroundEmpty.png"/>
         <CollectionView x:Name="categoriesView" Margin="20" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
 
             <CollectionView.ItemsLayout>

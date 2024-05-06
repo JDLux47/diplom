@@ -38,36 +38,38 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout Padding="20">
+        <Grid>
+            <Image AbsoluteLayout.LayoutFlags="All" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Aspect="AspectFill" Source="BackgroundForm.png"/>
+            <StackLayout Padding="20">
 
-            <Frame BackgroundColor="#9C80A9" CornerRadius="40" VerticalOptions="CenterAndExpand">
-                <StackLayout>
-                    <Label Text="Здравствуйте!" FontSize="25" HorizontalOptions="CenterAndExpand" Margin="0,0,0,40"/>
-                    <Entry x:Name="EntryLogin" Placeholder="Введите логин" VerticalOptions="CenterAndExpand"/>
-                    <Entry x:Name="EntryPassword" Placeholder="Введите пароль" IsPassword="True"/>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Входить автоматически " FontSize ="18" VerticalOptions="Center"/>
-                        <CheckBox x:Name="Checkbox"/>
+                <Frame BackgroundColor="#9C80A9" CornerRadius="40" VerticalOptions="CenterAndExpand">
+                    <StackLayout>
+                        <Label Text="Здравствуйте!" FontSize="25" HorizontalOptions="CenterAndExpand" Margin="0,0,0,40"/>
+                        <Entry x:Name="EntryLogin" Placeholder="Введите логин" VerticalOptions="CenterAndExpand"/>
+                        <Entry x:Name="EntryPassword" Placeholder="Введите пароль" IsPassword="True"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Входить автоматически " FontSize ="18" VerticalOptions="Center"/>
+                            <CheckBox x:Name="Checkbox"/>
+                        </StackLayout>
+                        <Button Text="➲ Войти" Clicked="LoginButton_Clicked" CornerRadius="40"/>
                     </StackLayout>
-                    <Button Text="➲ Войти" Clicked="LoginButton_Clicked" CornerRadius="40"/>
+                </Frame>
+
+                <StackLayout HorizontalOptions="Center">
+                    <Label>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="RegisterLabel_Tapped"/>
+                        </Label.GestureRecognizers>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Ещё нет аккаунта? "/>
+                                <Span Text="Зарегистрироваться" TextDecorations="Underline" FontAttributes="Bold"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                 </StackLayout>
-            </Frame>
-
-            <StackLayout HorizontalOptions="Center">
-                <Label>
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="RegisterLabel_Tapped"/>
-                    </Label.GestureRecognizers>
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="Ещё нет аккаунта? "/>
-                            <Span Text="Зарегистрироваться" TextDecorations="Underline" FontAttributes="Bold"/>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
             </StackLayout>
-        </StackLayout>
-
+        </Grid>
     </ContentPage.Content>
     
 </ContentPage>
