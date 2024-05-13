@@ -93,8 +93,7 @@ namespace diplom.Views
             var transactions = await App.Diplomdatabase.GetTransactionsAsync();
 
             // Группируем транзакции, исключая текущий месяц
-            var groupedTransactions = transactions.Where(t => t.Date.Year != DateTime.Now.Year || t.Date.Month != DateTime.Now.Month)
-                                                  .GroupBy(t => new { t.Date.Year, t.Date.Month });
+            var groupedTransactions = transactions.GroupBy(t => new { t.Date.Year, t.Date.Month });
 
             decimal totalProfit = 0;
             int totalMonths = 0;
