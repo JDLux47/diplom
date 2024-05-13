@@ -114,7 +114,7 @@ namespace diplom.Views
                 {
                     result = await DisplayAlert("Нарушение связей", $"Существуют транзакции с данной категорией. Удалить категорию?", "Да", "Отмена");
                     if (result)
-                        DependencyService.Get<ICustomToast>().ShowCustomToast("Категории у связанных транзакций будут изменены на 'Без категории'", Color.Yellow.ToHex(), Color.White.ToHex());
+                        DependencyService.Get<ICustomToast>().ShowCustomToast("Категории у связанных транзакций будут изменены на 'Без категории'", Color.Yellow.ToHex(), Color.Black.ToHex());
                     break;
                 }
             }

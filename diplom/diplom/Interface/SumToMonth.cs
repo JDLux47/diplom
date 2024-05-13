@@ -27,7 +27,10 @@ namespace diplom.Interface
                 else
                     sum = Math.Round(sum - App.LoggedInUser.Balance, 0, MidpointRounding.AwayFromZero);
 
-                return $"Нужно откладывать по {sum}₽ в месяц, чтобы накопить до конца срока";
+                if(sum > 0)
+                    return $"Нужно откладывать по {sum}₽ в месяц, чтобы накопить до конца срока";
+                else 
+                    return $"Вы накопили нужную сумму!";
             }
             else 
                 return null;
