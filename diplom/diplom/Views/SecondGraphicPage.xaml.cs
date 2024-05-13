@@ -78,10 +78,10 @@ namespace diplom.Views
                                 Label = $"{CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(group.Month)} {group.Year}",
                                 ValueLabel = group.TotalSum.ToString(),
                                 Color = SKColors.Red,
-                                ValueLabelColor = SKColors.White,
+                                ValueLabelColor = SKColors.Red,
                             });
                         }
-                        BarChartRas = new BarChart { Entries = entries, LabelTextSize = 30f, LabelColor = SKColors.White, LabelOrientation = Orientation.Horizontal, ValueLabelOrientation = Orientation.Horizontal, BackgroundColor = SKColors.Transparent };
+                        BarChartRas = new BarChart { Entries = entries, LabelTextSize = 30f, LabelColor = SKColors.Red, LabelOrientation = Orientation.Horizontal, ValueLabelOrientation = Orientation.Horizontal, BackgroundColor = SKColors.Transparent };
                         CostTitleLabel.IsVisible = true;
                         DiagramBarRas.IsVisible = true;
                         CostTitleLabel.Text = "Расходы";
@@ -96,10 +96,10 @@ namespace diplom.Views
                                 Label = $"{CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(group.Month)} {group.Year}",
                                 ValueLabel = group.TotalSum.ToString(),
                                 Color = SKColors.SpringGreen,
-                                ValueLabelColor = SKColors.White,
+                                ValueLabelColor = SKColors.SpringGreen,
                             });
                         }
-                        BarChartDoh = new BarChart { Entries = entries, LabelTextSize = 30f, LabelColor = SKColors.White, LabelOrientation = Orientation.Horizontal, ValueLabelOrientation = Orientation.Horizontal, BackgroundColor = SKColors.Transparent };
+                        BarChartDoh = new BarChart { Entries = entries, LabelTextSize = 30f, LabelColor = SKColors.SpringGreen, LabelOrientation = Orientation.Horizontal, ValueLabelOrientation = Orientation.Horizontal, BackgroundColor = SKColors.Transparent };
                         IncomeTitleLabel.IsVisible = true;
                         DiagramBarDoh.IsVisible = true;
                     }
